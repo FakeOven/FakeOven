@@ -1,506 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAKEOVEN Portfolio</title>
-    <style>
-        /* Basic Styles */
-        * {
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            color: #333;
-            width: 100%;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: #fff;
-            padding: 15px 0;
-            width: 100%;
-            border-bottom: 1px solid #f0f0f0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .logo {
-            height: 40px;
-            cursor: pointer;
-        }
-        
-        .logo img {
-            height: 100%;
-            width: auto;
-        }
-        
-        .menu {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            flex-wrap: wrap;
-        }
-        
-        .menu li {
-            margin: 0 0 0 30px;
-        }
-        
-        .menu a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 400;
-            font-size: 14px;
-            display: block;
-            padding: 5px 0;
-            position: relative;
-        }
-        
-        .menu a:hover {
-            color: #000;
-        }
-        
-        .menu a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background-color: #000;
-            transition: width 0.3s;
-        }
-        
-        .menu a:hover:after {
-            width: 100%;
-        }
-        
-        /* Main Area */
-        .hero {
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin: 40px 0;
-            padding: 40px 20px;
-        }
-        
-        .hero h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            word-wrap: break-word;
-            font-weight: 300;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            max-width: 600px;
-            line-height: 1.6;
-            font-weight: 300;
-        }
-        
-        /* Gallery Section */
-        .gallery-section {
-            margin: 60px 0;
-            padding: 0 10px;
-        }
-        
-        .gallery-section h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .gallery-item {
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .gallery-item .caption {
-            padding: 15px 0;
-        }
-        
-        .gallery-item .caption h3 {
-            margin-top: 0;
-            font-size: 18px;
-            font-weight: 400;
-        }
-        
-        .gallery-item .caption p {
-            font-weight: 300;
-            margin: 5px 0 0;
-            color: #666;
-        }
-        
-        /* Video Section */
-        .video-section {
-            margin: 60px 0;
-            padding: 0 10px;
-        }
-        
-        .video-section h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        
-        .video-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .video-item {
-            overflow: hidden;
-        }
-        
-        .video-thumbnail {
-            position: relative;
-            height: 200px;
-            background-color: #f9f9f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 16px;
-            text-align: center;
-            padding: 10px;
-        }
-        
-        .video-item .caption {
-            padding: 15px 0;
-        }
-        
-        .video-item .caption h3 {
-            margin-top: 0;
-            font-size: 18px;
-            font-weight: 400;
-        }
-        
-        .video-item .caption p {
-            font-weight: 300;
-            margin: 5px 0 0;
-            color: #666;
-        }
-        
-        /* Contact Section */
-        .contact-section {
-            margin: 60px 0;
-            padding: 0 10px;
-        }
-        
-        .contact-section h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        
-        .contact-info {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .contact-info p {
-            margin: 15px 0;
-            font-size: 16px;
-            font-weight: 300;
-        }
-        
-        .contact-info a {
-            color: #333;
-            text-decoration: none;
-        }
-        
-        .contact-info a:hover {
-            color: #000;
-            text-decoration: underline;
-        }
-        
-        /* Footer Styles */
-        footer {
-            padding: 30px 0;
-            text-align: center;
-            width: 100%;
-            border-top: 1px solid #f0f0f0;
-        }
-        
-        .copyright {
-            font-size: 12px;
-            color: #000;
-            margin-bottom: 15px;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .social-links a {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-        }
-        
-        .social-links img {
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        
-        .social-links img:hover {
-            opacity: 1;
-        }
-        
-        /* Section Dividers */
-        .section-divider {
-            height: 1px;
-            background-color: #f0f0f0;
-            margin: 60px auto;
-            width: 100%;
-            max-width: 100px;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            nav {
-                padding: 0 15px;
-                justify-content: center;
-                flex-direction: column;
-            }
-            
-            .logo {
-                margin-bottom: 15px;
-            }
-            
-            .menu {
-                justify-content: center;
-                width: 100%;
-            }
-            
-            .menu li {
-                margin: 0 10px;
-            }
-            
-            .hero {
-                min-height: 300px;
-                padding: 30px 15px;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            
-            .video-gallery {
-                grid-template-columns: 1fr;
-            }
-            
-            .gallery-item, .video-item {
-                margin-bottom: 20px;
-            }
-            
-            .gallery-item img {
-                height: 200px;
-            }
-        }
-        
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .video-gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#home" class="logo">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MjYgMTY4IiBmaWxsPSJub25lIj48cGF0aCBkPSJNMCAwSDg1VjE2OEgwVjBaIiBmaWxsPSJibGFjayIvPjxwYXRoIGQ9Ik04NSA4NEg0Mi41VjBIMFY4NEg0Mi41SDBWMTYxLjJWMTY4SDg1Vjg0WiIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMjM0IDBoLTU2bC05MyAxNjhoNTZsMjUtNDVoNDBsMjUgNDVoNTZMMjM0IDBabS01NiA5NGwyNC00NCAyNCA0NEgxNzhaIiBmaWxsPSJibGFjayIvPjxwYXRoIGQ9Ik00MzggMEgzNDV2NDJoMzcuNXY2QzM4Mi41IDM4MC41IDM4MiA0OCgzODIuNSA0OGgwbC01Ni0zMy42VjE2OEgzODJoMFYxMzJsMTUtOSA4IDQ1SDQ2NmwtMjAtMTAwIDIwLTMuNkw0MjQgMGgyMFYwaDYzLjVWMjRMNDM4IDBaIiBmaWxsPSJibGFjayIvPjxwYXRoIGQ9Ik02NTkgMEg1NzRWMTY4SDY1OVYwWiIgZmlsbD0iYmxhY2siLz48cGF0aCBkPSJNNjU5IDg0aC00Mi41VjBINTc0Vjg0aDQyLjVINTc0VjE2MS4yVjE2OEg2NTlWODRaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik03NDQgMEg2NTl2ODRoND4eJVjg0ViDZgiiTl1MaCIBPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik04MjYgMEg3NDR2MTY4aDgyVjBaIiBmaWxsPSJibGFjayIvPjwvc3ZnPg==" alt="FAKEOVEN Logo">
-                </a>
-                <ul class="menu" id="mobileMenu">
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#photos">PHOTOGRAPHY</a></li>
-                    <li><a href="#videos">FILMS</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    
-    <div class="container">
-        <section id="home" class="hero">
-            <h1>VISUAL STORYTELLING</h1>
-            <p>Professional photographer and filmmaker with 10 years of experience. Capturing moments with unique vision and technical precision.</p>
-        </section>
-        
-        <div class="section-divider"></div>
-        
-        <section id="photos" class="gallery-section">
-            <h2>PHOTOGRAPHY</h2>
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Landscape photography">
-                    <div class="caption">
-                        <h3>Natural Landscapes</h3>
-                        <p>Sunrise captured in Jeju Island, 2023</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Portrait photography">
-                    <div class="caption">
-                        <h3>Portrait Series</h3>
-                        <p>Emotional portraits using natural light</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Product photography">
-                    <div class="caption">
-                        <h3>Product Photography</h3>
-                        <p>Product lineup for Brand A</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Event photography">
-                    <div class="caption">
-                        <h3>Event Coverage</h3>
-                        <p>Seoul Fashion Week 2024</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <div class="section-divider"></div>
-        
-        <section id="videos" class="video-section">
-            <h2>FILMMAKING</h2>
-            <div class="video-gallery">
-                <div class="video-item">
-                    <div class="video-thumbnail">
-                        Video Preview (Videos will appear here on the actual site)
-                    </div>
-                    <div class="caption">
-                        <h3>Brand Promotional Film</h3>
-                        <p>Storytelling for a local coffee brand</p>
-                    </div>
-                </div>
-                <div class="video-item">
-                    <div class="video-thumbnail">
-                        Video Preview (Videos will appear here on the actual site)
-                    </div>
-                    <div class="caption">
-                        <h3>Travel Documentary</h3>
-                        <p>Asian Journey Series - Episode 1</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <div class="section-divider"></div>
-        
-        <section id="contact" class="contact-section">
-            <h2>CONTACT</h2>
-            <div class="contact-info">
-                <p>Email: <a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
-                <p>KakaoTalk: <a href="https://open.kakao.com/me/fakeoven" target="_blank">open.kakao.com/me/fakeoven</a></p>
-            </div>
-        </section>
-    </div>
-    
-    <footer>
-        <div class="container">
-            <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
-            <div class="social-links">
-                <a href="https://youtube.com/@FakeOven" target="_blank">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS15b3V0dWJlIj48cGF0aCBkPSJNMjIuNTQgNi40MmE0LjY0IDIuNSAwIDAgMC0zLjEtMi43NCAxLjY1IDEuNjUgMCAwIDAtLjI0LS4wNCAxMDAgNzUgMCAwIDAtMTYuMzggMCA0LjM0IDQuMzQgMCAwIDAtMy4zMiAyLjgyQTMxLjkyIDM4Ljc4IDAgMCAwIDEuNDYgMTBhMzIgMzkgMCAwIDAgMCAzLjg3IDE0LjYzIDE0LjYzIDAgMCAwIC4yMyAyLjkyIDQuNzYgMi41OCAwIDAgMCAzLjEgMi43IDEuNzUgMS43NSAwIDAgMCAuMjYuMDMgMTk3LjU0IDgxLjU3IDAgMCAwIDE2LjI1IDBsLjA2LS4wM2E0LjcgMi41IDAgMCAwIDMuMS0yLjY3IDE2LjYzIDE2LjYzIDAgMCAwIC4yLS44NyAzMiAzOSAwIDAgMCAwLTRhMzAuNDggMzYuNTggMCAwIDAtLjIyLTMuNTIuODUuODUgMCAwIDAgMCAwWiIgZmlsbD0iIzAwMDAwMCI+PC9wYXRoPjxwYXRoIGQ9Im05Ljc1IDc45Nkw5LjY3IDggMTUuNDQgMTEuNGMuNjUuMzggLjc3IDEuMTUuMiAxLjQ2YS44Mi44MiAwIDAgMS0uMTQuMDYgMi4wMiAyLjAyIDAgMCAxLS42Ny4wOGgwYTEuMiBxLjIgMCAwLTEtLjI3aDBsLTQuMTYtMi42di0uMDIiIGZpbGw9IiNmZmZmZmYiPjwvcGF0aD48cGF0aCBkPSJNOSA4bDYgNHYtN0w5IDhabTE0IDJjLjItLjY4LjMtMS4yNC4zLTEuOTlhMzIgMzkgMCAwIDAgMC00IDMwLjk2IDM3LjE1IDAgMCAwLS4yNC0zLjc4IDUuMTYgMi43NSAwIDAgMC0zLjEyLTIuOTUgMS41IDEuNSAwIDAgMC0uMjktLjA2aDAwYTE5My45IDgwLjEzIDAgMCAwLTE2LjE5IDBhNC43NiA0Ljc2IDAgMCAwLTMuMzMgMyAzMiAzOSAwIDAgMCAwIDcuNzkgMTQuODIgMTQuODIgMCAwIDAgLjI0IDMuMDUgNS4xNiAyLjc3IDAgMCAwIDMuMTEgMi45MiAxLjM0IDEuMzQgMCAwIDAgLjIuMDNjMi45MSAwIDE5LjQgLjA3IDkuNyAweiIgZmlsbD0idHJhbnNwYXJlbnQiPjwvcGF0aD48L3N2Zz4=" alt="YouTube">
-                </a>
-                <a href="https://instagram.com/@fakeoven.ai" target="_blank">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1pbnN0YWdyYW0iPjxyZWN0IHg9IjIiIHk9IjIiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcng9IjUiIHJ5PSI1IiBmaWxsPSIjMDAwMDAwIj48L3JlY3Q+PHBhdGggZD0iTTE2IDExLjM3QTQgNCAwIDEgMSAxMi42MyA4IDQgNCAwIDAgMSAxNiAxMS4zN3oiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2ZmZmZmZiI+PC9wYXRoPjxsaW5lIHgxPSIxNy41IiB5MT0iNi41IiB4Mj0iMTcuNTEiIHkyPSI2LjUiIHN0cm9rZT0iI2ZmZmZmZiI+PC9saW5lPjwvc3ZnPg==" alt="Instagram">
-                </a>
-            </div>
-        </div>
-    </footer>
+import React from 'react';
 
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+const WebsitePreview = () => {
+  return (
+    <div className="bg-gray-100 p-6 rounded-lg">
+      <h2 className="text-xl font-semibold mb-6">Updated FAKEOVEN Website Preview</h2>
+      
+      {/* Desktop Preview */}
+      <div className="mb-10">
+        <h3 className="text-lg font-medium mb-3">Desktop View</h3>
+        <div className="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md">
+          {/* Header */}
+          <div className="border-b border-gray-100 p-4 flex justify-between items-center">
+            <div className="w-40">
+              <div className="bg-gray-800 text-white px-3 py-1 inline-block">FAKEOVEN</div>
+            </div>
+            <div className="flex space-x-6">
+              <a href="#" className="text-sm hover:text-blue-600">HOME</a>
+              <a href="#" className="text-sm hover:text-blue-600">PHOTOGRAPHY</a>
+              <a href="#" className="text-sm hover:text-blue-600">FILMS</a>
+              <a href="#" className="text-sm hover:text-blue-600">CONTACT</a>
+            </div>
+          </div>
+          
+          {/* Hero Section */}
+          <div className="py-16 px-6 text-center">
+            <h1 className="text-3xl font-light mb-4">VISUAL STORYTELLING</h1>
+            <p className="max-w-md mx-auto text-gray-600">Professional photographer and filmmaker with 10 years of experience. Capturing moments with unique vision and technical precision.</p>
+            <p className="max-w-md mx-auto text-gray-600 mt-6 italic text-lg">Each fake mirrors its own truth.</p>
+          </div>
+          
+          {/* Divider */}
+          <div className="w-16 h-px bg-gray-200 mx-auto my-12"></div>
+          
+          {/* Gallery Preview */}
+          <div className="px-6 mb-12">
+            <h2 className="text-xl font-light text-center mb-8">PHOTOGRAPHY</h2>
+            <div className="grid grid-cols-4 gap-6">
+              <div className="space-y-2">
+                <div className="bg-gray-200 h-40 w-full"></div>
+                <h3 className="text-sm font-medium">Natural Landscapes</h3>
+                <p className="text-xs text-gray-500">Sunrise captured in Jeju Island, 2023</p>
+              </div>
+              <div className="space-y-2">
+                <div className="bg-gray-200 h-40 w-full"></div>
+                <h3 className="text-sm font-medium">Portrait Series</h3>
+                <p className="text-xs text-gray-500">Emotional portraits using natural light</p>
+              </div>
+              <div className="space-y-2">
+                <div className="bg-gray-200 h-40 w-full"></div>
+                <h3 className="text-sm font-medium">Product Photography</h3>
+                <p className="text-xs text-gray-500">Product lineup for Brand A</p>
+              </div>
+              <div className="space-y-2">
+                <div className="bg-gray-200 h-40 w-full"></div>
+                <h3 className="text-sm font-medium">Event Coverage</h3>
+                <p className="text-xs text-gray-500">Seoul Fashion Week 2024</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Contact Preview */}
+          <div className="px-6 pb-8">
+            <h2 className="text-xl font-light text-center mb-6">CONTACT</h2>
+            <div className="text-center">
+              <p className="mb-2">Email: <a href="#" className="text-gray-700">contact@fakeoven.com</a></p>
+              <p>Kakao Talk: <a href="#" className="text-gray-700">open.kakao.com/me/fakeoven</a></p>
+            </div>
+          </div>
+          
+          {/* Footer */}
+          <div className="border-t border-gray-100 py-6 px-6 text-center">
+            <p className="text-xs mb-3">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
+            <div className="flex justify-center space-x-4">
+              <a href="#">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                  <path d="M22.54 6.42a4.64 2.5 0 0 0-3.1-2.74 1.65 1.65 0 0 0-.24-.04 100 75 0 0 0-16.38 0 4.34 4.34 0 0 0-3.32 2.82A31.92 38.78 0 0 0 1.46 10a32 39 0 0 0 0 3.87 14.63 14.63 0 0 0 .23 2.92 4.76 2.58 0 0 0 3.1 2.7 1.75 1.75 0 0 0 .26.03 197.54 81.57 0 0 0 16.25 0l.06-.03a4.7 2.5 0 0 0 3.1-2.67 16.63 16.63 0 0 0 .2-.87 32 39 0 0 0 0-4 30.48 36.58 0 0 0-.22-3.52.85.85 0 0 0 0 0Z" fill="#000000"></path>
+                  <path d="m9.75 7.96L9.67 8 15.44 11.4c.65.38.77 1.15.2 1.46a.82.82 0 0 1-.14.06 2.02 2.02 0 0 1-.67.08h0a1.2 1.2 0 0 1-1-.27h0l-4.16-2.6v-.02" fill="#ffffff"></path>
+                </svg>
+              </a>
+              <a href="#">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="#000000"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="#ffffff" stroke="#ffffff"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#ffffff"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Mobile Preview */}
+      <div>
+        <h3 className="text-lg font-medium mb-3">Mobile View</h3>
+        <div className="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md w-64 mx-auto">
+          {/* Header */}
+          <div className="border-b border-gray-100 p-3 flex flex-col items-center">
+            <div className="w-32 mb-3">
+              <div className="bg-gray-800 text-white px-2 py-1 text-sm text-center">FAKEOVEN</div>
+            </div>
+            <div className="flex justify-center space-x-3 text-xs w-full">
+              <a href="#" className="hover:text-blue-600">HOME</a>
+              <a href="#" className="hover:text-blue-600">PHOTO</a>
+              <a href="#" className="hover:text-blue-600">FILMS</a>
+              <a href="#" className="hover:text-blue-600">CONTACT</a>
+            </div>
+          </div>
+          
+          {/* Hero Section */}
+          <div className="py-8 px-4 text-center">
+            <h1 className="text-xl font-light mb-3">VISUAL STORYTELLING</h1>
+            <p className="text-xs text-gray-600">Professional photographer and filmmaker with 10 years of experience.</p>
+            <p className="text-xs text-gray-600 mt-3 italic">Each fake mirrors its own truth.</p>
+          </div>
+          
+          {/* Divider */}
+          <div className="w-12 h-px bg-gray-200 mx-auto my-6"></div>
+          
+          {/* Gallery Preview */}
+          <div className="px-4 mb-6">
+            <h2 className="text-lg font-light text-center mb-4">PHOTOGRAPHY</h2>
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <div className="bg-gray-200 h-28 w-full"></div>
+                <h3 className="text-xs font-medium">Natural Landscapes</h3>
+                <p className="text-xs text-gray-500">Sunrise captured in Jeju Island, 2023</p>
+              </div>
+              <div className="space-y-1">
+                <div className="bg-gray-200 h-28 w-full"></div>
+                <h3 className="text-xs font-medium">Portrait Series</h3>
+                <p className="text-xs text-gray-500">Emotional portraits using natural light</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Contact Preview */}
+          <div className="px-4 pb-6">
+            <h2 className="text-lg font-light text-center mb-3">CONTACT</h2>
+            <div className="text-center text-xs">
+              <p className="mb-1">Email: <a href="#" className="text-gray-700">contact@fakeoven.com</a></p>
+              <p>Kakao Talk: <a href="#" className="text-gray-700">open.kakao.com/me/fakeoven</a></p>
+            </div>
+          </div>
+          
+          {/* Footer */}
+          <div className="border-t border-gray-100 py-4 px-4 text-center">
+            <p className="text-xs mb-2">&copy; 2025 FAKEOVEN.</p>
+            <div className="flex justify-center space-x-3">
+              <a href="#">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                  <path d="M22.54 6.42a4.64 2.5 0 0 0-3.1-2.74 1.65 1.65 0 0 0-.24-.04 100 75 0 0 0-16.38 0 4.34 4.34 0 0 0-3.32 2.82A31.92 38.78 0 0 0 1.46 10a32 39 0 0 0 0 3.87 14.63 14.63 0 0 0 .23 2.92 4.76 2.58 0 0 0 3.1 2.7 1.75 1.75 0 0 0 .26.03 197.54 81.57 0 0 0 16.25 0l.06-.03a4.7 2.5 0 0 0 3.1-2.67 16.63 16.63 0 0 0 .2-.87 32 39 0 0 0 0-4 30.48 36.58 0 0 0-.22-3.52.85.85 0 0 0 0 0Z" fill="#000000"></path>
+                  <path d="m9.75 7.96L9.67 8 15.44 11.4c.65.38.77 1.15.2 1.46a.82.82 0 0 1-.14.06 2.02 2.02 0 0 1-.67.08h0a1.2 1.2 0 0 1-1-.27h0l-4.16-2.6v-.02" fill="#ffffff"></path>
+                </svg>
+              </a>
+              <a href="#">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="#000000"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="#ffffff" stroke="#ffffff"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#ffffff"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default WebsitePreview;
