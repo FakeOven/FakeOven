@@ -451,7 +451,7 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: var(--spacing-unit) * 2;
+            gap: calc(var(--spacing-unit) * 2);
             margin: var(--spacing-medium) 0;
         }
         
@@ -472,6 +472,24 @@
         
         .social-links a:hover img {
             opacity: 1;
+        }
+        
+        /* Fade-in Animation */
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0; /* Start invisible */
+            visibility: hidden; /* Set initially hidden */
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Responsive Styles */
@@ -553,23 +571,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 1s ease forwards;
-            opacity: 0; /* Start invisible */
-            visibility: hidden; /* Set initially hidden */
-        }
-        
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
@@ -741,8 +742,6 @@
                                 <p>Premium product lineup for Brand A</p>
                             </div>
                         </div>
-                        
-                        <!-- Add more photo items here -->
                     </div>
                 </div>
             </div>
@@ -786,55 +785,4 @@
                     <div class="concept-item fade-in delay-300">
                         <div class="concept-image">
                             <!-- 여기에 이미지 URL을 붙여넣으세요 -->
-                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
-                                여기에 이미지 URL을 붙여넣으세요<br>(Sci-Fi 컨셉)
-                            </div>
-                            <div class="concept-overlay">
-                                <h3>Sci-Fi</h3>
-                                <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 2D Animation Concept -->
-                    <div class="concept-item fade-in delay-400">
-                        <div class="concept-image">
-                            <!-- 여기에 이미지 URL을 붙여넣으세요 -->
-                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
-                                여기에 이미지 URL을 붙여넣으세요<br>(2D Animation 컨셉)
-                            </div>
-                            <div class="concept-overlay">
-                                <h3>2D Animation</h3>
-                                <p>Stylized animated visuals with a distinctive artistic approach</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Add more concept items as needed -->
-                </div>
-            </div>
-        </section>
-        
-        <!-- Contact Page -->
-        <section id="contact" class="page contact-page">
-            <div class="container">
-                <h2 class="fade-in">CONTACT</h2>
-                
-                <div class="contact-info fade-in delay-100">
-                    <p>Email: <a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
-                    <p>Kakao Talk: <a href="https://open.kakao.com/me/fakeoven" target="_blank">open.kakao.com/me/fakeoven</a></p>
-                </div>
-                
-                <div class="social-links fade-in delay-200">
-                    <a href="https://youtube.com/@FakeOven" target="_blank">
-                        <!-- 여기에 유튜브 아이콘 이미지 URL을 붙여넣으세요 -->
-                        <div style="width:24px; height:24px; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; font-size:8px; text-align:center;">
-                            유튜브<br>아이콘
-                        </div>
-                    </a>
-                    <a href="https://www.instagram.com/fakeoven.ai" target="_blank">
-                        <!-- 여기에 인스타그램 아이콘 이미지 URL을 붙여넣으세요 -->
-                        <div style="width:24px; height:24px; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; font-size:8px; text-align:center;">
-                            인스타<br>아이콘
-                        </div>
-                    </a>
+                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:
