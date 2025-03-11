@@ -278,8 +278,7 @@
             background-color: var(--subtle-color);
         }
         
-        .work-image img,
-        .work-image iframe {
+        .work-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -313,6 +312,65 @@
             font-size: 14px;
             color: var(--secondary-color);
             margin-bottom: 0;
+        }
+        
+        /* 커스텀 비디오 플레이어 스타일 */
+        .custom-video-player {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .custom-video-player img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .custom-video-player:hover img {
+            transform: scale(1.05);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-button svg {
+            width: 24px;
+            height: 24px;
+            margin-left: 4px; /* 재생 버튼을 약간 오른쪽으로 이동시켜 중앙에 보이게 함 */
+        }
+
+        .youtube-iframe {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
         }
         
         /* Concepts Section */
@@ -532,7 +590,7 @@
     <section id="hero" class="hero-section">
         <div class="hero-content fade-in">
             <h1>FAKEOVEN</h1>
-            <p>Professional photographer and filmmaker with 10 years of experience. Capturing moments with unique vision and technical precision.</p>
+            <p>FAKEOVEN is an AI visual production studio. We create films, photos, and ads—along with characters, stories, and much more—using our fictional visual language. That's how we explore this dynamic real world.</p>
             <p class="vision-statement">Each fake mirrors its own truth.</p>
         </div>
     </section>
@@ -553,47 +611,79 @@
                     <!-- 1. 出勤無用曲 출근금지곡 -->
                     <div class="work-item fade-in">
                         <div class="work-image">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ImpUC9WWetw?si=bsJaZ6uBRmbUMl8h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="custom-video-player" data-video-id="ImpUC9WWetw">
+                                <img src="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg" alt="出勤無用曲">
+                                <button class="play-button">
+                                    <svg viewBox="0 0 24 24">
+                                        <polygon points="5,3 19,12 5,21" fill="white"/>
+                                    </svg>
+                                </button>
+                                <div class="youtube-iframe"></div>
+                            </div>
                         </div>
                         <div class="work-caption">
                             <h3 style="font-family: 'Noto Sans JP', sans-serif; font-weight: 700;">出勤無用曲</h3>
                             <span class="subtitle">출근금지곡</span>
-                            <p>AI Music Video</p>
+                            <p>AI MUSIC VIDEO</p>
                         </div>
                     </div>
                     
                     <!-- 2. Parrot Funk Star Show -->
                     <div class="work-item fade-in">
                         <div class="work-image">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vxWbgvPWJfQ?si=ebEsEZtnij84jK2b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="custom-video-player" data-video-id="vxWbgvPWJfQ">
+                                <img src="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg" alt="Parrot Funk Star Show">
+                                <button class="play-button">
+                                    <svg viewBox="0 0 24 24">
+                                        <polygon points="5,3 19,12 5,21" fill="white"/>
+                                    </svg>
+                                </button>
+                                <div class="youtube-iframe"></div>
+                            </div>
                         </div>
                         <div class="work-caption">
                             <h3>Parrot Funk Star Show</h3>
                             <span class="subtitle">앵무 펑크 스타쇼</span>
-                            <p>AI Music Video</p>
+                            <p>AI MUSIC VIDEO</p>
                         </div>
                     </div>
                     
                     <!-- 3. LURK -->
                     <div class="work-item fade-in">
                         <div class="work-image">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Q6rFUU8QkWg?si=P-X2UoeLXLtrc_xE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="custom-video-player" data-video-id="Q6rFUU8QkWg">
+                                <img src="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg" alt="LURK">
+                                <button class="play-button">
+                                    <svg viewBox="0 0 24 24">
+                                        <polygon points="5,3 19,12 5,21" fill="white"/>
+                                    </svg>
+                                </button>
+                                <div class="youtube-iframe"></div>
+                            </div>
                         </div>
                         <div class="work-caption">
                             <h3>LURK</h3>
                             <span class="subtitle">어둠 속의 포식자</span>
-                            <p>AI Short Film</p>
+                            <p>AI SHORT FILM</p>
                         </div>
                     </div>
                     
                     <!-- 4. Running Beats -->
                     <div class="work-item fade-in">
                         <div class="work-image">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/jdFzTTSEKTE?si=5v-oLYFdqTewnrXl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="custom-video-player" data-video-id="jdFzTTSEKTE">
+                                <img src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="Running Beats">
+                                <button class="play-button">
+                                    <svg viewBox="0 0 24 24">
+                                        <polygon points="5,3 19,12 5,21" fill="white"/>
+                                    </svg>
+                                </button>
+                                <div class="youtube-iframe"></div>
+                            </div>
                         </div>
                         <div class="work-caption">
                             <h3>Running Beats</h3>
-                            <p>AI Audio Visual</p>
+                            <p>AI AUDIO VISUAL</p>
                         </div>
                     </div>
                 </div>
@@ -604,47 +694,79 @@
                     <!-- 1. 出勤無用曲 출근금지곡 -->
                     <div class="work-item">
                         <div class="work-image">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ImpUC9WWetw?si=bsJaZ6uBRmbUMl8h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="custom-video-player" data-video-id="ImpUC9WWetw">
+                                <img src="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg" alt="出勤無用曲">
+                                <button class="play-button">
+                                    <svg viewBox="0 0 24 24">
+                                        <polygon points="5,3 19,12 5,21" fill="white"/>
+                                    </svg>
+                                </button>
+                                <div class="youtube-iframe"></div>
+                            </div>
                         </div>
                         <div class="work-caption">
                             <h3 style="font-family: 'Noto Sans JP', sans-serif; font-weight: 700;">出勤無用曲</h3>
                             <span class="subtitle">출근금지곡</span>
-                            <p>Digital Music Video</p>
+                            <p>AI MUSIC VIDEO</p>
                         </div>
                     </div>
                     
                     <!-- 2. Parrot Funk Star Show -->
                     <div class="work-item">
                         <div class="work-image">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vxWbgvPWJfQ?si=ebEsEZtnij84jK2b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="custom-video-player" data-video-id="vxWbgvPWJfQ">
+                                <img src="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg" alt="Parrot Funk Star Show">
+                                <button class="play-button">
+                                    <svg viewBox="0 0 24 24">
+                                        <polygon points="5,3 19,12 5,21" fill="white"/>
+                                    </svg>
+                                </button>
+                                <div class="youtube-iframe"></div>
+                            </div>
                         </div>
                         <div class="work-caption">
                             <h3>Parrot Funk Star Show</h3>
                             <span class="subtitle">앵무 펑크 스타쇼</span>
-                            <p>Digital Music Video</p>
+                            <p>AI MUSIC VIDEO</p>
                         </div>
                     </div>
                     
                     <!-- 3. LURK -->
                     <div class="work-item">
                         <div class="work-image">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Q6rFUU8QkWg?si=P-X2UoeLXLtrc_xE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="custom-video-player" data-video-id="Q6rFUU8QkWg">
+                                <img src="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg" alt="LURK">
+                                <button class="play-button">
+                                    <svg viewBox="0 0 24 24">
+                                        <polygon points="5,3 19,12 5,21" fill="white"/>
+                                    </svg>
+                                </button>
+                                <div class="youtube-iframe"></div>
+                            </div>
                         </div>
                         <div class="work-caption">
                             <h3>LURK</h3>
                             <span class="subtitle">어둠 속의 포식자</span>
-                            <p>Digital Music Video</p>
+                            <p>AI SHORT FILM</p>
                         </div>
                     </div>
                     
                     <!-- 4. Running Beats -->
                     <div class="work-item">
                         <div class="work-image">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/jdFzTTSEKTE?si=5v-oLYFdqTewnrXl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="custom-video-player" data-video-id="jdFzTTSEKTE">
+                                <img src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="Running Beats">
+                                <button class="play-button">
+                                    <svg viewBox="0 0 24 24">
+                                        <polygon points="5,3 19,12 5,21" fill="white"/>
+                                    </svg>
+                                </button>
+                                <div class="youtube-iframe"></div>
+                            </div>
                         </div>
                         <div class="work-caption">
                             <h3>Running Beats</h3>
-                            <p>Digital Music Video</p>
+                            <p>AI AUDIO VISUAL</p>
                         </div>
                     </div>
                 </div>
@@ -839,6 +961,37 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+            });
+        });
+        
+        // 유튜브 동영상 플레이어 기능
+        const customPlayers = document.querySelectorAll('.custom-video-player');
+
+        customPlayers.forEach(player => {
+            player.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video-id');
+                const iframeContainer = this.querySelector('.youtube-iframe');
+                
+                // 비디오가 아직 로드되지 않았을 때만 iframe 생성
+                if (iframeContainer.innerHTML === '') {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+                    iframe.setAttribute('frameborder', '0');
+                    iframe.setAttribute('allowfullscreen', 'true');
+                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    
+                    iframeContainer.appendChild(iframe);
+                    iframeContainer.style.display = 'block';
+                    
+                    // 플레이 버튼 숨기기
+                    this.querySelector('.play-button').style.display = 'none';
+                } else {
+                    // 이미 로드된 비디오는 보이게만 설정
+                    iframeContainer.style.display = 'block';
+                    this.querySelector('.play-button').style.display = 'none';
+                }
             });
         });
     </script>
