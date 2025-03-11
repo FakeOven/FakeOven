@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>크리에이티브 포트폴리오</title>
+    <title>FAKEOVEN Portfolio</title>
     <style>
-        /* 기본 스타일 */
+        /* Basic Styles */
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
@@ -20,7 +20,7 @@
             padding: 20px;
         }
         
-        /* 헤더 스타일 */
+        /* Header Styles */
         header {
             background-color: #fff;
             padding: 20px 0;
@@ -36,6 +36,7 @@
         .logo {
             font-size: 24px;
             font-weight: bold;
+            letter-spacing: 1px;
         }
         
         .menu {
@@ -51,13 +52,16 @@
             text-decoration: none;
             color: #333;
             font-weight: 500;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
         }
         
         .menu a:hover {
             color: #007BFF;
         }
         
-        /* 메인 영역 */
+        /* Main Area */
         .hero {
             height: 500px;
             display: flex;
@@ -72,14 +76,16 @@
         .hero h1 {
             font-size: 48px;
             margin-bottom: 20px;
+            letter-spacing: 2px;
         }
         
         .hero p {
             font-size: 18px;
             max-width: 600px;
+            line-height: 1.6;
         }
         
-        /* 갤러리 섹션 */
+        /* Gallery Section */
         .gallery-section {
             margin: 40px 0;
         }
@@ -87,6 +93,9 @@
         .gallery-section h2 {
             text-align: center;
             margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
         .gallery {
@@ -118,7 +127,7 @@
             background-color: #fff;
         }
         
-        /* 비디오 섹션 */
+        /* Video Section */
         .video-section {
             margin: 40px 0;
         }
@@ -126,6 +135,9 @@
         .video-section h2 {
             text-align: center;
             margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
         .video-gallery {
@@ -156,7 +168,7 @@
             background-color: #fff;
         }
         
-        /* 연락처 섹션 */
+        /* Contact Section */
         .contact-section {
             background-color: #fff;
             padding: 40px;
@@ -168,6 +180,9 @@
         .contact-section h2 {
             text-align: center;
             margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
         .contact-form {
@@ -206,13 +221,15 @@
             border-radius: 4px;
             font-size: 16px;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         button:hover {
             background-color: #0056b3;
         }
         
-        /* 푸터 스타일 */
+        /* Footer Styles */
         footer {
             background-color: #333;
             color: #fff;
@@ -227,11 +244,13 @@
         .social-links a {
             color: #fff;
             margin: 0 10px;
-            font-size: 20px;
+            font-size: 16px;
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        /* 반응형 스타일 */
+        /* Responsive Styles */
         @media (max-width: 768px) {
             .gallery {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -251,12 +270,12 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">홍길동 포트폴리오</div>
+                <div class="logo">FAKEOVEN</div>
                 <ul class="menu">
-                    <li><a href="#home">홈</a></li>
-                    <li><a href="#photos">사진</a></li>
-                    <li><a href="#videos">영상</a></li>
-                    <li><a href="#contact">연락처</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#photos">Photography</a></li>
+                    <li><a href="#videos">Films</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -264,101 +283,101 @@
     
     <div class="container">
         <section id="home" class="hero">
-            <h1>창의적인 시각을 담은 포트폴리오</h1>
-            <p>10년 경력의 전문 사진작가 및 영상 크리에이터입니다. 독창적인 시각과 섬세한 기술로 당신의 이야기를 담아드립니다.</p>
+            <h1>VISUAL STORYTELLING</h1>
+            <p>Professional photographer and filmmaker with 10 years of experience. Capturing moments with unique vision and technical precision.</p>
         </section>
         
         <section id="photos" class="gallery-section">
-            <h2>사진 작업</h2>
+            <h2>Photography</h2>
             <div class="gallery">
                 <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="풍경 사진 작품">
+                    <img src="/api/placeholder/400/300" alt="Landscape photography">
                     <div class="caption">
-                        <h3>자연의 풍경</h3>
-                        <p>2023년 제주도에서 촬영한 일출 장면</p>
+                        <h3>Natural Landscapes</h3>
+                        <p>Sunrise captured in Jeju Island, 2023</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="인물 사진 작품">
+                    <img src="/api/placeholder/400/300" alt="Portrait photography">
                     <div class="caption">
-                        <h3>인물 포트레이트</h3>
-                        <p>자연광을 활용한 감성 인물 사진</p>
+                        <h3>Portrait Series</h3>
+                        <p>Emotional portraits using natural light</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="제품 사진 작품">
+                    <img src="/api/placeholder/400/300" alt="Product photography">
                     <div class="caption">
-                        <h3>제품 촬영</h3>
-                        <p>브랜드 A사의 제품 라인업 촬영</p>
+                        <h3>Product Photography</h3>
+                        <p>Product lineup for Brand A</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="이벤트 사진 작품">
+                    <img src="/api/placeholder/400/300" alt="Event photography">
                     <div class="caption">
-                        <h3>이벤트 사진</h3>
-                        <p>2024 서울 패션위크 현장</p>
+                        <h3>Event Coverage</h3>
+                        <p>Seoul Fashion Week 2024</p>
                     </div>
                 </div>
             </div>
         </section>
         
         <section id="videos" class="video-section">
-            <h2>영상 작업</h2>
+            <h2>Filmmaking</h2>
             <div class="video-gallery">
                 <div class="video-item">
                     <div class="video-thumbnail">
-                        영상 미리보기 (실제 사이트에서는 여기에 영상이 들어갑니다)
+                        Video Preview (Videos will appear here on the actual site)
                     </div>
                     <div class="caption">
-                        <h3>브랜드 홍보 영상</h3>
-                        <p>로컬 카페 브랜드 스토리텔링</p>
+                        <h3>Brand Promotional Film</h3>
+                        <p>Storytelling for a local coffee brand</p>
                     </div>
                 </div>
                 <div class="video-item">
                     <div class="video-thumbnail">
-                        영상 미리보기 (실제 사이트에서는 여기에 영상이 들어갑니다)
+                        Video Preview (Videos will appear here on the actual site)
                     </div>
                     <div class="caption">
-                        <h3>여행 다큐멘터리</h3>
-                        <p>아시아 여행기 시리즈 1편</p>
+                        <h3>Travel Documentary</h3>
+                        <p>Asian Journey Series - Episode 1</p>
                     </div>
                 </div>
             </div>
         </section>
         
         <section id="contact" class="contact-section">
-            <h2>연락처</h2>
+            <h2>Contact</h2>
             <div class="contact-form">
                 <div class="form-group">
-                    <label for="name">이름</label>
-                    <input type="text" id="name" placeholder="이름을 입력하세요">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
                 </div>
                 <div class="form-group">
-                    <label for="email">이메일</label>
-                    <input type="email" id="email" placeholder="이메일을 입력하세요">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
                 </div>
                 <div class="form-group">
-                    <label for="message">메시지</label>
-                    <textarea id="message" placeholder="문의사항을 입력하세요"></textarea>
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Enter your inquiry"></textarea>
                 </div>
-                <button type="submit">보내기</button>
+                <button type="submit">Send Message</button>
             </div>
             
             <div style="margin-top: 30px; text-align: center;">
-                <h3>직접 연락하기</h3>
-                <p>이메일: example@portfolio.com</p>
-                <p>전화번호: 010-1234-5678</p>
+                <h3>Direct Contact</h3>
+                <p>Email: hello@fakeoven.com</p>
+                <p>Phone: +1 (234) 567-8910</p>
             </div>
         </section>
     </div>
     
     <footer>
         <div class="container">
-            <p>&copy; 2025 홍길동 포트폴리오. All Rights Reserved.</p>
+            <p>&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
             <div class="social-links">
-                <a href="#">인스타그램</a>
-                <a href="#">유튜브</a>
-                <a href="#">비메오</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+                <a href="#">Vimeo</a>
             </div>
         </div>
     </footer>
