@@ -25,6 +25,7 @@
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
+            --spacing-xl: 120px;
             --transition: all 0.3s ease;
         }
         
@@ -104,15 +105,6 @@
             width: auto;
         }
         
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: var(--main-color);
-        }
-        
         .menu {
             display: flex;
             list-style: none;
@@ -144,55 +136,33 @@
             transition: var(--transition);
         }
         
-        .menu a:hover::after,
-        .menu a.active::after {
+        .menu a:hover::after {
             width: 100%;
         }
         
-        /* Main Content */
-        main {
-            margin-top: 80px;
-            min-height: 100vh;
-        }
-        
-        .page {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            padding: var(--spacing-large) 0;
-        }
-        
-        .page.active {
-            display: block;
-            opacity: 1;
-        }
-        
-        /* Main Page */
-        .main-page {
+        /* Hero Section */
+        .hero-section {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            margin-top: -80px; /* Offset the main margin-top */
-            position: relative;
-            overflow: hidden;
+            padding: 0 var(--spacing-medium);
+            margin-bottom: var(--spacing-large);
         }
         
-        .main-content {
+        .hero-content {
             max-width: 800px;
-            z-index: 2;
-            padding: var(--spacing-large);
         }
         
-        .main-page h1 {
+        .hero-section h1 {
             font-size: clamp(32px, 5vw, 60px);
             margin-bottom: calc(var(--spacing-unit) * 3);
             line-height: 1.2;
         }
         
-        .main-page p {
+        .hero-section p {
             font-size: clamp(16px, 2vw, 20px);
             max-width: 600px;
             margin: 0 auto var(--spacing-medium);
@@ -206,16 +176,31 @@
             opacity: 0.8;
         }
         
-        /* Works Page */
-        .works-page {
-            padding-top: var(--spacing-large);
+        /* Section Styles */
+        section {
+            padding: var(--spacing-large) 0;
+            scroll-margin-top: 100px;
         }
         
-        .works-page h2 {
+        section:nth-child(odd) {
+            background-color: var(--bg-color);
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--subtle-color);
+        }
+        
+        .section-title {
             text-align: center;
             margin-bottom: var(--spacing-large);
             font-size: clamp(24px, 3vw, 36px);
             letter-spacing: 0.1em;
+        }
+        
+        /* Works Section */
+        .works-section {
+            padding-top: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
         }
         
         .works-tabs {
@@ -330,16 +315,10 @@
             margin-bottom: 0;
         }
         
-        /* Concepts Page */
-        .concepts-page {
-            padding-top: var(--spacing-large);
-        }
-        
-        .concepts-page h2 {
-            text-align: center;
-            margin-bottom: var(--spacing-large);
-            font-size: clamp(24px, 3vw, 36px);
-            letter-spacing: 0.1em;
+        /* Concepts Section */
+        .concepts-section {
+            padding-top: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
         }
         
         .concepts-grid {
@@ -409,19 +388,12 @@
             margin: 0 auto;
         }
         
-        /* Contact Page */
-        .contact-page {
-            padding: var(--spacing-large) 0;
+        /* Contact Section */
+        .contact-section {
+            padding: var(--spacing-xl) 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        
-        .contact-page h2 {
-            text-align: center;
-            margin-bottom: var(--spacing-large);
-            font-size: clamp(24px, 3vw, 36px);
-            letter-spacing: 0.1em;
         }
         
         .contact-info {
@@ -476,20 +448,14 @@
         
         /* Fade-in Animation */
         .fade-in {
-            animation: fadeIn 1s ease forwards;
-            opacity: 0; /* Start invisible */
-            visibility: hidden; /* Set initially hidden */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
         
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Responsive Styles */
@@ -497,10 +463,12 @@
             :root {
                 --spacing-large: 50px;
                 --spacing-medium: 30px;
+                --spacing-xl: 80px;
             }
             
             header {
                 padding: var(--spacing-unit) 0;
+                background-color: rgba(255, 255, 255, 0.95);
             }
             
             nav {
@@ -509,42 +477,14 @@
             
             .logo {
                 height: 25px;
-                z-index: 1001;
-            }
-            
-            .menu-toggle {
-                display: block;
-                z-index: 1001;
             }
             
             .menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100vh;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                background-color: rgba(255, 255, 255, 0.95);
-                transition: right 0.3s ease;
-                z-index: 1000;
+                display: none;
             }
             
-            .menu.active {
-                right: 0;
-            }
-            
-            .menu li {
-                margin: var(--spacing-medium) 0;
-            }
-            
-            .menu a {
-                font-size: 18px;
-            }
-            
-            .main-content {
-                padding: var(--spacing-medium);
+            .hero-section {
+                padding-top: 80px;
             }
             
             .works-grid,
@@ -576,213 +516,331 @@
 <body>
     <header id="header">
         <nav>
-            <a href="#main" class="logo">
+            <a href="#hero" class="logo">
                 <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fakeovenlogo_trans.png?raw=true" alt="FAKEOVEN Logo">
             </a>
-            <button class="menu-toggle" id="menuToggle">
-                <span>≡</span>
-            </button>
-            <ul class="menu" id="menu">
-                <li><a href="#main" class="nav-link active">MAIN</a></li>
-                <li><a href="#works" class="nav-link">WORKS</a></li>
-                <li><a href="#concepts" class="nav-link">CONCEPTS</a></li>
-                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+            <ul class="menu">
+                <li><a href="#hero">MAIN</a></li>
+                <li><a href="#works">WORKS</a></li>
+                <li><a href="#concepts">CONCEPTS</a></li>
+                <li><a href="#contact">CONTACT</a></li>
             </ul>
         </nav>
     </header>
     
-    <main>
-        <!-- Main Page -->
-        <section id="main" class="page main-page active">
-            <div class="main-content">
-                <h1 class="fade-in">VISUAL STORYTELLING</h1>
-                <p class="fade-in delay-100">Professional photographer and filmmaker with 10 years of experience. Capturing moments with unique vision and technical precision.</p>
-                <p class="vision-statement fade-in delay-200">Each fake mirrors its own truth.</p>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content fade-in">
+            <h1>VISUAL STORYTELLING</h1>
+            <p>Professional photographer and filmmaker with 10 years of experience. Capturing moments with unique vision and technical precision.</p>
+            <p class="vision-statement">Each fake mirrors its own truth.</p>
+        </div>
+    </section>
+    
+    <!-- Works Section -->
+    <section id="works" class="works-section">
+        <div class="container">
+            <h2 class="section-title fade-in">WORKS</h2>
+            
+            <div class="works-tabs fade-in">
+                <button class="tab-button active" data-tab="all">All</button>
+                <button class="tab-button" data-tab="videos">Videos</button>
+                <button class="tab-button" data-tab="photos">Photos</button>
             </div>
-        </section>
-        
-        <!-- Works Page -->
-        <section id="works" class="page works-page">
-            <div class="container">
-                <h2 class="fade-in">WORKS</h2>
-                
-                <div class="works-tabs fade-in delay-100">
-                    <button class="tab-button active" data-tab="all">All</button>
-                    <button class="tab-button" data-tab="videos">Videos</button>
-                    <button class="tab-button" data-tab="photos">Photos</button>
-                </div>
-                
-                <div class="tab-content active" id="all">
-                    <div class="works-grid">
-                        <!-- 1. 出勤無用曲 출근금지곡 -->
-                        <div class="work-item fade-in delay-200">
-                            <div class="work-image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ImpUC9WWetw?si=bsJaZ6uBRmbUMl8h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <div class="work-caption">
-                                <h3 style="font-family: 'Noto Sans JP', sans-serif; font-weight: 700;">出勤無用曲</h3>
-                                <span class="subtitle">출근금지곡</span>
-                                <p>Digital Music Video</p>
-                            </div>
+            
+            <div class="tab-content active" id="all">
+                <div class="works-grid">
+                    <!-- 1. 出勤無用曲 출근금지곡 -->
+                    <div class="work-item fade-in">
+                        <div class="work-image">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ImpUC9WWetw?si=bsJaZ6uBRmbUMl8h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
-                        
-                        <!-- 2. Parrot Funk Star Show -->
-                        <div class="work-item fade-in delay-300">
-                            <div class="work-image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vxWbgvPWJfQ?si=ebEsEZtnij84jK2b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <div class="work-caption">
-                                <h3>Parrot Funk Star Show</h3>
-                                <span class="subtitle">앵무 펑크 스타쇼</span>
-                                <p>Digital Music Video</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 3. LURK -->
-                        <div class="work-item fade-in delay-400">
-                            <div class="work-image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Q6rFUU8QkWg?si=P-X2UoeLXLtrc_xE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <div class="work-caption">
-                                <h3>LURK</h3>
-                                <span class="subtitle">어둠 속의 포식자</span>
-                                <p>Digital Music Video</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 4. Running Beats -->
-                        <div class="work-item fade-in delay-500">
-                            <div class="work-image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/jdFzTTSEKTE?si=5v-oLYFdqTewnrXl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <div class="work-caption">
-                                <h3>Running Beats</h3>
-                                <p>Digital Music Video</p>
-                            </div>
+                        <div class="work-caption">
+                            <h3 style="font-family: 'Noto Sans JP', sans-serif; font-weight: 700;">出勤無用曲</h3>
+                            <span class="subtitle">출근금지곡</span>
+                            <p>Digital Music Video</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="tab-content" id="videos">
-                    <div class="works-grid">
-                        <!-- 1. 出勤無用曲 출근금지곡 -->
-                        <div class="work-item">
-                            <div class="work-image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ImpUC9WWetw?si=bsJaZ6uBRmbUMl8h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <div class="work-caption">
-                                <h3 style="font-family: 'Noto Sans JP', sans-serif; font-weight: 700;">出勤無用曲</h3>
-                                <span class="subtitle">출근금지곡</span>
-                                <p>Digital Music Video</p>
-                            </div>
+                    
+                    <!-- 2. Parrot Funk Star Show -->
+                    <div class="work-item fade-in">
+                        <div class="work-image">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vxWbgvPWJfQ?si=ebEsEZtnij84jK2b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
-                        
-                        <!-- 2. Parrot Funk Star Show -->
-                        <div class="work-item">
-                            <div class="work-image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vxWbgvPWJfQ?si=ebEsEZtnij84jK2b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <div class="work-caption">
-                                <h3>Parrot Funk Star Show</h3>
-                                <span class="subtitle">앵무 펑크 스타쇼</span>
-                                <p>Digital Music Video</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 3. LURK -->
-                        <div class="work-item">
-                            <div class="work-image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Q6rFUU8QkWg?si=P-X2UoeLXLtrc_xE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <div class="work-caption">
-                                <h3>LURK</h3>
-                                <span class="subtitle">어둠 속의 포식자</span>
-                                <p>Digital Music Video</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 4. Running Beats -->
-                        <div class="work-item">
-                            <div class="work-image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/jdFzTTSEKTE?si=5v-oLYFdqTewnrXl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <div class="work-caption">
-                                <h3>Running Beats</h3>
-                                <p>Digital Music Video</p>
-                            </div>
+                        <div class="work-caption">
+                            <h3>Parrot Funk Star Show</h3>
+                            <span class="subtitle">앵무 펑크 스타쇼</span>
+                            <p>Digital Music Video</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="tab-content" id="photos">
-                    <div class="works-grid">
-                        <!-- Photo work items go here -->
-                        <div class="work-item">
-                            <div class="work-image">
-                                <!-- 여기에 이미지 URL을 붙여넣으세요 -->
-                                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
-                                    여기에 이미지 URL을 붙여넣으세요
-                                </div>
-                            </div>
-                            <div class="work-caption">
-                                <h3>Portrait Series</h3>
-                                <p>Emotional portraits using natural light</p>
-                            </div>
+                    
+                    <!-- 3. LURK -->
+                    <div class="work-item fade-in">
+                        <div class="work-image">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Q6rFUU8QkWg?si=P-X2UoeLXLtrc_xE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
-                        
-                        <div class="work-item">
-                            <div class="work-image">
-                                <!-- 여기에 이미지 URL을 붙여넣으세요 -->
-                                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
-                                    여기에 이미지 URL을 붙여넣으세요
-                                </div>
-                            </div>
-                            <div class="work-caption">
-                                <h3>Product Photography</h3>
-                                <p>Premium product lineup for Brand A</p>
-                            </div>
+                        <div class="work-caption">
+                            <h3>LURK</h3>
+                            <span class="subtitle">어둠 속의 포식자</span>
+                            <p>Digital Music Video</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 4. Running Beats -->
+                    <div class="work-item fade-in">
+                        <div class="work-image">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/jdFzTTSEKTE?si=5v-oLYFdqTewnrXl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="work-caption">
+                            <h3>Running Beats</h3>
+                            <p>Digital Music Video</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- Concepts Page -->
-        <section id="concepts" class="page concepts-page">
-            <div class="container">
-                <h2 class="fade-in">CONCEPTS</h2>
+            
+            <div class="tab-content" id="videos">
+                <div class="works-grid">
+                    <!-- 1. 出勤無用曲 출근금지곡 -->
+                    <div class="work-item">
+                        <div class="work-image">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ImpUC9WWetw?si=bsJaZ6uBRmbUMl8h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="work-caption">
+                            <h3 style="font-family: 'Noto Sans JP', sans-serif; font-weight: 700;">出勤無用曲</h3>
+                            <span class="subtitle">출근금지곡</span>
+                            <p>Digital Music Video</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 2. Parrot Funk Star Show -->
+                    <div class="work-item">
+                        <div class="work-image">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vxWbgvPWJfQ?si=ebEsEZtnij84jK2b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="work-caption">
+                            <h3>Parrot Funk Star Show</h3>
+                            <span class="subtitle">앵무 펑크 스타쇼</span>
+                            <p>Digital Music Video</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 3. LURK -->
+                    <div class="work-item">
+                        <div class="work-image">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Q6rFUU8QkWg?si=P-X2UoeLXLtrc_xE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="work-caption">
+                            <h3>LURK</h3>
+                            <span class="subtitle">어둠 속의 포식자</span>
+                            <p>Digital Music Video</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 4. Running Beats -->
+                    <div class="work-item">
+                        <div class="work-image">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/jdFzTTSEKTE?si=5v-oLYFdqTewnrXl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="work-caption">
+                            <h3>Running Beats</h3>
+                            <p>Digital Music Video</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="photos">
+                <div class="works-grid">
+                    <!-- Photo work items go here -->
+                    <div class="work-item">
+                        <div class="work-image">
+                            <!-- 여기에 이미지 URL을 붙여넣으세요 -->
+                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
+                                여기에 이미지 URL을 붙여넣으세요
+                            </div>
+                        </div>
+                        <div class="work-caption">
+                            <h3>Portrait Series</h3>
+                            <p>Emotional portraits using natural light</p>
+                        </div>
+                    </div>
+                    
+                    <div class="work-item">
+                        <div class="work-image">
+                            <!-- 여기에 이미지 URL을 붙여넣으세요 -->
+                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
+                                여기에 이미지 URL을 붙여넣으세요
+                            </div>
+                        </div>
+                        <div class="work-caption">
+                            <h3>Product Photography</h3>
+                            <p>Premium product lineup for Brand A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Concepts Section -->
+    <section id="concepts" class="concepts-section">
+        <div class="container">
+            <h2 class="section-title fade-in">CONCEPTS</h2>
+            
+            <div class="concepts-grid">
+                <!-- Beauty Shot Concept -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <!-- 여기에 이미지 URL을 붙여넣으세요 -->
+                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
+                            여기에 이미지 URL을 붙여넣으세요<br>(Beauty Shot 컨셉)
+                        </div>
+                        <div class="concept-overlay">
+                            <h3>Beauty Shot</h3>
+                            <p>Elegant and expressive portraits highlighting natural beauty</p>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="concepts-grid">
-                    <!-- Beauty Shot Concept -->
-                    <div class="concept-item fade-in delay-100">
-                        <div class="concept-image">
-                            <!-- 여기에 이미지 URL을 붙여넣으세요 -->
-                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
-                                여기에 이미지 URL을 붙여넣으세요<br>(Beauty Shot 컨셉)
-                            </div>
-                            <div class="concept-overlay">
-                                <h3>Beauty Shot</h3>
-                                <p>Elegant and expressive portraits highlighting natural beauty</p>
-                            </div>
+                <!-- Fantasy Concept -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <!-- 여기에 이미지 URL을 붙여넣으세요 -->
+                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
+                            여기에 이미지 URL을 붙여넣으세요<br>(Fantasy 컨셉)
+                        </div>
+                        <div class="concept-overlay">
+                            <h3>Fantasy</h3>
+                            <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
                         </div>
                     </div>
-                    
-                    <!-- Fantasy Concept -->
-                    <div class="concept-item fade-in delay-200">
-                        <div class="concept-image">
-                            <!-- 여기에 이미지 URL을 붙여넣으세요 -->
-                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
-                                여기에 이미지 URL을 붙여넣으세요<br>(Fantasy 컨셉)
-                            </div>
-                            <div class="concept-overlay">
-                                <h3>Fantasy</h3>
-                                <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
-                            </div>
+                </div>
+                
+                <!-- Sci-Fi Concept -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <!-- 여기에 이미지 URL을 붙여넣으세요 -->
+                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
+                            여기에 이미지 URL을 붙여넣으세요<br>(Sci-Fi 컨셉)
+                        </div>
+                        <div class="concept-overlay">
+                            <h3>Sci-Fi</h3>
+                            <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
                         </div>
                     </div>
-                    
-                    <!-- Sci-Fi Concept -->
-                    <div class="concept-item fade-in delay-300">
-                        <div class="concept-image">
-                            <!-- 여기에 이미지 URL을 붙여넣으세요 -->
-                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:
+                </div>
+                
+                <!-- 2D Animation Concept -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <!-- 여기에 이미지 URL을 붙여넣으세요 -->
+                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; text-align:center; padding:20px;">
+                            여기에 이미지 URL을 붙여넣으세요<br>(2D Animation 컨셉)
+                        </div>
+                        <div class="concept-overlay">
+                            <h3>2D Animation</h3>
+                            <p>Stylized animated visuals with a distinctive artistic approach</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title fade-in">CONTACT</h2>
+            
+            <div class="contact-info fade-in">
+                <p>Email: <a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
+                <p>Kakao Talk: <a href="https://open.kakao.com/me/fakeoven" target="_blank">open.kakao.com/me/fakeoven</a></p>
+            </div>
+            
+            <div class="social-links fade-in">
+                <a href="https://youtube.com/@FakeOven" target="_blank">
+                    <!-- 여기에 유튜브 아이콘 이미지 URL을 붙여넣으세요 -->
+                    <div style="width:24px; height:24px; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; font-size:8px; text-align:center;">
+                        유튜브<br>아이콘
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/fakeoven.ai" target="_blank">
+                    <!-- 여기에 인스타그램 아이콘 이미지 URL을 붙여넣으세요 -->
+                    <div style="width:24px; height:24px; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; font-size:8px; text-align:center;">
+                        인스타<br>아이콘
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 스크롤 시 헤더 스타일 변경
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // 탭 기능
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 활성 탭 버튼 업데이트
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 해당 탭 내용 표시
+                const tabId = this.getAttribute('data-tab');
+                tabContents.forEach(content => {
+                    if (content.id === tabId) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // 스크롤 시 요소 페이드인
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 50) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+        
+        // 스무스 스크롤링
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
