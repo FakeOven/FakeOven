@@ -448,22 +448,39 @@
         
         /* Contact Section */
         .contact-section {
-            padding: var(--spacing-xl) 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    padding: var(--spacing-xl) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
         
-        .contact-info {
-            max-width: 500px;
-            text-align: center;
-            margin: 0 auto;
-        }
-        
-        .contact-info p {
-            margin: calc(var(--spacing-unit) * 2) 0;
-            font-size: 16px;
-        }
+        .section-title.contact-title {
+    font-weight: 700; /* 볼드체 추가 */
+    letter-spacing: 0.15em;
+}
+
+.contact-info {
+    max-width: 500px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.contact-info p {
+    margin: calc(var(--spacing-unit) * 2) 0;
+    font-size: 16px;
+}
+
+.contact-info a {
+    color: var(--main-color);
+    font-weight: 500; /* 이메일 주소 강조 */
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: var(--transition);
+}
+
+.contact-info a:hover {
+    border-bottom-color: var(--main-color);
+}
         
         /* Footer */
         footer {
@@ -478,31 +495,31 @@
             margin-bottom: var(--spacing-unit);
         }
         
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: calc(var(--spacing-unit) * 2);
-            margin: var(--spacing-medium) 0;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            width: 24px;
-            height: 24px;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .social-links img {
-            width: 100%;
-            height: 100%;
-            opacity: 0.7;
-            transition: var(--transition);
-        }
-        
-        .social-links a:hover img {
-            opacity: 1;
-        }
+       .social-links {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--spacing-unit) * 4); /* 아이콘 간격 증가 */
+    margin: var(--spacing-medium) 0;
+}
+
+.social-links a {
+    display: inline-flex;
+    width: 30px; /* 아이콘 크기 증가 */
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.social-links a:hover img {
+    opacity: 1;
+}
         
         /* Fade-in Animation */
         .fade-in {
@@ -870,32 +887,28 @@
         </div>
     </section>
     
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title fade-in">CONTACT</h2>
-            
-            <div class="contact-info fade-in">
-                <p>Email: <a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
-                <p>Kakao Talk: <a href="https://open.kakao.com/me/fakeoven" target="_blank">open.kakao.com/me/fakeoven</a></p>
-            </div>
-            
-            <div class="social-links fade-in">
-                <a href="https://youtube.com/@FakeOven" target="_blank">
-                    <!-- 여기에 유튜브 아이콘 이미지 URL을 붙여넣으세요 -->
-                    <div style="width:24px; height:24px; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; font-size:8px; text-align:center;">
-                        유튜브<br>아이콘
-                    </div>
-                </a>
-                <a href="https://www.instagram.com/fakeoven.ai" target="_blank">
-                    <!-- 여기에 인스타그램 아이콘 이미지 URL을 붙여넣으세요 -->
-                    <div style="width:24px; height:24px; display:flex; align-items:center; justify-content:center; background-color:#f5f5f5; color:#666; font-size:8px; text-align:center;">
-                        인스타<br>아이콘
-                    </div>
-                </a>
-            </div>
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2 class="section-title contact-title fade-in">CONTACT</h2>
+        
+        <div class="contact-info fade-in">
+            <p><a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
         </div>
-    </section>
+        
+        <div class="social-links fade-in">
+            <a href="https://youtube.com/@FakeOven" target="_blank" aria-label="YouTube">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/yt_logo.svg.png?raw=true" alt="YouTube">
+            </a>
+            <a href="https://www.instagram.com/fakeoven.ai" target="_blank" aria-label="Instagram">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/insta_logo1.png?raw=true" alt="Instagram">
+            </a>
+            <a href="https://open.kakao.com/me/fakeoven" target="_blank" aria-label="KakaoTalk">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/KakaoTalk_logo2.png?raw=true" alt="KakaoTalk">
+            </a>
+        </div>
+    </div>
+</section>
     
     <footer>
         <div class="container">
