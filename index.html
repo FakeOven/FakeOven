@@ -13,10 +13,10 @@
         }
         
         body {
-            font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
             color: #333;
             width: 100%;
             overflow-x: hidden;
@@ -38,9 +38,11 @@
         header {
             background-color: #fff;
             padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: relative;
             width: 100%;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         
         nav {
@@ -51,10 +53,13 @@
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin: 5px 0;
+            height: 40px;
+            cursor: pointer;
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
         }
         
         .menu {
@@ -66,32 +71,36 @@
         }
         
         .menu li {
-            margin: 10px 0 10px 20px;
+            margin: 0 0 0 30px;
         }
         
         .menu a {
             text-decoration: none;
             color: #333;
-            font-weight: 500;
-            text-transform: uppercase;
+            font-weight: 400;
             font-size: 14px;
-            letter-spacing: 1px;
             display: block;
             padding: 5px 0;
+            position: relative;
         }
         
         .menu a:hover {
-            color: #007BFF;
+            color: #000;
         }
         
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 5px;
+        .menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #000;
+            transition: width 0.3s;
+        }
+        
+        .menu a:hover:after {
+            width: 100%;
         }
         
         /* Main Area */
@@ -102,10 +111,8 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background-color: #f0f0f0;
-            margin: 20px 0;
+            margin: 40px 0;
             padding: 40px 20px;
-            border-radius: 8px;
         }
         
         .hero h1 {
@@ -113,40 +120,38 @@
             margin-bottom: 20px;
             letter-spacing: 2px;
             word-wrap: break-word;
+            font-weight: 300;
         }
         
         .hero p {
             font-size: 18px;
             max-width: 600px;
             line-height: 1.6;
+            font-weight: 300;
         }
         
         /* Gallery Section */
         .gallery-section {
-            margin: 40px 0;
+            margin: 60px 0;
             padding: 0 10px;
         }
         
         .gallery-section h2 {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-weight: 300;
             letter-spacing: 1px;
-            text-transform: uppercase;
         }
         
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 30px;
         }
         
         .gallery-item {
             overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s;
-            background-color: #fff;
         }
         
         .gallery-item:hover {
@@ -161,156 +166,152 @@
         }
         
         .gallery-item .caption {
-            padding: 15px;
-            background-color: #fff;
+            padding: 15px 0;
         }
         
         .gallery-item .caption h3 {
             margin-top: 0;
             font-size: 18px;
+            font-weight: 400;
+        }
+        
+        .gallery-item .caption p {
+            font-weight: 300;
+            margin: 5px 0 0;
+            color: #666;
         }
         
         /* Video Section */
         .video-section {
-            margin: 40px 0;
+            margin: 60px 0;
             padding: 0 10px;
         }
         
         .video-section h2 {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-weight: 300;
             letter-spacing: 1px;
-            text-transform: uppercase;
         }
         
         .video-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 30px;
         }
         
         .video-item {
             overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            background-color: #fff;
         }
         
         .video-thumbnail {
             position: relative;
             height: 200px;
-            background-color: #000;
+            background-color: #f9f9f9;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            color: #666;
             font-size: 16px;
             text-align: center;
             padding: 10px;
         }
         
         .video-item .caption {
-            padding: 15px;
-            background-color: #fff;
+            padding: 15px 0;
         }
         
         .video-item .caption h3 {
             margin-top: 0;
             font-size: 18px;
+            font-weight: 400;
+        }
+        
+        .video-item .caption p {
+            font-weight: 300;
+            margin: 5px 0 0;
+            color: #666;
         }
         
         /* Contact Section */
         .contact-section {
-            background-color: #fff;
-            padding: 30px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin: 40px 0;
+            margin: 60px 0;
+            padding: 0 10px;
         }
         
         .contact-section h2 {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-weight: 300;
             letter-spacing: 1px;
-            text-transform: uppercase;
         }
         
-        .contact-form {
+        .contact-info {
             max-width: 600px;
             margin: 0 auto;
-            width: 100%;
+            text-align: center;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        .contact-info p {
+            margin: 15px 0;
             font-size: 16px;
-            -webkit-appearance: none;
-            appearance: none;
+            font-weight: 300;
         }
         
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
+        .contact-info a {
+            color: #333;
+            text-decoration: none;
         }
         
-        button {
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            width: 100%;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-        
-        button:hover {
-            background-color: #0056b3;
+        .contact-info a:hover {
+            color: #000;
+            text-decoration: underline;
         }
         
         /* Footer Styles */
         footer {
-            background-color: #333;
-            color: #fff;
             padding: 30px 0;
             text-align: center;
             width: 100%;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: #000;
+            margin-bottom: 15px;
         }
         
         .social-links {
-            margin-top: 20px;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
+            gap: 20px;
         }
         
         .social-links a {
-            color: #fff;
-            margin: 5px 10px;
-            font-size: 16px;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .social-links img {
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .social-links img:hover {
+            opacity: 1;
+        }
+        
+        /* Section Dividers */
+        .section-divider {
+            height: 1px;
+            background-color: #f0f0f0;
+            margin: 60px auto;
+            width: 100%;
+            max-width: 100px;
         }
         
         /* Responsive Styles */
@@ -321,32 +322,21 @@
             
             nav {
                 padding: 0 15px;
+                justify-content: center;
+                flex-direction: column;
             }
             
-            .mobile-menu-btn {
-                display: block;
+            .logo {
+                margin-bottom: 15px;
             }
             
             .menu {
-                display: none;
+                justify-content: center;
                 width: 100%;
-                flex-direction: column;
-                margin-top: 15px;
-            }
-            
-            .menu.active {
-                display: flex;
             }
             
             .menu li {
-                margin: 10px 0;
-                width: 100%;
-                text-align: center;
-            }
-            
-            .menu a {
-                padding: 10px;
-                border-bottom: 1px solid #eee;
+                margin: 0 10px;
             }
             
             .hero {
@@ -377,10 +367,6 @@
             .gallery-item img {
                 height: 200px;
             }
-            
-            .contact-section {
-                padding: 20px 15px;
-            }
         }
         
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -398,13 +384,14 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">FAKEOVEN</div>
-                <button class="mobile-menu-btn" id="menuToggle">☰</button>
+                <a href="#home" class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MjYgMTY4IiBmaWxsPSJub25lIj48cGF0aCBkPSJNMCAwSDg1VjE2OEgwVjBaIiBmaWxsPSJibGFjayIvPjxwYXRoIGQ9Ik04NSA4NEg0Mi41VjBIMFY4NEg0Mi41SDBWMTYxLjJWMTY4SDg1Vjg0WiIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMjM0IDBoLTU2bC05MyAxNjhoNTZsMjUtNDVoNDBsMjUgNDVoNTZMMjM0IDBabS01NiA5NGwyNC00NCAyNCA0NEgxNzhaIiBmaWxsPSJibGFjayIvPjxwYXRoIGQ9Ik00MzggMEgzNDV2NDJoMzcuNXY2QzM4Mi41IDM4MC41IDM4MiA0OCgzODIuNSA0OGgwbC01Ni0zMy42VjE2OEgzODJoMFYxMzJsMTUtOSA4IDQ1SDQ2NmwtMjAtMTAwIDIwLTMuNkw0MjQgMGgyMFYwaDYzLjVWMjRMNDM4IDBaIiBmaWxsPSJibGFjayIvPjxwYXRoIGQ9Ik02NTkgMEg1NzRWMTY4SDY1OVYwWiIgZmlsbD0iYmxhY2siLz48cGF0aCBkPSJNNjU5IDg0aC00Mi41VjBINTc0Vjg0aDQyLjVINTc0VjE2MS4yVjE2OEg2NTlWODRaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik03NDQgMEg2NTl2ODRoND4eJVjg0ViDZgiiTl1MaCIBPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik04MjYgMEg3NDR2MTY4aDgyVjBaIiBmaWxsPSJibGFjayIvPjwvc3ZnPg==" alt="FAKEOVEN Logo">
+                </a>
                 <ul class="menu" id="mobileMenu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#photos">Photography</a></li>
-                    <li><a href="#videos">Films</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#photos">PHOTOGRAPHY</a></li>
+                    <li><a href="#videos">FILMS</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
                 </ul>
             </nav>
         </div>
@@ -416,8 +403,10 @@
             <p>Professional photographer and filmmaker with 10 years of experience. Capturing moments with unique vision and technical precision.</p>
         </section>
         
+        <div class="section-divider"></div>
+        
         <section id="photos" class="gallery-section">
-            <h2>Photography</h2>
+            <h2>PHOTOGRAPHY</h2>
             <div class="gallery">
                 <div class="gallery-item">
                     <img src="/api/placeholder/400/300" alt="Landscape photography">
@@ -450,8 +439,10 @@
             </div>
         </section>
         
+        <div class="section-divider"></div>
+        
         <section id="videos" class="video-section">
-            <h2>Filmmaking</h2>
+            <h2>FILMMAKING</h2>
             <div class="video-gallery">
                 <div class="video-item">
                     <div class="video-thumbnail">
@@ -474,58 +465,39 @@
             </div>
         </section>
         
+        <div class="section-divider"></div>
+        
         <section id="contact" class="contact-section">
-            <h2>Contact</h2>
-            <div class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="Enter your name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" placeholder="Enter your inquiry"></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </div>
-            
-            <div style="margin-top: 30px; text-align: center;">
-                <h3>Contact</h3>
-                <p>Email: contact@fakeoven.com</p>
-                <p>KakaoTalk: open.kakao.com/me/fakeoven</p>
+            <h2>CONTACT</h2>
+            <div class="contact-info">
+                <p>Email: <a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
+                <p>KakaoTalk: <a href="https://open.kakao.com/me/fakeoven" target="_blank">open.kakao.com/me/fakeoven</a></p>
             </div>
         </section>
     </div>
     
     <footer>
         <div class="container">
-            <p>&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
+            <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
             <div class="social-links">
-                <a href="#">Instagram</a>
-                <a href="#">YouTube</a>
-                <a href="#">Vimeo</a>
+                <a href="https://youtube.com/@FakeOven" target="_blank">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS15b3V0dWJlIj48cGF0aCBkPSJNMjIuNTQgNi40MmE0LjY0IDIuNSAwIDAgMC0zLjEtMi43NCAxLjY1IDEuNjUgMCAwIDAtLjI0LS4wNCAxMDAgNzUgMCAwIDAtMTYuMzggMCA0LjM0IDQuMzQgMCAwIDAtMy4zMiAyLjgyQTMxLjkyIDM4Ljc4IDAgMCAwIDEuNDYgMTBhMzIgMzkgMCAwIDAgMCAzLjg3IDE0LjYzIDE0LjYzIDAgMCAwIC4yMyAyLjkyIDQuNzYgMi41OCAwIDAgMCAzLjEgMi43IDEuNzUgMS43NSAwIDAgMCAuMjYuMDMgMTk3LjU0IDgxLjU3IDAgMCAwIDE2LjI1IDBsLjA2LS4wM2E0LjcgMi41IDAgMCAwIDMuMS0yLjY3IDE2LjYzIDE2LjYzIDAgMCAwIC4yLS44NyAzMiAzOSAwIDAgMCAwLTRhMzAuNDggMzYuNTggMCAwIDAtLjIyLTMuNTIuODUuODUgMCAwIDAgMCAwWiIgZmlsbD0iIzAwMDAwMCI+PC9wYXRoPjxwYXRoIGQ9Im05Ljc1IDc45Nkw5LjY3IDggMTUuNDQgMTEuNGMuNjUuMzggLjc3IDEuMTUuMiAxLjQ2YS44Mi44MiAwIDAgMS0uMTQuMDYgMi4wMiAyLjAyIDAgMCAxLS42Ny4wOGgwYTEuMiBxLjIgMCAwLTEtLjI3aDBsLTQuMTYtMi42di0uMDIiIGZpbGw9IiNmZmZmZmYiPjwvcGF0aD48cGF0aCBkPSJNOSA4bDYgNHYtN0w5IDhabTE0IDJjLjItLjY4LjMtMS4yNC4zLTEuOTlhMzIgMzkgMCAwIDAgMC00IDMwLjk2IDM3LjE1IDAgMCAwLS4yNC0zLjc4IDUuMTYgMi43NSAwIDAgMC0zLjEyLTIuOTUgMS41IDEuNSAwIDAgMC0uMjktLjA2aDAwYTE5My45IDgwLjEzIDAgMCAwLTE2LjE5IDBhNC43NiA0Ljc2IDAgMCAwLTMuMzMgMyAzMiAzOSAwIDAgMCAwIDcuNzkgMTQuODIgMTQuODIgMCAwIDAgLjI0IDMuMDUgNS4xNiAyLjc3IDAgMCAwIDMuMTEgMi45MiAxLjM0IDEuMzQgMCAwIDAgLjIuMDNjMi45MSAwIDE5LjQgLjA3IDkuNyAweiIgZmlsbD0idHJhbnNwYXJlbnQiPjwvcGF0aD48L3N2Zz4=" alt="YouTube">
+                </a>
+                <a href="https://instagram.com/@fakeoven.ai" target="_blank">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1pbnN0YWdyYW0iPjxyZWN0IHg9IjIiIHk9IjIiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcng9IjUiIHJ5PSI1IiBmaWxsPSIjMDAwMDAwIj48L3JlY3Q+PHBhdGggZD0iTTE2IDExLjM3QTQgNCAwIDEgMSAxMi42MyA4IDQgNCAwIDAgMSAxNiAxMS4zN3oiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2ZmZmZmZiI+PC9wYXRoPjxsaW5lIHgxPSIxNy41IiB5MT0iNi41IiB4Mj0iMTcuNTEiIHkyPSI2LjUiIHN0cm9rZT0iI2ZmZmZmZiI+PC9saW5lPjwvc3ZnPg==" alt="Instagram">
+                </a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const mobileMenu = document.getElementById('mobileMenu');
-            
-            menuToggle.addEventListener('click', function() {
-                mobileMenu.classList.toggle('active');
-            });
-            
-            // Close menu when clicking menu items
-            const menuItems = document.querySelectorAll('#mobileMenu a');
-            menuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    mobileMenu.classList.remove('active');
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
         });
