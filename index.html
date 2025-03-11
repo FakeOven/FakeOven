@@ -4,57 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAKEOVEN | AI VISUAL PRODUCTION</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         /* Basic Styles */
         * {
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --main-color: #000;
+            --secondary-color: #777;
+            --bg-color: #fff;
+            --subtle-color: #f5f5f5;
+            --spacing-unit: 10px;
+            --spacing-medium: 40px;
+            --spacing-large: 80px;
+            --transition: all 0.3s ease;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--main-color);
             width: 100%;
             overflow-x: hidden;
+            line-height: 1.5;
+            font-weight: 300;
+            letter-spacing: 0.02em;
         }
         
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 calc(var(--spacing-unit) * 3);
         }
         
         img {
             max-width: 100%;
             height: auto;
+            display: block;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        
+        p {
+            margin-bottom: var(--spacing-medium);
         }
         
         /* Header Styles */
         header {
-            background-color: #fff;
-            padding: 15px 0;
-            width: 100%;
-            border-bottom: 1px solid #f0f0f0;
-            position: sticky;
+            background-color: transparent;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
+            padding: calc(var(--spacing-unit) * 3) 0;
             z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-unit) 0;
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            padding: 0 calc(var(--spacing-unit) * 3);
         }
         
         .logo {
-            height: 40px;
-            cursor: pointer;
+            height: 30px;
+            transition: var(--transition);
         }
         
         .logo img {
@@ -62,459 +104,654 @@
             width: auto;
         }
         
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--main-color);
+        }
+        
         .menu {
             display: flex;
             list-style: none;
-            margin: 0;
-            padding: 0;
-            flex-wrap: wrap;
         }
         
         .menu li {
-            margin: 0 0 0 30px;
+            margin-left: calc(var(--spacing-unit) * 5);
         }
         
         .menu a {
             text-decoration: none;
-            color: #333;
-            font-weight: 400;
+            color: var(--main-color);
             font-size: 14px;
-            display: block;
-            padding: 5px 0;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             position: relative;
+            padding: 5px 0;
         }
         
-        .menu a:hover {
-            color: #000;
-        }
-        
-        .menu a:after {
+        .menu a::after {
             content: '';
             position: absolute;
             width: 0;
             height: 1px;
             bottom: 0;
             left: 0;
-            background-color: #000;
-            transition: width 0.3s;
+            background-color: var(--main-color);
+            transition: var(--transition);
         }
         
-        .menu a:hover:after {
+        .menu a:hover::after,
+        .menu a.active::after {
             width: 100%;
         }
         
-        /* Main Area */
-        .hero {
-            min-height: 400px;
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: 100vh;
+        }
+        
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: var(--spacing-large) 0;
+        }
+        
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        /* Main Page */
+        .main-page {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            margin: 40px 0;
-            padding: 40px 20px;
+            margin-top: -80px; /* Offset the main margin-top */
+            position: relative;
+            overflow: hidden;
         }
         
-        .hero h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            word-wrap: break-word;
-            font-weight: 300;
+        .main-content {
+            max-width: 800px;
+            z-index: 2;
+            padding: var(--spacing-large);
         }
         
-        .hero p {
-            font-size: 18px;
+        .main-page h1 {
+            font-size: clamp(32px, 5vw, 60px);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            line-height: 1.2;
+        }
+        
+        .main-page p {
+            font-size: clamp(16px, 2vw, 20px);
             max-width: 600px;
-            line-height: 1.6;
-            font-weight: 300;
+            margin: 0 auto var(--spacing-medium);
         }
         
         .vision-statement {
-            margin-top: 30px;
+            margin-top: var(--spacing-medium);
             font-style: italic;
-            font-size: 20px;
-            letter-spacing: 1px;
+            font-size: clamp(16px, 2vw, 22px);
+            letter-spacing: 0.05em;
             opacity: 0.8;
         }
         
-        /* Gallery Section */
-        .gallery-section {
-            margin: 60px 0;
-            padding: 0 10px;
+        /* Works Page */
+        .works-page {
+            padding-top: var(--spacing-large);
         }
         
-        .gallery-section h2 {
+        .works-page h2 {
             text-align: center;
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 1px;
+            margin-bottom: var(--spacing-large);
+            font-size: clamp(24px, 3vw, 36px);
+            letter-spacing: 0.1em;
         }
         
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .gallery-item {
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .gallery-item .caption {
-            padding: 15px 0;
-        }
-        
-        .gallery-item .caption h3 {
-            margin-top: 0;
-            font-size: 18px;
-            font-weight: 400;
-        }
-        
-        .gallery-item .caption p {
-            font-weight: 300;
-            margin: 5px 0 0;
-            color: #666;
-        }
-        
-        /* Video Section */
-        .video-section {
-            margin: 60px 0;
-            padding: 0 10px;
-        }
-        
-        .video-section h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        
-        .video-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .video-item {
-            overflow: hidden;
-        }
-        
-        .video-thumbnail {
-            position: relative;
-            height: 200px;
-            background-color: #f9f9f9;
+        .works-tabs {
             display: flex;
-            align-items: center;
             justify-content: center;
-            color: #666;
+            margin-bottom: var(--spacing-medium);
+            border-bottom: 1px solid var(--subtle-color);
+            padding-bottom: var(--spacing-unit);
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            margin: 0 var(--spacing-unit);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -1px;
+            left: 0;
+            background-color: var(--main-color);
+            transition: var(--transition);
+        }
+        
+        .tab-button:hover,
+        .tab-button.active {
+            color: var(--main-color);
+        }
+        
+        .tab-button.active::after {
+            width: 100%;
+        }
+        
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: var(--spacing-medium);
+        }
+        
+        .work-item {
+            margin-bottom: var(--spacing-medium);
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .work-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background-color: var(--subtle-color);
+        }
+        
+        .work-image img,
+        .work-image iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .work-item:hover .work-image img {
+            transform: scale(1.03);
+        }
+        
+        .work-caption {
+            padding: calc(var(--spacing-unit) * 2) 0;
+        }
+        
+        .work-caption h3 {
             font-size: 16px;
-            text-align: center;
-            padding: 10px;
-        }
-        
-        .video-item .caption {
-            padding: 15px 0;
-        }
-        
-        .video-item .caption h3 {
-            margin-top: 0;
-            font-size: 18px;
             font-weight: 400;
+            margin-bottom: 5px;
         }
         
-        .video-item .caption p {
-            font-weight: 300;
-            margin: 5px 0 0;
-            color: #666;
+        .work-caption p {
+            font-size: 14px;
+            color: var(--secondary-color);
+            margin-bottom: 0;
         }
         
-        /* Contact Section */
-        .contact-section {
-            margin: 60px 0;
-            padding: 0 10px;
+        /* Concepts Page */
+        .concepts-page {
+            padding-top: var(--spacing-large);
         }
         
-        .contact-section h2 {
+        .concepts-page h2 {
             text-align: center;
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 1px;
+            margin-bottom: var(--spacing-large);
+            font-size: clamp(24px, 3vw, 36px);
+            letter-spacing: 0.1em;
+        }
+        
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+        }
+        
+        .concept-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            cursor: pointer;
+        }
+        
+        .concept-image {
+            width: 100%;
+            height: 100%;
+            background-color: var(--subtle-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .concept-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .concept-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-medium);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .concept-item:hover .concept-image img {
+            transform: scale(1.05);
+        }
+        
+        .concept-item:hover .concept-overlay {
+            opacity: 1;
+        }
+        
+        .concept-overlay h3 {
+            font-size: 18px;
+            margin-bottom: var(--spacing-unit);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .concept-overlay p {
+            font-size: 14px;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        
+        /* Contact Page */
+        .contact-page {
+            padding: var(--spacing-large) 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-page h2 {
+            text-align: center;
+            margin-bottom: var(--spacing-large);
+            font-size: clamp(24px, 3vw, 36px);
+            letter-spacing: 0.1em;
         }
         
         .contact-info {
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 500px;
             text-align: center;
+            margin: 0 auto;
         }
         
         .contact-info p {
-            margin: 15px 0;
+            margin: calc(var(--spacing-unit) * 2) 0;
             font-size: 16px;
-            font-weight: 300;
         }
         
-        .contact-info a {
-            color: #333;
-            text-decoration: none;
-        }
-        
-        .contact-info a:hover {
-            color: #000;
-            text-decoration: underline;
-        }
-        
-        /* Footer Styles */
+        /* Footer */
         footer {
-            padding: 30px 0;
+            padding: var(--spacing-medium) 0;
             text-align: center;
-            width: 100%;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--subtle-color);
         }
         
         .copyright {
             font-size: 12px;
-            color: #000;
-            margin-bottom: 15px;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-unit);
         }
         
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: var(--spacing-unit) * 2;
+            margin: var(--spacing-medium) 0;
         }
         
         .social-links a {
-            display: inline-block;
+            display: inline-flex;
             width: 24px;
             height: 24px;
+            align-items: center;
+            justify-content: center;
         }
         
         .social-links img {
             width: 100%;
             height: 100%;
-            opacity: 0.8;
-            transition: opacity 0.3s;
+            opacity: 0.7;
+            transition: var(--transition);
         }
         
-        .social-links img:hover {
+        .social-links a:hover img {
             opacity: 1;
-        }
-        
-        /* Section Dividers */
-        .section-divider {
-            height: 1px;
-            background-color: #f0f0f0;
-            margin: 60px auto;
-            width: 100%;
-            max-width: 100px;
         }
         
         /* Responsive Styles */
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
+            :root {
+                --spacing-large: 50px;
+                --spacing-medium: 30px;
+            }
+            
+            header {
+                padding: var(--spacing-unit) 0;
             }
             
             nav {
-                padding: 0 15px;
-                justify-content: center;
-                flex-direction: column;
+                padding: 0 var(--spacing-unit);
             }
             
             .logo {
-                margin-bottom: 15px;
+                height: 25px;
+                z-index: 1001;
+            }
+            
+            .menu-toggle {
+                display: block;
+                z-index: 1001;
             }
             
             .menu {
-                justify-content: center;
+                position: fixed;
+                top: 0;
+                right: -100%;
                 width: 100%;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: rgba(255, 255, 255, 0.95);
+                transition: right 0.3s ease;
+                z-index: 1000;
+            }
+            
+            .menu.active {
+                right: 0;
             }
             
             .menu li {
-                margin: 0 10px;
+                margin: var(--spacing-medium) 0;
             }
             
-            .hero {
-                min-height: 300px;
-                padding: 30px 15px;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .vision-statement {
+            .menu a {
                 font-size: 18px;
-                margin-top: 20px;
             }
             
-            .gallery {
+            .main-content {
+                padding: var(--spacing-medium);
+            }
+            
+            .works-grid,
+            .concepts-grid {
                 grid-template-columns: 1fr;
             }
             
-            .video-gallery {
-                grid-template-columns: 1fr;
+            .tab-button {
+                padding: var(--spacing-unit) var(--spacing-unit);
+                font-size: 12px;
             }
             
-            .gallery-item, .video-item {
-                margin-bottom: 20px;
-            }
-            
-            .gallery-item img {
-                height: 200px;
+            .concept-item {
+                aspect-ratio: 3/4;
             }
         }
         
         @media (min-width: 769px) and (max-width: 1024px) {
-            .gallery {
+            .works-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .video-gallery {
+            .concepts-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#home" class="logo">
-                    <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fakeovenlogo_trans.png?raw=true" alt="FAKEOVEN Logo">
-                </a>
-                <ul class="menu" id="mobileMenu">
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#photos">PHOTOGRAPHY</a></li>
-                    <li><a href="#videos">FILMS</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header id="header">
+        <nav>
+            <a href="#main" class="logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fakeovenlogo_trans.png?raw=true" alt="FAKEOVEN Logo">
+            </a>
+            <button class="menu-toggle" id="menuToggle">
+                <span>≡</span>
+            </button>
+            <ul class="menu" id="menu">
+                <li><a href="#main" class="nav-link active">MAIN</a></li>
+                <li><a href="#works" class="nav-link">WORKS</a></li>
+                <li><a href="#concepts" class="nav-link">CONCEPTS</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+            </ul>
+        </nav>
     </header>
     
-    <div class="container">
-        <section id="home" class="hero">
-            <h1>VISUAL STORYTELLING</h1>
-            <p>Professional photographer and filmmaker with 10 years of experience. Capturing moments with unique vision and technical precision.</p>
-            <p class="vision-statement">Each fake mirrors its own truth.</p>
-        </section>
-        
-        <div class="section-divider"></div>
-        
-        <section id="photos" class="gallery-section">
-            <h2>PHOTOGRAPHY</h2>
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="landscape.jpg" alt="Landscape photography">
-                    <div class="caption">
-                        <h3>Natural Landscapes</h3>
-                        <p>Sunrise captured in Jeju Island, 2023</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="portrait.jpg" alt="Portrait photography">
-                    <div class="caption">
-                        <h3>Portrait Series</h3>
-                        <p>Emotional portraits using natural light</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="product.jpg" alt="Product photography">
-                    <div class="caption">
-                        <h3>Product Photography</h3>
-                        <p>Product lineup for Brand A</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="event.jpg" alt="Event photography">
-                    <div class="caption">
-                        <h3>Event Coverage</h3>
-                        <p>Seoul Fashion Week 2024</p>
-                    </div>
-                </div>
+    <main>
+        <!-- Main Page -->
+        <section id="main" class="page main-page active">
+            <div class="main-content">
+                <h1 class="fade-in">VISUAL STORYTELLING</h1>
+                <p class="fade-in delay-100">Professional photographer and filmmaker with 10 years of experience. Capturing moments with unique vision and technical precision.</p>
+                <p class="vision-statement fade-in delay-200">Each fake mirrors its own truth.</p>
             </div>
         </section>
         
-        <div class="section-divider"></div>
-        
-        <section id="videos" class="video-section">
-            <h2>FILMMAKING</h2>
-            <div class="video-gallery">
-                <div class="video-item">
-                    <div class="video-thumbnail">
-                        Video Preview (Videos will appear here on the actual site)
-                    </div>
-                    <div class="caption">
-                        <h3>Brand Promotional Film</h3>
-                        <p>Storytelling for a local coffee brand</p>
-                    </div>
-                </div>
-                <div class="video-item">
-                    <div class="video-thumbnail">
-                        Video Preview (Videos will appear here on the actual site)
-                    </div>
-                    <div class="caption">
-                        <h3>Travel Documentary</h3>
-                        <p>Asian Journey Series - Episode 1</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <div class="section-divider"></div>
-        
-        <section id="contact" class="contact-section">
-            <h2>CONTACT</h2>
-            <div class="contact-info">
-                <p>Email: <a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
-                <p>Kakao Talk: <a href="https://open.kakao.com/me/fakeoven" target="_blank">open.kakao.com/me/fakeoven</a></p>
-            </div>
-        </section>
-    </div>
-    
-    <footer>
-        <div class="container">
-            <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
-            <div class="social-links">
-                <a href="https://youtube.com/@FakeOven" target="_blank">
-                    <img src="youtube-icon.png" alt="YouTube">
-                </a>
-                <a href="https://www.instagram.com/fakeoven.ai" target="_blank">
-                    <img src="instagram-icon.png" alt="Instagram">
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+        <!-- Works Page -->
+        <section id="works" class="page works-page">
+            <div class="container">
+                <h2 class="fade-in">WORKS</h2>
                 
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+                <div class="works-tabs fade-in delay-100">
+                    <button class="tab-button active" data-tab="all">All</button>
+                    <button class="tab-button" data-tab="videos">Videos</button>
+                    <button class="tab-button" data-tab="photos">Photos</button>
+                </div>
+                
+                <div class="tab-content active" id="all">
+                    <div class="works-grid">
+                        <!-- Sample Video Work Item -->
+                        <div class="work-item fade-in delay-200">
+                            <div class="work-image">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="work-caption">
+                                <h3>Brand Campaign</h3>
+                                <p>Promotional video for luxury brand</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Sample Photo Work Items -->
+                        <div class="work-item fade-in delay-300">
+                            <div class="work-image">
+                                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/sample-work1.jpg" alt="Sample Work">
+                            </div>
+                            <div class="work-caption">
+                                <h3>Portrait Series</h3>
+                                <p>Emotional portraits using natural light</p>
+                            </div>
+                        </div>
+                        
+                        <div class="work-item fade-in delay-400">
+                            <div class="work-image">
+                                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/sample-work2.jpg" alt="Sample Work">
+                            </div>
+                            <div class="work-caption">
+                                <h3>Product Photography</h3>
+                                <p>Premium product lineup for Brand A</p>
+                            </div>
+                        </div>
+                        
+                        <!-- You can add more work items here -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="videos">
+                    <div class="works-grid">
+                        <!-- Video work items go here -->
+                        <div class="work-item">
+                            <div class="work-image">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="work-caption">
+                                <h3>Brand Campaign</h3>
+                                <p>Promotional video for luxury brand</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Add more video items here -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="photos">
+                    <div class="works-grid">
+                        <!-- Photo work items go here -->
+                        <div class="work-item">
+                            <div class="work-image">
+                                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/sample-work1.jpg" alt="Sample Work">
+                            </div>
+                            <div class="work-caption">
+                                <h3>Portrait Series</h3>
+                                <p>Emotional portraits using natural light</p>
+                            </div>
+                        </div>
+                        
+                        <div class="work-item">
+                            <div class="work-image">
+                                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/sample-work2.jpg" alt="Sample Work">
+                            </div>
+                            <div class="work-caption">
+                                <h3>Product Photography</h3>
+                                <p>Premium product lineup for Brand A</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Add more photo items here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Concepts Page -->
+        <section id="concepts" class="page concepts-page">
+            <div class="container">
+                <h2 class="fade-in">CONCEPTS</h2>
+                
+                <div class="concepts-grid">
+                    <!-- Beauty Shot Concept -->
+                    <div class="concept-item fade-in delay-100">
+                        <div class="concept-image">
+                            <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/concept-beauty.jpg" alt="Beauty Shot Concept">
+                            <div class="concept-overlay">
+                                <h3>Beauty Shot</h3>
+                                <p>Elegant and expressive portraits highlighting natural beauty</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fantasy Concept -->
+                    <div class="concept-item fade-in delay-200">
+                        <div class="concept-image">
+                            <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/concept-fantasy.jpg" alt="Fantasy Concept">
+                            <div class="concept-overlay">
+                                <h3>Fantasy</h3>
+                                <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sci-Fi Concept -->
+                    <div class="concept-item fade-in delay-300">
+                        <div class="concept-image">
+                            <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/concept-scifi.jpg" alt="Sci-Fi Concept">
+                            <div class="concept-overlay">
+                                <h3>Sci-Fi</h3>
+                                <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2D Animation Concept -->
+                    <div class="concept-item fade-in delay-400">
+                        <div class="concept-image">
+                            <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/concept-animation.jpg" alt="2D Animation Concept">
+                            <div class="concept-overlay">
+                                <h3>2D Animation</h3>
+                                <p>Stylized animated visuals with a distinctive artistic approach</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Add more concept items as needed -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Page -->
+        <section id="contact" class="page contact-page">
+            <div class="container">
+                <h2 class="fade-in">CONTACT</h2>
+                
+                <div class="contact-info fade-in delay-100">
+                    <p>Email: <a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
+                    <p>Kakao Talk: <a href="https://open.kakao.com/me/fakeoven" target="_blank">open.kakao.com/me/fakeoven</a></p>
+                </div>
+                
+                <div class="social-links fade-in delay-200">
+                    <a href="https://youtube.com/@FakeOven" target="_blank">
+                        <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/youtube-icon.png" alt="YouTube" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjIuNTQgNi40MmE0LjY0IDIuNSAwIDAgMC0zLjEtMi43NCAxLjY1IDEuNjUgMCAwIDAtLjI0LS4wNCAxMDAgNzUgMCAwIDAtMTYuMzggMCA0LjM0IDQuMzQgMCAwIDAtMy4zMiAyLjgyQTMxLjkyIDM4Ljc4IDAgMCAwIDEuNDYgMTBhMzIgMzkgMCAwIDAgMCAzLjg3IDE0LjYzIDE0LjYzIDAgMCAwIC4yMyAyLjkyIDQuNzYgMi41OCAwIDAgMCAzLjEgMi43IDEuNzUgMS43NSAwIDAgMCAuMjYuMDMgMTk3LjU0IDgxLjU3IDAgMCAwIDE2LjI1IDBsLjA2LS4wM2E0LjcgMi41IDAgMCAwIDMuMS0yLjY3IDE2LjYzIDE2LjYzIDAgMCAwIC4yLS44NyAzMiAzOSAwIDAgMCAwLTRhMzAuNDggMzYuNTggMCAwIDAtLjIyLTMuNTIuODUuODUgMCAwIDAgMCAwWiIgZmlsbD0iIzAwMDAwMCI+PC9wYXRoPjxwYXRoIGQ9Im05Ljc1IDcuOTZMOS42NyA4IDE1LjQ0IDExLjRjLjY1LjM4IC43NyAxLjE1LjIgMS40NmEuODIuODIgMCAwIDEtLjE0LjA2IDIuMDIgMi4wMiAwIDAgMS0uNjcuMDhoMGExLjIgMS4yIDAgMCAxLTEtLjI3aDBsLTQuMTYtMi42di0uMDIiIGZpbGw9IiNmZmZmZmYiPjwvcGF0aD48L3N2Zz4='">
+                    </a>
+                    <a href="https://www.instagram.com/fakeoven.ai" target="_blank">
+                        <img src="https://github.com/FakeOven/FakeOvenLinks/blob/
