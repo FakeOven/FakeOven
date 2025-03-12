@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
 <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <style>
-        /* Basic Styles */
+        /* 기존 스타일 + 모바일 메뉴 추가 스타일 */
         * {
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
@@ -31,14 +31,14 @@
             --spacing-large: 80px;
             --spacing-xl: 120px;
             --transition: all 0.3s ease;
-            --section-title-font: 'Montserrat', sans-serif;
-            --tab-button-font: 'Montserrat', sans-serif;
-            --work-title-font: 'Montserrat', sans-serif;
-            --menu-font: 'Montserrat', sans-serif;
+            --section-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --tab-button-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --work-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --menu-font: 'Montserrat', 'Noto Sans KR', sans-serif;
         }
         
         body {
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
@@ -48,6 +48,73 @@
             line-height: 1.5;
             font-weight: 300;
             letter-spacing: 0.02em;
+        }
+        /* 모바일 메뉴 버튼 스타일 */
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            z-index: 1100;
+        }
+
+        .mobile-menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            transition: all 0.3s ease;
+            transform-origin: left;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu-overlay.active {
+            display: flex;
+        }
+
+        .mobile-menu-overlay .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mobile-menu-overlay .menu li {
+            margin: 15px 0;
+        }
+
+        .mobile-menu-overlay .menu a {
+            color: white;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
         
         .container {
@@ -78,7 +145,7 @@
             margin-bottom: var(--spacing-medium);
         }
         
-        /* Header Styles */
+        /* 기존 헤더 스타일 유지 */
         header {
             background-color: transparent;
             position: fixed;
@@ -89,53 +156,59 @@
             z-index: 1000;
             transition: var(--transition);
         }
-        
+
         header.scrolled {
             background-color: rgba(255, 255, 255, 0.95);
             box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
             padding: var(--spacing-unit) 0;
         }
-        
+
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 calc(var(--spacing-unit) * 3);
         }
-        
+
         .logo {
-            height: 112px; /* 로고 크기 1.5배 증가 */
+            height: 112px;
             transition: var(--transition);
         }
-        
+
         .logo img {
             height: 100%;
             width: auto;
         }
-        
+
         .menu {
             display: flex;
             list-style: none;
         }
-        
+
         .menu li {
-            margin-left: calc(var(--spacing-unit) * 4); /* 간격 약간 조정 */
+            margin-left: calc(var(--spacing-unit) * 4);
         }
-        
+
         .menu a {
             text-decoration: none;
-            color: white; /* 기본 메뉴 색상을 흰색으로 유지 */
+            color: white;
             font-family: var(--menu-font);
-            font-size: 18px; /* 메뉴 폰트 크기 증가 */
-            font-weight: 400; /* 메뉴 폰트 더 얇게 */
+            font-size: 18px;
+            font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             position: relative;
             padding: 5px 0;
         }
-        
+        .menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
         header.scrolled .menu a {
-            color: var(--main-color); /* 스크롤 시 메뉴 색상 변경 유지 */
+            color: var(--main-color);
         }
         
         .menu a::after {
@@ -153,7 +226,7 @@
             width: 100%;
         }
         
-        /* Hero Section */
+        /* Hero Section 수정 */
         .hero-section {
             height: 100vh;
             display: flex;
@@ -162,9 +235,32 @@
             align-items: center;
             text-align: center;
             padding: 0 var(--spacing-medium);
-            margin-bottom: var(--spacing-large); /* 원상복구 */
+            margin-bottom: var(--spacing-large);
             position: relative;
             overflow: hidden;
+        }
+
+        .hero-content h1 {
+            margin-bottom: var(--spacing-medium);
+        }
+
+        .hero-content .korean-description {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: clamp(16px, 2.5vw, 22px);
+            max-width: 800px;
+            margin: 0 auto var(--spacing-medium);
+            line-height: 1.6;
+            font-weight: 300;
+            letter-spacing: 0.03em;
+        }
+
+        .hero-content .english-description {
+            font-size: clamp(14px, 2vw, 18px);
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+            font-weight: 300;
+            letter-spacing: 0.05em;
         }
         
         .hero-background {
@@ -642,48 +738,28 @@
         
         /* Responsive Styles */
         @media (max-width: 768px) {
-            :root {
-                --spacing-large: 50px;
-                --spacing-medium: 30px;
-                --spacing-xl: 80px;
-            }
-            
-            header {
-                padding: var(--spacing-unit) 0;
-                background-color: rgba(255, 255, 255, 0.95);
-            }
-            
             nav {
-                padding: 0 var(--spacing-unit);
+                padding: 0 calc(var(--spacing-unit) * 2);
             }
-            
+
             .logo {
-                height: 40px;
+                height: 60px;
             }
-            
+
             .menu {
                 display: none;
             }
-            
-            .hero-section {
-                padding-top: 80px;
+
+            .mobile-menu-toggle {
+                display: flex;
             }
             
-            .works-grid {
-                grid-template-columns: 1fr; /* 모바일에서는 1개씩 표시 */
+            header:not(.scrolled) .mobile-menu-toggle span {
+                background-color: white;
             }
-            
-            .concepts-grid {
-                grid-template-columns: 1fr; /* 모바일에서는 1개씩 표시 */
-            }
-            
-            .tab-button {
-                padding: var(--spacing-unit) var(--spacing-unit);
-                font-size: 12px;
-            }
-            
-            .concept-item {
-                aspect-ratio: 3/4;
+
+            header.scrolled .mobile-menu-toggle span {
+                background-color: var(--main-color);
             }
         }
         
@@ -731,7 +807,6 @@
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
         <div class="hero-background">
-            <!-- 역동적인 애니메이션 배경 비디오 -->
             <video autoplay muted loop playsinline style="display:block;">
                 <source src="https://player.vimeo.com/progressive_redirect/playback/697749874/rendition/720p/file.mp4?loc=external&signature=fc2b07fd4d9f0b73272e15787b855eaa67f7ae0074a36e616c3a3fe2be1a05a9" type="video/mp4">
             </video>
@@ -739,8 +814,13 @@
         </div>
         <div class="hero-content fade-in">
             <h1>FAKEOVEN</h1>
-            <p>is an AI creative studio. We make films, photos, and ads, as well as characters, stories, and beyond. AI sparks, and we listen—but we also create. This is how we navigate this dynamic world.</p>
-            <p class="vision-statement">Each fake mirrors its own truth.</p>
+            <p class="korean-description">
+                페이크오븐은 *AI* *크리에이티브* *스튜디오*입니다. *우리만의* *독창적인* *비주얼* *언어로* *영상과* *이미지를* *만들고* *캐릭터*, *스토리* *IP*를 *기획하고* *개발합니다*.
+            </p>
+            <p class="english-description">
+                We are an AI creative studio. We make films, photos, and ads, as well as characters, stories, and beyond. AI sparks, and we listen—but we also create. This is how we navigate this dynamic world.
+                <br>*Each fake mirrors its own truth.*
+            </p>
         </div>
     </section>
     
@@ -1159,6 +1239,30 @@
                 });
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
+
+    // 모바일 메뉴 토글 기능
+    mobileMenuToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenuOverlay.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+    });
+
+    // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
+    });
+
+    // 기존의 다른 스크립트 코드들 유지...
+});
         
         // 스크롤 시 요소 페이드인
         const fadeElements = document.querySelectorAll('.fade-in');
