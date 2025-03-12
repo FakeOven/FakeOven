@@ -126,8 +126,8 @@
             text-decoration: none;
             color: white; /* 기본 메뉴 색상을 흰색으로 유지 */
             font-family: var(--menu-font);
-            font-size: 16px; /* 폰트 크기 증가 */
-            font-weight: 500;
+            font-size: 18px; /* 폰트 크기 더 증가 */
+            font-weight: 700; /* 더 볼드하게 */
             text-transform: uppercase;
             letter-spacing: 0.15em;
             position: relative;
@@ -162,7 +162,7 @@
             align-items: center;
             text-align: center;
             padding: 0 var(--spacing-medium);
-            margin-bottom: 0; /* 변경: 마진 제거 */
+            margin-bottom: var(--spacing-large); /* 원상복구 */
             position: relative;
             overflow: hidden;
         }
@@ -224,12 +224,30 @@
             font-weight: 400;
         }
         
-        .hero-section p {
-            font-size: clamp(16px, 2vw, 20px);
+        /* 그래픽 텍스트 스타일 - 직사각형 레이아웃 */
+        .graphic-text {
             max-width: 600px;
-            margin: 0 auto var(--spacing-medium);
-            font-weight: 300;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: justify;
+            padding: 0 20px;
         }
+        
+        .graphic-text span {
+            display: inline-block;
+            margin: 0 2px;
+            position: relative;
+            transform-origin: center;
+        }
+        
+        /* 각 단어별 크기 및 스타일 변화 */
+        .size-1 { font-size: 18px; font-weight: 400; }
+        .size-2 { font-size: 20px; font-weight: 500; }
+        .size-3 { font-size: 22px; font-weight: 300; }
+        .size-4 { font-size: 16px; font-weight: 400; }
+        .size-5 { font-size: 21px; font-weight: 500; }
         
         .vision-statement {
             margin-top: var(--spacing-medium);
@@ -237,15 +255,6 @@
             font-size: clamp(16px, 2vw, 22px);
             letter-spacing: 0.05em;
             opacity: 0.9;
-        }
-        
-        /* 섹션 간 그라데이션 전환 개선 */
-        .gradient-transition {
-            position: relative;
-            height: 300px; /* 그라데이션 높이 증가 */
-            margin-top: -150px; /* 위쪽 섹션과 더 많이 겹치게 배치 */
-            background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.8) 70%, var(--bg-color) 100%);
-            z-index: 2;
         }
         
         /* Section Styles */
@@ -273,11 +282,10 @@
         
         /* Works Section */
         .works-section {
-            margin-top: -100px; /* 그라데이션과 더 자연스럽게 이어지도록 위치 조정 */
-            padding-top: calc(var(--spacing-xl) + 100px); /* 위로 올라간 만큼 패딩 추가 */
+            padding-top: var(--spacing-xl); /* 원상복구 */
             padding-bottom: var(--spacing-xl);
-            position: relative;
-            z-index: 3;
+            position: relative; /* 상대 위치 설정 */
+            z-index: 3; /* 앞에 표시되도록 */
         }
         
         .works-tabs {
@@ -745,13 +753,46 @@
         </div>
         <div class="hero-content fade-in">
             <h1>FAKEOVEN</h1>
-            <p>is an AI creative studio. We make films, photos, and ads, as well as characters, stories, and beyond. AI sparks, and we listen—but we also create. This is how we navigate this dynamic world.</p>
+            <!-- 그래픽 텍스트 스타일 적용 -->
+            <div class="graphic-text">
+                <span class="size-2">is</span>
+                <span class="size-1">an</span>
+                <span class="size-3">AI</span>
+                <span class="size-2">creative</span>
+                <span class="size-1">studio.</span>
+                <span class="size-4">We</span>
+                <span class="size-3">make</span>
+                <span class="size-1">films,</span>
+                <span class="size-5">photos,</span>
+                <span class="size-2">and</span>
+                <span class="size-3">ads,</span>
+                <span class="size-1">as</span>
+                <span class="size-4">well</span>
+                <span class="size-2">as</span>
+                <span class="size-3">characters,</span>
+                <span class="size-1">stories,</span>
+                <span class="size-4">and</span>
+                <span class="size-5">beyond.</span>
+                <span class="size-2">AI</span>
+                <span class="size-3">sparks,</span>
+                <span class="size-1">and</span>
+                <span class="size-4">we</span>
+                <span class="size-2">listen—but</span>
+                <span class="size-3">we</span>
+                <span class="size-1">also</span>
+                <span class="size-5">create.</span>
+                <span class="size-2">This</span>
+                <span class="size-4">is</span>
+                <span class="size-3">how</span>
+                <span class="size-1">we</span>
+                <span class="size-5">navigate</span>
+                <span class="size-2">this</span>
+                <span class="size-3">dynamic</span>
+                <span class="size-1">world.</span>
+            </div>
             <p class="vision-statement">Each fake mirrors its own truth.</p>
         </div>
     </section>
-    
-    <!-- 그라데이션 전환 요소 -->
-    <div class="gradient-transition"></div>
     
     <!-- Works Section -->
     <section id="works" class="works-section">
@@ -982,7 +1023,7 @@
                 <!-- Beauty Shot Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/2681751/pexels-photo-2681751.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Beauty Shot Concept">
+                        <img src="https://i.pinimg.com/564x/86/57/79/8657799e5a8d2b8d7c602c7fa7d5fc3c.jpg" alt="Beauty Shot Concept">
                         <div class="concept-overlay">
                             <h3>Beauty Shot</h3>
                             <p>Elegant and expressive portraits highlighting natural beauty</p>
@@ -993,7 +1034,7 @@
                 <!-- Fantasy Concept (교체됨) -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/5022847/pexels-photo-5022847.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fantasy Concept">
+                        <img src="https://i.pinimg.com/564x/cd/f5/fb/cdf5fb4e01e79937e0b2f211e14f1a35.jpg" alt="Fantasy Concept">
                         <div class="concept-overlay">
                             <h3>Fantasy</h3>
                             <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
@@ -1004,7 +1045,7 @@
                 <!-- Sci-Fi Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/3910141/pexels-photo-3910141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sci-Fi Concept">
+                        <img src="https://i.pinimg.com/564x/26/21/8e/26218e99f58372df30f01a9837d3df37.jpg" alt="Sci-Fi Concept">
                         <div class="concept-overlay">
                             <h3>Sci-Fi</h3>
                             <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
@@ -1015,7 +1056,7 @@
                 <!-- 2D Animation Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/14286166/pexels-photo-14286166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="2D Animation Concept">
+                        <img src="https://i.pinimg.com/564x/a3/c4/91/a3c491ae6e3fe0edbc16de4950c61277.jpg" alt="2D Animation Concept">
                         <div class="concept-overlay">
                             <h3>2D Animation</h3>
                             <p>Stylized animated visuals with a distinctive artistic approach</p>
@@ -1026,7 +1067,7 @@
                 <!-- Fashion Film Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fashion Film Concept">
+                        <img src="https://i.pinimg.com/564x/5e/bc/55/5ebc5523f4aff26ea4e0970e2b6b22af.jpg" alt="Fashion Film Concept">
                         <div class="concept-overlay">
                             <h3>Fashion Film</h3>
                             <p>Cinematic fashion narratives with artistic direction and visual storytelling</p>
@@ -1037,7 +1078,7 @@
                 <!-- Abstract Motion Concept (교체됨) -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/1092364/pexels-photo-1092364.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Abstract Motion Concept">
+                        <img src="https://i.pinimg.com/564x/a8/59/17/a85917f2b274eb7d6bb733b8fa54e09a.jpg" alt="Abstract Motion Concept">
                         <div class="concept-overlay">
                             <h3>Abstract Motion</h3>
                             <p>Experimental visual explorations through color, form, and movement</p>
@@ -1048,7 +1089,7 @@
                 <!-- Ambient Reality Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/3075535/pexels-photo-3075535.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Ambient Reality Concept">
+                        <img src="https://i.pinimg.com/564x/7d/0c/d5/7d0cd5f93ef7a6fa7ebef4eab8d9860d.jpg" alt="Ambient Reality Concept">
                         <div class="concept-overlay">
                             <h3>Ambient Reality</h3>
                             <p>Atmospheric environments blending physical and digital elements</p>
@@ -1059,7 +1100,7 @@
                 <!-- Digital Surrealism Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/3894157/pexels-photo-3894157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Digital Surrealism Concept">
+                        <img src="https://i.pinimg.com/564x/da/94/74/da9474ce8272a2a3e19019124bd43677.jpg" alt="Digital Surrealism Concept">
                         <div class="concept-overlay">
                             <h3>Digital Surrealism</h3>
                             <p>Contemporary dreamscapes merging impossible realities</p>
@@ -1070,10 +1111,43 @@
                 <!-- Tactile Textures Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/3325720/pexels-photo-3325720.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tactile Textures Concept">
+                        <img src="https://i.pinimg.com/564x/4a/8d/f1/4a8df1c93ff2e9cc56243d49c7c58eb1.jpg" alt="Tactile Textures Concept">
                         <div class="concept-overlay">
                             <h3>Tactile Textures</h3>
                             <p>Sensory visual experiences exploring materiality and surface</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Neon Noir Concept (추가) -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <img src="https://i.pinimg.com/564x/a1/9c/e6/a19ce628c83cd5b3a8c28e39fdd1b1d2.jpg" alt="Neon Noir Concept">
+                        <div class="concept-overlay">
+                            <h3>Neon Noir</h3>
+                            <p>Cyberpunk-inspired cityscapes with vibrant neon aesthetics</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hyper Reality Concept (추가) -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <img src="https://i.pinimg.com/564x/30/17/2b/30172b8c5b3114856e938f6f23afc5cc.jpg" alt="Hyper Reality Concept">
+                        <div class="concept-overlay">
+                            <h3>Hyper Reality</h3>
+                            <p>Intensified visual experiences blending digital and physical worlds</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Liquid Motion Concept (추가) -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <img src="https://i.pinimg.com/564x/f5/75/7c/f5757c2f83c8b0ae7d5b44d5d3efe20c.jpg" alt="Liquid Motion Concept">
+                        <div class="concept-overlay">
+                            <h3>Liquid Motion</h3>
+                            <p>Fluid dynamics and organic movement in experimental visuals</p>
                         </div>
                     </div>
                 </div>
