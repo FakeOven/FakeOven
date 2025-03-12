@@ -104,7 +104,7 @@
         }
         
         .logo {
-            height: 75px; /* 로고 크기 2.5배 증가 */
+            height: 75px; /* 로고 크기 유지 */
             transition: var(--transition);
         }
         
@@ -119,14 +119,14 @@
         }
         
         .menu li {
-            margin-left: calc(var(--spacing-unit) * 5);
+            margin-left: calc(var(--spacing-unit) * 4); /* 간격 약간 조정 */
         }
         
         .menu a {
             text-decoration: none;
-            color: white; /* 기본 메뉴 색상을 흰색으로 변경 */
+            color: white; /* 기본 메뉴 색상을 흰색으로 유지 */
             font-family: var(--menu-font);
-            font-size: 14px;
+            font-size: 16px; /* 폰트 크기 증가 */
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.15em;
@@ -135,7 +135,7 @@
         }
         
         header.scrolled .menu a {
-            color: var(--main-color); /* 스크롤 시 메뉴 색상 변경 */
+            color: var(--main-color); /* 스크롤 시 메뉴 색상 변경 유지 */
         }
         
         .menu a::after {
@@ -147,12 +147,6 @@
             left: 0;
             background-color: currentColor; /* 현재 텍스트 색상에 맞춰 밑줄 색상 변경 */
             transition: var(--transition);
-            opacity: 0.8;
-            /* 지지직거리는 밑줄 효과 */
-            background-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="currentColor" style="opacity: 0.9"/></svg>');
-            background-size: 6px 1px;
-            background-repeat: repeat-x;
-            height: 2px;
         }
         
         .menu a:hover::after {
@@ -256,7 +250,7 @@
         }
         
         section:nth-child(even) {
-            background-color: var(--subtle-color);
+            background-color: var(--bg-color); /* 배경색 통일 */
         }
         
         .section-title {
@@ -265,7 +259,7 @@
             font-size: clamp(24px, 3vw, 36px);
             letter-spacing: 0.1em;
             font-family: var(--section-title-font);
-            font-weight: 600; /* 섹션 제목 더 볼드하게 */
+            font-weight: 600; /* 섹션 제목 볼드 유지 */
         }
         
         /* Works Section */
@@ -280,12 +274,15 @@
             margin-bottom: var(--spacing-medium);
             border-bottom: 1px solid var(--subtle-color);
             padding-bottom: var(--spacing-unit);
+            /* 중앙 정렬 개선 */
+            position: relative;
+            text-align: center;
         }
         
         .tab-button {
             background: none;
             border: none;
-            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5); /* 간격 축소 */
             margin: 0 var(--spacing-unit);
             cursor: pointer;
             font-family: var(--tab-button-font);
@@ -451,6 +448,18 @@
         .concepts-section {
             padding-top: var(--spacing-xl);
             padding-bottom: var(--spacing-xl);
+            position: relative;
+        }
+        
+        /* 미묘한 구분선 추가 */
+        .concepts-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20%;
+            right: 20%;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.05);
         }
         
         .concepts-grid {
@@ -529,7 +538,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: var(--subtle-color); /* 확실히 회색으로 지정 */
+            position: relative;
+            background-color: var(--bg-color);
+        }
+        
+        /* 세련된 구분선 추가 */
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
         }
         
         /* 원래 Contact 섹션 스타일로 복구 */
@@ -663,8 +684,21 @@
             }
             
             .concepts-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
+        }
+        
+        /* 추가: 로고 색상 변경을 위한 스타일 */
+        .light-logo, .dark-logo {
+            display: none;
+        }
+        
+        header:not(.scrolled) .light-logo {
+            display: block;
+        }
+        
+        header.scrolled .dark-logo {
+            display: block;
         }
     </style>
 </head>
@@ -672,7 +706,9 @@
     <header id="header">
         <nav>
             <a href="#hero" class="logo">
-                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
+                <!-- 로고 이미지 두 버전 -->
+                <img class="light-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
+                <img class="dark-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
                 <li><a href="#hero">BRAND</a></li>
@@ -686,9 +722,9 @@
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
         <div class="hero-background">
-            <!-- 추상적 애니메이션 배경 비디오 -->
-            <video autoplay muted loop playsinline>
-                <source src="https://player.vimeo.com/progressive_redirect/playback/727955330/rendition/720p/file.mp4?loc=external&signature=5c1d6f1fbf0db3c51e9a6c17c7ebae9aac8a0c8d0cd40a3e9306f15b0843df7b" type="video/mp4">
+            <!-- 역동적인 애니메이션 배경 비디오 -->
+            <video autoplay muted loop playsinline style="display:block;">
+                <source src="https://player.vimeo.com/progressive_redirect/playback/697749874/rendition/720p/file.mp4?loc=external&signature=fc2b07fd4d9f0b73272e15787b855eaa67f7ae0074a36e616c3a3fe2be1a05a9" type="video/mp4">
             </video>
             <div class="film-grain"></div>
         </div>
@@ -814,7 +850,6 @@
                             <p>AI MUSIC VIDEO</p>
                         </div>
                     </div>
-                    
                     <!-- 2. Parrot Funk Star Show -->
                     <div class="work-item">
                         <div class="work-image">
@@ -912,7 +947,6 @@
                 <!-- Beauty Shot Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <!-- 뷰티샷 컨셉: 깨끗하고 클리어한 화장품 광고 스타일 -->
                         <img src="https://images.pexels.com/photos/2681751/pexels-photo-2681751.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Beauty Shot Concept">
                         <div class="concept-overlay">
                             <h3>Beauty Shot</h3>
@@ -924,7 +958,6 @@
                 <!-- Fantasy Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <!-- 판타지 컨셉: 반지의 제왕 스타일의 다크 판타지 -->
                         <img src="https://images.pexels.com/photos/6771604/pexels-photo-6771604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fantasy Concept">
                         <div class="concept-overlay">
                             <h3>Fantasy</h3>
@@ -936,7 +969,6 @@
                 <!-- Sci-Fi Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <!-- 사이파이 컨셉: 사이버펑크 엣지러너 스타일 -->
                         <img src="https://images.pexels.com/photos/3910141/pexels-photo-3910141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sci-Fi Concept">
                         <div class="concept-overlay">
                             <h3>Sci-Fi</h3>
@@ -948,11 +980,65 @@
                 <!-- 2D Animation Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <!-- 2D 애니메이션 컨셉: 곤 사토시 스타일의 서정적인 풍경 -->
                         <img src="https://images.pexels.com/photos/14286166/pexels-photo-14286166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="2D Animation Concept">
                         <div class="concept-overlay">
                             <h3>2D Animation</h3>
                             <p>Stylized animated visuals with a distinctive artistic approach</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fashion Film Concept (추가) -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <img src="https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fashion Film Concept">
+                        <div class="concept-overlay">
+                            <h3>Fashion Film</h3>
+                            <p>Cinematic fashion narratives with artistic direction and visual storytelling</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Abstract Motion Concept (추가) -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <img src="https://images.pexels.com/photos/3109816/pexels-photo-3109816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Abstract Motion Concept">
+                        <div class="concept-overlay">
+                            <h3>Abstract Motion</h3>
+                            <p>Experimental visual explorations through color, form, and movement</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ambient Reality Concept (추가) -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <img src="https://images.pexels.com/photos/3075535/pexels-photo-3075535.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Ambient Reality Concept">
+                        <div class="concept-overlay">
+                            <h3>Ambient Reality</h3>
+                            <p>Atmospheric environments blending physical and digital elements</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Digital Surrealism Concept (추가) -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <img src="https://images.pexels.com/photos/3894157/pexels-photo-3894157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Digital Surrealism Concept">
+                        <div class="concept-overlay">
+                            <h3>Digital Surrealism</h3>
+                            <p>Contemporary dreamscapes merging impossible realities</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tactile Textures Concept (추가) -->
+                <div class="concept-item fade-in">
+                    <div class="concept-image">
+                        <img src="https://images.pexels.com/photos/3325720/pexels-photo-3325720.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tactile Textures Concept">
+                        <div class="concept-overlay">
+                            <h3>Tactile Textures</h3>
+                            <p>Sensory visual experiences exploring materiality and surface</p>
                         </div>
                     </div>
                 </div>
