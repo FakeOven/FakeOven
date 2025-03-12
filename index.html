@@ -6,7 +6,7 @@
     <title>FAKEOVEN | AI VISUAL PRODUCTION</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
 <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
 <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
@@ -31,9 +31,9 @@
             --spacing-large: 80px;
             --spacing-xl: 120px;
             --transition: all 0.3s ease;
-            --section-title-font: 'Roboto', sans-serif;
+            --section-title-font: 'Montserrat', sans-serif;
             --tab-button-font: 'Montserrat', sans-serif;
-            --work-title-font: 'Roboto', sans-serif;
+            --work-title-font: 'Montserrat', sans-serif;
             --menu-font: 'Montserrat', sans-serif;
         }
         
@@ -104,7 +104,7 @@
         }
         
         .logo {
-            height: 30px;
+            height: 75px; /* 로고 크기 2.5배 증가 */
             transition: var(--transition);
         }
         
@@ -124,14 +124,18 @@
         
         .menu a {
             text-decoration: none;
-            color: var(--main-color);
+            color: white; /* 기본 메뉴 색상을 흰색으로 변경 */
             font-family: var(--menu-font);
             font-size: 14px;
-            font-weight: 500; /* 폰트 굵기 증가 */
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             position: relative;
             padding: 5px 0;
+        }
+        
+        header.scrolled .menu a {
+            color: var(--main-color); /* 스크롤 시 메뉴 색상 변경 */
         }
         
         .menu a::after {
@@ -141,8 +145,14 @@
             height: 1px;
             bottom: 0;
             left: 0;
-            background-color: var(--main-color);
+            background-color: currentColor; /* 현재 텍스트 색상에 맞춰 밑줄 색상 변경 */
             transition: var(--transition);
+            opacity: 0.8;
+            /* 지지직거리는 밑줄 효과 */
+            background-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="currentColor" style="opacity: 0.9"/></svg>');
+            background-size: 6px 1px;
+            background-repeat: repeat-x;
+            height: 2px;
         }
         
         .menu a:hover::after {
@@ -160,7 +170,7 @@
             padding: 0 var(--spacing-medium);
             margin-bottom: var(--spacing-large);
             position: relative;
-            overflow: hidden; /* 추가: 배경 비디오 경계 제한 */
+            overflow: hidden;
         }
         
         .hero-background {
@@ -187,7 +197,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* 어두운 오버레이로 변경 */
+            background: rgba(0, 0, 0, 0.6);
             z-index: 1;
         }
         
@@ -210,7 +220,7 @@
             max-width: 800px;
             position: relative;
             z-index: 3;
-            color: white; /* 텍스트 색상을 흰색으로 변경 */
+            color: white;
         }
         
         .hero-section h1 {
@@ -255,7 +265,7 @@
             font-size: clamp(24px, 3vw, 36px);
             letter-spacing: 0.1em;
             font-family: var(--section-title-font);
-            font-weight: 500;
+            font-weight: 600; /* 섹션 제목 더 볼드하게 */
         }
         
         /* Works Section */
@@ -355,7 +365,7 @@
         }
         
         .work-caption h3 {
-            font-size: 20px; /* 폰트 사이즈 증가 */
+            font-size: 20px;
             font-weight: 500;
             margin-bottom: 4px;
             font-family: var(--work-title-font);
@@ -363,7 +373,7 @@
         }
         
         .work-caption .subtitle {
-            font-size: 14px; /* 폰트 사이즈 증가 */
+            font-size: 14px;
             font-weight: 300;
             color: var(--secondary-color);
             margin-top: 0;
@@ -424,7 +434,7 @@
         .play-button svg {
             width: 24px;
             height: 24px;
-            margin-left: 4px; /* 재생 버튼을 약간 오른쪽으로 이동시켜 중앙에 보이게 함 */
+            margin-left: 4px;
         }
 
         .youtube-iframe {
@@ -498,7 +508,7 @@
         }
         
         .concept-overlay h3 {
-            font-size: 20px; /* 폰트 사이즈 증가 */
+            font-size: 20px;
             margin-bottom: var(--spacing-unit);
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -519,6 +529,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: var(--subtle-color); /* 확실히 회색으로 지정 */
         }
         
         /* 원래 Contact 섹션 스타일로 복구 */
@@ -567,13 +578,13 @@
        .social-links {
             display: flex;
             justify-content: center;
-            gap: calc(var(--spacing-unit) * 4); /* 아이콘 간격 증가 */
+            gap: calc(var(--spacing-unit) * 4);
             margin: var(--spacing-medium) 0;
         }
 
         .social-links a {
             display: inline-flex;
-            width: 30px; /* 아이콘 크기 증가 */
+            width: 30px;
             height: 30px;
             align-items: center;
             justify-content: center;
@@ -620,7 +631,7 @@
             }
             
             .logo {
-                height: 25px;
+                height: 40px;
             }
             
             .menu {
@@ -661,7 +672,7 @@
     <header id="header">
         <nav>
             <a href="#hero" class="logo">
-                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
                 <li><a href="#hero">BRAND</a></li>
@@ -901,8 +912,8 @@
                 <!-- Beauty Shot Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <!-- 뷰티샷 컨셉 이미지 - 깨끗하고 클리어한 화장품 광고 스타일 -->
-                        <img src="https://cdn.dribbble.com/users/63407/screenshots/17431690/media/edbd6c581fcb1a01bcd5f3935618d8a4.jpg" alt="Beauty Shot Concept">
+                        <!-- 뷰티샷 컨셉: 깨끗하고 클리어한 화장품 광고 스타일 -->
+                        <img src="https://images.pexels.com/photos/2681751/pexels-photo-2681751.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Beauty Shot Concept">
                         <div class="concept-overlay">
                             <h3>Beauty Shot</h3>
                             <p>Elegant and expressive portraits highlighting natural beauty</p>
@@ -913,8 +924,8 @@
                 <!-- Fantasy Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <!-- 판타지 컨셉 이미지 - 반지의 제왕 스타일의 다크 판타지 -->
-                        <img src="https://cdn.dribbble.com/users/2401559/screenshots/15297344/media/ae6af030fda166b564017e8d11828a3e.png" alt="Fantasy Concept">
+                        <!-- 판타지 컨셉: 반지의 제왕 스타일의 다크 판타지 -->
+                        <img src="https://images.pexels.com/photos/6771604/pexels-photo-6771604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fantasy Concept">
                         <div class="concept-overlay">
                             <h3>Fantasy</h3>
                             <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
@@ -925,8 +936,8 @@
                 <!-- Sci-Fi Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <!-- 사이파이 컨셉 이미지 - 사이버펑크 스타일 -->
-                        <img src="https://cdn.dribbble.com/users/1787323/screenshots/14804936/media/78c02daa10d8cc6d85bd4115c75fb2ce.png" alt="Sci-Fi Concept">
+                        <!-- 사이파이 컨셉: 사이버펑크 엣지러너 스타일 -->
+                        <img src="https://images.pexels.com/photos/3910141/pexels-photo-3910141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sci-Fi Concept">
                         <div class="concept-overlay">
                             <h3>Sci-Fi</h3>
                             <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
@@ -937,8 +948,8 @@
                 <!-- 2D Animation Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <!-- 2D 애니메이션 컨셉 이미지 - 곤 사토시 스타일 -->
-                        <img src="https://cdn.dribbble.com/users/1803663/screenshots/17021700/media/f0b85e7137d51334282d5bf196789af4.jpg" alt="2D Animation Concept">
+                        <!-- 2D 애니메이션 컨셉: 곤 사토시 스타일의 서정적인 풍경 -->
+                        <img src="https://images.pexels.com/photos/14286166/pexels-photo-14286166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="2D Animation Concept">
                         <div class="concept-overlay">
                             <h3>2D Animation</h3>
                             <p>Stylized animated visuals with a distinctive artistic approach</p>
