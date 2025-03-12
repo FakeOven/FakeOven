@@ -162,7 +162,7 @@
             align-items: center;
             text-align: center;
             padding: 0 var(--spacing-medium);
-            margin-bottom: var(--spacing-large);
+            margin-bottom: 0; /* 변경: 마진 제거 */
             position: relative;
             overflow: hidden;
         }
@@ -239,6 +239,15 @@
             opacity: 0.9;
         }
         
+        /* 섹션 간 그라데이션 전환 */
+        .gradient-transition {
+            position: relative;
+            height: 200px; /* 그라데이션 높이 */
+            margin-top: -100px; /* 위쪽 섹션과 겹치게 배치 */
+            background: linear-gradient(to bottom, transparent, var(--bg-color));
+            z-index: 2;
+        }
+        
         /* Section Styles */
         section {
             padding: var(--spacing-large) 0;
@@ -266,6 +275,8 @@
         .works-section {
             padding-top: var(--spacing-xl);
             padding-bottom: var(--spacing-xl);
+            position: relative; /* 상대 위치 설정 */
+            z-index: 3; /* 그라데이션보다 위에 표시 */
         }
         
         .works-tabs {
@@ -274,8 +285,6 @@
             margin-bottom: var(--spacing-medium);
             border-bottom: 1px solid var(--subtle-color);
             padding-bottom: var(--spacing-unit);
-            /* 중앙 정렬 개선 */
-            position: relative;
             text-align: center;
         }
         
@@ -283,7 +292,7 @@
             background: none;
             border: none;
             padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5); /* 간격 축소 */
-            margin: 0 var(--spacing-unit);
+            margin: 0;
             cursor: pointer;
             font-family: var(--tab-button-font);
             font-size: 14px;
@@ -293,6 +302,15 @@
             color: var(--secondary-color);
             transition: var(--transition);
             position: relative;
+        }
+        
+        /* 탭 버튼 간격 조정 */
+        .tab-button[data-tab="all"] {
+            margin-right: 30px; /* ALL과 VIDEOS 사이 간격 증가 */
+        }
+        
+        .tab-button[data-tab="videos"] {
+            margin-right: 30px; /* VIDEOS와 PHOTOS 사이 간격 증가 */
         }
         
         .tab-button::after {
@@ -385,8 +403,8 @@
             font-weight: 400;
         }
         
-        /* 커스텀 비디오 플레이어 스타일 */
-        .custom-video-player {
+        /* 자동 재생 비디오 스타일 */
+        .auto-video {
             position: relative;
             width: 100%;
             height: 100%;
@@ -395,53 +413,20 @@
             cursor: pointer;
         }
 
-        .custom-video-player img {
+        .auto-video video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .custom-video-player:hover img {
-            transform: scale(1.05);
-        }
-
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .play-button:hover {
-            background-color: rgba(0, 0, 0, 0.9);
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-
-        .play-button svg {
-            width: 24px;
-            height: 24px;
-            margin-left: 4px;
         }
 
         .youtube-iframe {
-            display: none;
+            width: 100%;
+            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
             z-index: 2;
+            display: none;
         }
         
         /* Concepts Section */
@@ -735,6 +720,9 @@
         </div>
     </section>
     
+    <!-- 그라데이션 전환 요소 -->
+    <div class="gradient-transition"></div>
+    
     <!-- Works Section -->
     <section id="works" class="works-section">
         <div class="container">
@@ -751,13 +739,10 @@
                     <!-- 1. 出勤無用曲 출근금지곡 -->
                     <div class="work-item fade-in">
                         <div class="work-image">
-                            <div class="custom-video-player" data-video-id="ImpUC9WWetw">
-                                <img src="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg" alt="出勤無用曲">
-                                <button class="play-button">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
+                            <div class="auto-video" data-video-id="ImpUC9WWetw">
+                                <video muted loop preload="auto" class="preview-video">
+                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520307/ImpUC9WWetw_preview_vsbcmk.mp4" type="video/mp4">
+                                </video>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -771,13 +756,10 @@
                     <!-- 2. Parrot Funk Star Show -->
                     <div class="work-item fade-in">
                         <div class="work-image">
-                            <div class="custom-video-player" data-video-id="vxWbgvPWJfQ">
-                                <img src="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg" alt="Parrot Funk Star Show">
-                                <button class="play-button">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
+                            <div class="auto-video" data-video-id="vxWbgvPWJfQ">
+                                <video muted loop preload="auto" class="preview-video">
+                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/vxWbgvPWJfQ_preview_cxgwpz.mp4" type="video/mp4">
+                                </video>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -791,13 +773,10 @@
                     <!-- 3. LURK -->
                     <div class="work-item fade-in">
                         <div class="work-image">
-                            <div class="custom-video-player" data-video-id="Q6rFUU8QkWg">
-                                <img src="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg" alt="LURK">
-                                <button class="play-button">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
+                            <div class="auto-video" data-video-id="Q6rFUU8QkWg">
+                                <video muted loop preload="auto" class="preview-video">
+                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/Q6rFUU8QkWg_preview_vbtskq.mp4" type="video/mp4">
+                                </video>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -811,13 +790,10 @@
                     <!-- 4. Running Beats -->
                     <div class="work-item fade-in">
                         <div class="work-image">
-                            <div class="custom-video-player" data-video-id="jdFzTTSEKTE">
-                                <img src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="Running Beats">
-                                <button class="play-button">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
+                            <div class="auto-video" data-video-id="jdFzTTSEKTE">
+                                <video muted loop preload="auto" class="preview-video">
+                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/jdFzTTSEKTE_preview_rwcxnn.mp4" type="video/mp4">
+                                </video>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -834,13 +810,10 @@
                     <!-- 1. 出勤無用曲 출근금지곡 -->
                     <div class="work-item">
                         <div class="work-image">
-                            <div class="custom-video-player" data-video-id="ImpUC9WWetw">
-                                <img src="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg" alt="出勤無用曲">
-                                <button class="play-button">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
+                            <div class="auto-video" data-video-id="ImpUC9WWetw">
+                                <video muted loop preload="auto" class="preview-video">
+                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520307/ImpUC9WWetw_preview_vsbcmk.mp4" type="video/mp4">
+                                </video>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -850,16 +823,14 @@
                             <p>AI MUSIC VIDEO</p>
                         </div>
                     </div>
+                    
                     <!-- 2. Parrot Funk Star Show -->
                     <div class="work-item">
                         <div class="work-image">
-                            <div class="custom-video-player" data-video-id="vxWbgvPWJfQ">
-                                <img src="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg" alt="Parrot Funk Star Show">
-                                <button class="play-button">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
+                            <div class="auto-video" data-video-id="vxWbgvPWJfQ">
+                                <video muted loop preload="auto" class="preview-video">
+                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/vxWbgvPWJfQ_preview_cxgwpz.mp4" type="video/mp4">
+                                </video>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -873,13 +844,10 @@
                     <!-- 3. LURK -->
                     <div class="work-item">
                         <div class="work-image">
-                            <div class="custom-video-player" data-video-id="Q6rFUU8QkWg">
-                                <img src="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg" alt="LURK">
-                                <button class="play-button">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
+                            <div class="auto-video" data-video-id="Q6rFUU8QkWg">
+                                <video muted loop preload="auto" class="preview-video">
+                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/Q6rFUU8QkWg_preview_vbtskq.mp4" type="video/mp4">
+                                </video>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -893,13 +861,10 @@
                     <!-- 4. Running Beats -->
                     <div class="work-item">
                         <div class="work-image">
-                            <div class="custom-video-player" data-video-id="jdFzTTSEKTE">
-                                <img src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="Running Beats">
-                                <button class="play-button">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
+                            <div class="auto-video" data-video-id="jdFzTTSEKTE">
+                                <video muted loop preload="auto" class="preview-video">
+                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/jdFzTTSEKTE_preview_rwcxnn.mp4" type="video/mp4">
+                                </video>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -955,10 +920,10 @@
                     </div>
                 </div>
                 
-                <!-- Fantasy Concept -->
+                <!-- Fantasy Concept (교체됨) -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/6771604/pexels-photo-6771604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fantasy Concept">
+                        <img src="https://images.pexels.com/photos/5022847/pexels-photo-5022847.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fantasy Concept">
                         <div class="concept-overlay">
                             <h3>Fantasy</h3>
                             <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
@@ -988,7 +953,7 @@
                     </div>
                 </div>
                 
-                <!-- Fashion Film Concept (추가) -->
+                <!-- Fashion Film Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
                         <img src="https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fashion Film Concept">
@@ -999,10 +964,10 @@
                     </div>
                 </div>
                 
-                <!-- Abstract Motion Concept (추가) -->
+                <!-- Abstract Motion Concept (교체됨) -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.pexels.com/photos/3109816/pexels-photo-3109816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Abstract Motion Concept">
+                        <img src="https://images.pexels.com/photos/1092364/pexels-photo-1092364.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Abstract Motion Concept">
                         <div class="concept-overlay">
                             <h3>Abstract Motion</h3>
                             <p>Experimental visual explorations through color, form, and movement</p>
@@ -1010,7 +975,7 @@
                     </div>
                 </div>
                 
-                <!-- Ambient Reality Concept (추가) -->
+                <!-- Ambient Reality Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
                         <img src="https://images.pexels.com/photos/3075535/pexels-photo-3075535.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Ambient Reality Concept">
@@ -1021,7 +986,7 @@
                     </div>
                 </div>
                 
-                <!-- Digital Surrealism Concept (추가) -->
+                <!-- Digital Surrealism Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
                         <img src="https://images.pexels.com/photos/3894157/pexels-photo-3894157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Digital Surrealism Concept">
@@ -1032,7 +997,7 @@
                     </div>
                 </div>
                 
-                <!-- Tactile Textures Concept (추가) -->
+                <!-- Tactile Textures Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
                         <img src="https://images.pexels.com/photos/3325720/pexels-photo-3325720.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tactile Textures Concept">
@@ -1137,10 +1102,26 @@
             });
         });
         
-        // 유튜브 동영상 플레이어 기능
-        const customPlayers = document.querySelectorAll('.custom-video-player');
-
-        customPlayers.forEach(player => {
+        // 비디오 자동 재생 기능
+        const autoVideos = document.querySelectorAll('.preview-video');
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play();
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        autoVideos.forEach(video => {
+            videoObserver.observe(video);
+        });
+        
+        // 클릭 시 유튜브 전체 영상 보기
+        const videoPlayers = document.querySelectorAll('.auto-video');
+        
+        videoPlayers.forEach(player => {
             player.addEventListener('click', function() {
                 const videoId = this.getAttribute('data-video-id');
                 const iframeContainer = this.querySelector('.youtube-iframe');
@@ -1158,12 +1139,12 @@
                     iframeContainer.appendChild(iframe);
                     iframeContainer.style.display = 'block';
                     
-                    // 플레이 버튼 숨기기
-                    this.querySelector('.play-button').style.display = 'none';
+                    // 프리뷰 비디오 숨기기
+                    this.querySelector('.preview-video').style.display = 'none';
                 } else {
                     // 이미 로드된 비디오는 보이게만 설정
                     iframeContainer.style.display = 'block';
-                    this.querySelector('.play-button').style.display = 'none';
+                    this.querySelector('.preview-video').style.display = 'none';
                 }
             });
         });
