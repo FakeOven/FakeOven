@@ -239,12 +239,12 @@
             opacity: 0.9;
         }
         
-        /* 섹션 간 그라데이션 전환 */
+        /* 섹션 간 그라데이션 전환 개선 */
         .gradient-transition {
             position: relative;
-            height: 200px; /* 그라데이션 높이 */
-            margin-top: -100px; /* 위쪽 섹션과 겹치게 배치 */
-            background: linear-gradient(to bottom, transparent, var(--bg-color));
+            height: 300px; /* 그라데이션 높이 증가 */
+            margin-top: -150px; /* 위쪽 섹션과 더 많이 겹치게 배치 */
+            background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.8) 70%, var(--bg-color) 100%);
             z-index: 2;
         }
         
@@ -273,10 +273,11 @@
         
         /* Works Section */
         .works-section {
-            padding-top: var(--spacing-xl);
+            margin-top: -100px; /* 그라데이션과 더 자연스럽게 이어지도록 위치 조정 */
+            padding-top: calc(var(--spacing-xl) + 100px); /* 위로 올라간 만큼 패딩 추가 */
             padding-bottom: var(--spacing-xl);
-            position: relative; /* 상대 위치 설정 */
-            z-index: 3; /* 그라데이션보다 위에 표시 */
+            position: relative;
+            z-index: 3;
         }
         
         .works-tabs {
@@ -403,7 +404,7 @@
             font-weight: 400;
         }
         
-        /* 자동 재생 비디오 스타일 */
+        /* 자동 재생 비디오 스타일 수정 */
         .auto-video {
             position: relative;
             width: 100%;
@@ -413,10 +414,39 @@
             cursor: pointer;
         }
 
-        .auto-video video {
+        /* 수정: 썸네일 이미지 추가 */
+        .video-thumbnail {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .preview-video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .preview-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        /* 비디오가 로드되면 섬네일 숨기고 비디오 표시 */
+        .video-loaded .preview-video {
+            opacity: 1;
+        }
+        
+        .video-loaded .video-thumbnail {
+            opacity: 0;
         }
 
         .youtube-iframe {
@@ -425,7 +455,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 2;
+            z-index: 3;
             display: none;
         }
         
@@ -740,9 +770,14 @@
                     <div class="work-item fade-in">
                         <div class="work-image">
                             <div class="auto-video" data-video-id="ImpUC9WWetw">
-                                <video muted loop preload="auto" class="preview-video">
-                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520307/ImpUC9WWetw_preview_vsbcmk.mp4" type="video/mp4">
-                                </video>
+                                <img class="video-thumbnail" src="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg" alt="出勤無用曲">
+                                <div class="preview-video-container">
+                                    <video muted loop playsinline class="preview-video" 
+                                           poster="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg"
+                                           oncanplay="this.parentNode.parentNode.classList.add('video-loaded')">
+                                        <source src="https://www.youtube.com/embed/ImpUC9WWetw?clip=UgkxOO9hSy1XytOXQVG9dTTdL7QiO4GDhA4e&amp;clipt=EAAYmIYG" type="video/mp4">
+                                    </video>
+                                </div>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -757,9 +792,14 @@
                     <div class="work-item fade-in">
                         <div class="work-image">
                             <div class="auto-video" data-video-id="vxWbgvPWJfQ">
-                                <video muted loop preload="auto" class="preview-video">
-                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/vxWbgvPWJfQ_preview_cxgwpz.mp4" type="video/mp4">
-                                </video>
+                                <img class="video-thumbnail" src="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg" alt="Parrot Funk Star Show">
+                                <div class="preview-video-container">
+                                    <video muted loop playsinline class="preview-video"
+                                           poster="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg"
+                                           oncanplay="this.parentNode.parentNode.classList.add('video-loaded')">
+                                        <source src="https://www.youtube.com/embed/vxWbgvPWJfQ?clip=Ugkx9RjT5kEDgF-_zjzRCo-i5h-7h9xGmU-9&amp;clipt=EAAYiLsD" type="video/mp4">
+                                    </video>
+                                </div>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -774,9 +814,14 @@
                     <div class="work-item fade-in">
                         <div class="work-image">
                             <div class="auto-video" data-video-id="Q6rFUU8QkWg">
-                                <video muted loop preload="auto" class="preview-video">
-                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/Q6rFUU8QkWg_preview_vbtskq.mp4" type="video/mp4">
-                                </video>
+                                <img class="video-thumbnail" src="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg" alt="LURK">
+                                <div class="preview-video-container">
+                                    <video muted loop playsinline class="preview-video"
+                                           poster="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg"
+                                           oncanplay="this.parentNode.parentNode.classList.add('video-loaded')">
+                                        <source src="https://www.youtube.com/embed/Q6rFUU8QkWg?clip=UgkxaTWfpORnUmT3zNDEXJJ4e73RU2I4R_Ow&amp;clipt=EAAYt1M" type="video/mp4">
+                                    </video>
+                                </div>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -791,9 +836,14 @@
                     <div class="work-item fade-in">
                         <div class="work-image">
                             <div class="auto-video" data-video-id="jdFzTTSEKTE">
-                                <video muted loop preload="auto" class="preview-video">
-                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/jdFzTTSEKTE_preview_rwcxnn.mp4" type="video/mp4">
-                                </video>
+                                <img class="video-thumbnail" src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="Running Beats">
+                                <div class="preview-video-container">
+                                    <video muted loop playsinline class="preview-video"
+                                           poster="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg"
+                                           oncanplay="this.parentNode.parentNode.classList.add('video-loaded')">
+                                        <source src="https://www.youtube.com/embed/jdFzTTSEKTE?clip=Ugkxh1sEswOUVcQVtT7E2G3v_BKnQSoE-BPL&amp;clipt=EAAYt1I" type="video/mp4">
+                                    </video>
+                                </div>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -811,9 +861,14 @@
                     <div class="work-item">
                         <div class="work-image">
                             <div class="auto-video" data-video-id="ImpUC9WWetw">
-                                <video muted loop preload="auto" class="preview-video">
-                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520307/ImpUC9WWetw_preview_vsbcmk.mp4" type="video/mp4">
-                                </video>
+                                <img class="video-thumbnail" src="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg" alt="出勤無用曲">
+                                <div class="preview-video-container">
+                                    <video muted loop playsinline class="preview-video" 
+                                           poster="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg"
+                                           oncanplay="this.parentNode.parentNode.classList.add('video-loaded')">
+                                        <source src="https://www.youtube.com/embed/ImpUC9WWetw?clip=UgkxOO9hSy1XytOXQVG9dTTdL7QiO4GDhA4e&amp;clipt=EAAYmIYG" type="video/mp4">
+                                    </video>
+                                </div>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -828,9 +883,14 @@
                     <div class="work-item">
                         <div class="work-image">
                             <div class="auto-video" data-video-id="vxWbgvPWJfQ">
-                                <video muted loop preload="auto" class="preview-video">
-                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/vxWbgvPWJfQ_preview_cxgwpz.mp4" type="video/mp4">
-                                </video>
+                                <img class="video-thumbnail" src="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg" alt="Parrot Funk Star Show">
+                                <div class="preview-video-container">
+                                    <video muted loop playsinline class="preview-video"
+                                           poster="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg"
+                                           oncanplay="this.parentNode.parentNode.classList.add('video-loaded')">
+                                        <source src="https://www.youtube.com/embed/vxWbgvPWJfQ?clip=Ugkx9RjT5kEDgF-_zjzRCo-i5h-7h9xGmU-9&amp;clipt=EAAYiLsD" type="video/mp4">
+                                    </video>
+                                </div>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -845,9 +905,14 @@
                     <div class="work-item">
                         <div class="work-image">
                             <div class="auto-video" data-video-id="Q6rFUU8QkWg">
-                                <video muted loop preload="auto" class="preview-video">
-                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/Q6rFUU8QkWg_preview_vbtskq.mp4" type="video/mp4">
-                                </video>
+                                <img class="video-thumbnail" src="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg" alt="LURK">
+                                <div class="preview-video-container">
+                                    <video muted loop playsinline class="preview-video"
+                                           poster="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg"
+                                           oncanplay="this.parentNode.parentNode.classList.add('video-loaded')">
+                                        <source src="https://www.youtube.com/embed/Q6rFUU8QkWg?clip=UgkxaTWfpORnUmT3zNDEXJJ4e73RU2I4R_Ow&amp;clipt=EAAYt1M" type="video/mp4">
+                                    </video>
+                                </div>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -862,9 +927,14 @@
                     <div class="work-item">
                         <div class="work-image">
                             <div class="auto-video" data-video-id="jdFzTTSEKTE">
-                                <video muted loop preload="auto" class="preview-video">
-                                    <source src="https://res.cloudinary.com/dvdj8zyvj/video/upload/v1711520308/jdFzTTSEKTE_preview_rwcxnn.mp4" type="video/mp4">
-                                </video>
+                                <img class="video-thumbnail" src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="Running Beats">
+                                <div class="preview-video-container">
+                                    <video muted loop playsinline class="preview-video"
+                                           poster="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg"
+                                           oncanplay="this.parentNode.parentNode.classList.add('video-loaded')">
+                                        <source src="https://www.youtube.com/embed/jdFzTTSEKTE?clip=Ugkxh1sEswOUVcQVtT7E2G3v_BKnQSoE-BPL&amp;clipt=EAAYt1I" type="video/mp4">
+                                    </video>
+                                </div>
                                 <div class="youtube-iframe"></div>
                             </div>
                         </div>
@@ -1103,49 +1173,78 @@
         });
         
         // 비디오 자동 재생 기능
-        const autoVideos = document.querySelectorAll('.preview-video');
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.play();
-                } else {
-                    entry.target.pause();
-                }
+        document.addEventListener('DOMContentLoaded', function() {
+            const autoVideos = document.querySelectorAll('.preview-video');
+            
+            // 옵션 설정 - 비디오가 50% 이상 화면에 들어오면 재생
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // 비디오가 화면에 보이면 재생
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        
+                        // 비디오 로드 시작
+                        if (video.paused) {
+                            // 비디오 로드 및 재생
+                            video.load();
+                            
+                            // 비디오가 준비되면 재생
+                            video.oncanplaythrough = function() {
+                                video.play().catch(e => {
+                                    console.log("Auto-play prevented: ", e);
+                                    // 자동 재생이 차단된 경우 썸네일 표시 상태 유지
+                                });
+                            };
+                        }
+                    } else {
+                        // 화면에서 벗어나면 일시 정지
+                        entry.target.pause();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            // 모든 비디오 요소 관찰
+            autoVideos.forEach(video => {
+                videoObserver.observe(video);
             });
-        }, { threshold: 0.5 });
-        
-        autoVideos.forEach(video => {
-            videoObserver.observe(video);
-        });
-        
-        // 클릭 시 유튜브 전체 영상 보기
-        const videoPlayers = document.querySelectorAll('.auto-video');
-        
-        videoPlayers.forEach(player => {
-            player.addEventListener('click', function() {
-                const videoId = this.getAttribute('data-video-id');
-                const iframeContainer = this.querySelector('.youtube-iframe');
-                
-                // 비디오가 아직 로드되지 않았을 때만 iframe 생성
-                if (iframeContainer.innerHTML === '') {
-                    const iframe = document.createElement('iframe');
-                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-                    iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allowfullscreen', 'true');
-                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                    iframe.style.width = '100%';
-                    iframe.style.height = '100%';
+            
+            // 클릭 시 유튜브 전체 영상 보기
+            const videoPlayers = document.querySelectorAll('.auto-video');
+            
+            videoPlayers.forEach(player => {
+                player.addEventListener('click', function() {
+                    const videoId = this.getAttribute('data-video-id');
+                    const iframeContainer = this.querySelector('.youtube-iframe');
                     
-                    iframeContainer.appendChild(iframe);
-                    iframeContainer.style.display = 'block';
-                    
-                    // 프리뷰 비디오 숨기기
-                    this.querySelector('.preview-video').style.display = 'none';
-                } else {
-                    // 이미 로드된 비디오는 보이게만 설정
-                    iframeContainer.style.display = 'block';
-                    this.querySelector('.preview-video').style.display = 'none';
-                }
+                    // 비디오가 아직 로드되지 않았을 때만 iframe 생성
+                    if (iframeContainer.innerHTML === '') {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+                        iframe.setAttribute('frameborder', '0');
+                        iframe.setAttribute('allowfullscreen', 'true');
+                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                        iframe.style.width = '100%';
+                        iframe.style.height = '100%';
+                        
+                        iframeContainer.appendChild(iframe);
+                        iframeContainer.style.display = 'block';
+                        
+                        // 프리뷰 비디오와 썸네일 숨기기
+                        const previewContainer = this.querySelector('.preview-video-container');
+                        const thumbnail = this.querySelector('.video-thumbnail');
+                        if (previewContainer) previewContainer.style.display = 'none';
+                        if (thumbnail) thumbnail.style.display = 'none';
+                    } else {
+                        // 이미 로드된 비디오는 보이게만 설정
+                        iframeContainer.style.display = 'block';
+                        
+                        // 프리뷰 비디오와 썸네일 숨기기
+                        const previewContainer = this.querySelector('.preview-video-container');
+                        const thumbnail = this.querySelector('.video-thumbnail');
+                        if (previewContainer) previewContainer.style.display = 'none';
+                        if (thumbnail) thumbnail.style.display = 'none';
+                    }
+                });
             });
         });
     </script>
