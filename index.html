@@ -6,7 +6,7 @@
     <title>FAKEOVEN | AI VISUAL PRODUCTION</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@400;500;700&family=Raleway:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
 <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
 <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
@@ -31,11 +31,10 @@
             --spacing-large: 80px;
             --spacing-xl: 120px;
             --transition: all 0.3s ease;
-            --section-title-font: 'Raleway', sans-serif;
+            --section-title-font: 'Roboto', sans-serif;
             --tab-button-font: 'Montserrat', sans-serif;
-            --work-title-font: 'Playfair Display', serif;
+            --work-title-font: 'Roboto', sans-serif;
             --menu-font: 'Montserrat', sans-serif;
-            --contact-font: 'DM Serif Display', serif;
         }
         
         body {
@@ -161,12 +160,57 @@
             padding: 0 var(--spacing-medium);
             margin-bottom: var(--spacing-large);
             position: relative;
+            overflow: hidden; /* 추가: 배경 비디오 경계 제한 */
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .hero-background video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* 어두운 오버레이로 변경 */
+            z-index: 1;
+        }
+        
+        /* 필름 그레인 효과 */
+        .film-grain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHljcnUxOHcwOHd2eGtnYTI5cmpxcm9oM2Vta2Iya20wMTc5OGh5YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4QeEivuG0qn37HpK/giphy.gif');
+            background-size: cover;
+            opacity: 0.07;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 2;
         }
         
         .hero-content {
             max-width: 800px;
             position: relative;
-            z-index: 2;
+            z-index: 3;
+            color: white; /* 텍스트 색상을 흰색으로 변경 */
         }
         
         .hero-section h1 {
@@ -188,51 +232,7 @@
             font-style: italic;
             font-size: clamp(16px, 2vw, 22px);
             letter-spacing: 0.05em;
-            opacity: 0.8;
-        }
-        
-        /* 배경 비디오 오버레이 */
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        .hero-background::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.85); /* 비디오 위에 오버레이 */
-            z-index: 1;
-        }
-
-        .hero-background video {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.5;
-        }
-        
-        /* 필름 그레인 효과 */
-        .film-grain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHljcnUxOHcwOHd2eGtnYTI5cmpxcm9oM2Vta2Iya20wMTc5OGh5YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4QeEivuG0qn37HpK/giphy.gif');
-            background-size: cover;
-            opacity: 0.07;
-            mix-blend-mode: overlay;
-            pointer-events: none;
-            z-index: 3;
+            opacity: 0.9;
         }
         
         /* Section Styles */
@@ -521,10 +521,11 @@
             align-items: center;
         }
         
+        /* 원래 Contact 섹션 스타일로 복구 */
         .section-title.contact-title {
-            font-weight: 700; /* 볼드체 추가 */
+            font-weight: 700;
             letter-spacing: 0.15em;
-            font-family: var(--contact-font);
+            font-family: 'Montserrat', sans-serif;
         }
 
         .contact-info {
@@ -540,7 +541,7 @@
 
         .contact-info a {
             color: var(--main-color);
-            font-weight: 500; /* 이메일 주소 강조 */
+            font-weight: 500;
             border-bottom: 1px solid transparent;
             padding-bottom: 2px;
             transition: var(--transition);
@@ -674,8 +675,9 @@
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
         <div class="hero-background">
+            <!-- 추상적 애니메이션 배경 비디오 -->
             <video autoplay muted loop playsinline>
-                <source src="https://player.vimeo.com/external/604313879.sd.mp4?s=15f79ac2e0318e1bec21e3ad3dd2a0c52e691d2c&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
+                <source src="https://player.vimeo.com/progressive_redirect/playback/727955330/rendition/720p/file.mp4?loc=external&signature=5c1d6f1fbf0db3c51e9a6c17c7ebae9aac8a0c8d0cd40a3e9306f15b0843df7b" type="video/mp4">
             </video>
             <div class="film-grain"></div>
         </div>
@@ -707,243 +709,6 @@
                                 <button class="play-button">
                                     <svg viewBox="0 0 24 24">
                                         <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
-                                <div class="youtube-iframe"></div>
-                            </div>
-                        </div>
-                        <div class="work-caption">
-                            <h3>LURK</h3>
-                            <span class="subtitle">어둠 속의 포식자</span>
-                            <p>AI SHORT FILM</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 4. Running Beats -->
-                    <div class="work-item">
-                        <div class="work-image">
-                            <div class="custom-video-player" data-video-id="jdFzTTSEKTE">
-                                <img src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="Running Beats">
-                                <button class="play-button">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="5,3 19,12 5,21" fill="white"/>
-                                    </svg>
-                                </button>
-                                <div class="youtube-iframe"></div>
-                            </div>
-                        </div>
-                        <div class="work-caption">
-                            <h3>Running Beats</h3>
-                            <p>AI AUDIO VISUAL</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="photos">
-                <div class="works-grid">
-                    <!-- Photo work items go here -->
-                    <div class="work-item">
-                        <div class="work-image">
-                            <img src="https://images.unsplash.com/photo-1556139943-4bdca53adf1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Portrait Series">
-                        </div>
-                        <div class="work-caption">
-                            <h3>Portrait Series</h3>
-                            <p>AI Generated Portraits</p>
-                        </div>
-                    </div>
-                    
-                    <div class="work-item">
-                        <div class="work-image">
-                            <img src="https://images.unsplash.com/photo-1664575198308-3959904fa430?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Product Photography">
-                        </div>
-                        <div class="work-caption">
-                            <h3>Product Photography</h3>
-                            <p>AI Product Visualization</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Concepts Section -->
-    <section id="concepts" class="concepts-section">
-        <div class="container">
-            <h2 class="section-title fade-in">CONCEPTS</h2>
-            
-            <div class="concepts-grid">
-                <!-- Beauty Shot Concept -->
-                <div class="concept-item fade-in">
-                    <div class="concept-image">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Beauty Shot Concept">
-                        <div class="concept-overlay">
-                            <h3>Beauty Shot</h3>
-                            <p>Elegant and expressive portraits highlighting natural beauty</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Fantasy Concept -->
-                <div class="concept-item fade-in">
-                    <div class="concept-image">
-                        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Fantasy Concept">
-                        <div class="concept-overlay">
-                            <h3>Fantasy</h3>
-                            <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Sci-Fi Concept -->
-                <div class="concept-item fade-in">
-                    <div class="concept-image">
-                        <img src="https://images.unsplash.com/photo-1504221507732-5246c045949b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Sci-Fi Concept">
-                        <div class="concept-overlay">
-                            <h3>Sci-Fi</h3>
-                            <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 2D Animation Concept -->
-                <div class="concept-item fade-in">
-                    <div class="concept-image">
-                        <img src="https://images.unsplash.com/photo-1579547945413-497e1b99dac0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="2D Animation Concept">
-                        <div class="concept-overlay">
-                            <h3>2D Animation</h3>
-                            <p>Stylized animated visuals with a distinctive artistic approach</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-<!-- Contact Section -->
-<section id="contact" class="contact-section">
-    <div class="container">
-        <h2 class="section-title contact-title fade-in">CONTACT</h2>
-        
-        <div class="contact-info fade-in">
-            <p><a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
-        </div>
-        
-        <div class="social-links fade-in">
-            <a href="https://youtube.com/@FakeOven" target="_blank" aria-label="YouTube">
-                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/yt_logo.svg.png?raw=true" alt="YouTube">
-            </a>
-            <a href="https://www.instagram.com/fakeoven.ai" target="_blank" aria-label="Instagram">
-                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/insta_logo3.png?raw=true" alt="Instagram">
-            </a>
-            <a href="https://pf.kakao.com/_yKBnn/chat" target="_blank" aria-label="KakaoTalk">
-                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/KakaoTalk_logo2.png?raw=true" alt="KakaoTalk">
-            </a>
-        </div>
-    </div>
-</section>
-    
-    <footer>
-    <div class="container">
-        <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
-        <p class="copyright">페이크오븐｜대표이사 이지은｜사업자등록번호: 388-22-02026</p>
-    </div>
-</footer>
-    
-    <script>
-        // 스크롤 시 헤더 스타일 변경
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // 탭 기능
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // 활성 탭 버튼 업데이트
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // 해당 탭 내용 표시
-                const tabId = this.getAttribute('data-tab');
-                tabContents.forEach(content => {
-                    if (content.id === tabId) {
-                        content.classList.add('active');
-                    } else {
-                        content.classList.remove('active');
-                    }
-                });
-            });
-        });
-        
-        // 스크롤 시 요소 페이드인
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        function checkFade() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 50) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', checkFade);
-        window.addEventListener('load', checkFade);
-        
-        // 스무스 스크롤링
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // 유튜브 동영상 플레이어 기능
-        const customPlayers = document.querySelectorAll('.custom-video-player');
-
-        customPlayers.forEach(player => {
-            player.addEventListener('click', function() {
-                const videoId = this.getAttribute('data-video-id');
-                const iframeContainer = this.querySelector('.youtube-iframe');
-                
-                // 비디오가 아직 로드되지 않았을 때만 iframe 생성
-                if (iframeContainer.innerHTML === '') {
-                    const iframe = document.createElement('iframe');
-                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-                    iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allowfullscreen', 'true');
-                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                    iframe.style.width = '100%';
-                    iframe.style.height = '100%';
-                    
-                    iframeContainer.appendChild(iframe);
-                    iframeContainer.style.display = 'block';
-                    
-                    // 플레이 버튼 숨기기
-                    this.querySelector('.play-button').style.display = 'none';
-                } else {
-                    // 이미 로드된 비디오는 보이게만 설정
-                    iframeContainer.style.display = 'block';
-                    this.querySelector('.play-button').style.display = 'none';
-                }
-            });
-        });
-    </script>
-</body>
-</html>5,3 19,12 5,21" fill="white"/>
                                     </svg>
                                 </button>
                                 <div class="youtube-iframe"></div>
@@ -1136,7 +901,8 @@
                 <!-- Beauty Shot Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Beauty Shot Concept">
+                        <!-- 뷰티샷 컨셉 이미지 - 깨끗하고 클리어한 화장품 광고 스타일 -->
+                        <img src="https://cdn.dribbble.com/users/63407/screenshots/17431690/media/edbd6c581fcb1a01bcd5f3935618d8a4.jpg" alt="Beauty Shot Concept">
                         <div class="concept-overlay">
                             <h3>Beauty Shot</h3>
                             <p>Elegant and expressive portraits highlighting natural beauty</p>
@@ -1147,7 +913,8 @@
                 <!-- Fantasy Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Fantasy Concept">
+                        <!-- 판타지 컨셉 이미지 - 반지의 제왕 스타일의 다크 판타지 -->
+                        <img src="https://cdn.dribbble.com/users/2401559/screenshots/15297344/media/ae6af030fda166b564017e8d11828a3e.png" alt="Fantasy Concept">
                         <div class="concept-overlay">
                             <h3>Fantasy</h3>
                             <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
@@ -1158,7 +925,8 @@
                 <!-- Sci-Fi Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.unsplash.com/photo-1504221507732-5246c045949b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Sci-Fi Concept">
+                        <!-- 사이파이 컨셉 이미지 - 사이버펑크 스타일 -->
+                        <img src="https://cdn.dribbble.com/users/1787323/screenshots/14804936/media/78c02daa10d8cc6d85bd4115c75fb2ce.png" alt="Sci-Fi Concept">
                         <div class="concept-overlay">
                             <h3>Sci-Fi</h3>
                             <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
@@ -1169,7 +937,8 @@
                 <!-- 2D Animation Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://images.unsplash.com/photo-1579547945413-497e1b99dac0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="2D Animation Concept">
+                        <!-- 2D 애니메이션 컨셉 이미지 - 곤 사토시 스타일 -->
+                        <img src="https://cdn.dribbble.com/users/1803663/screenshots/17021700/media/f0b85e7137d51334282d5bf196789af4.jpg" alt="2D Animation Concept">
                         <div class="concept-overlay">
                             <h3>2D Animation</h3>
                             <p>Stylized animated visuals with a distinctive artistic approach</p>
