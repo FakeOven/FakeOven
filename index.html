@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
-<link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
-<link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <style>
         /* 기존 스타일 + 모바일 메뉴 추가 스타일 */
         * {
@@ -780,7 +780,7 @@
             color: black;
         }
         
-        /* 언어별 컨텐츠 스타일 */
+        /* 언어별 콘텐츠 스타일 */
         [lang] {
             display: none;
         }
@@ -1703,21 +1703,22 @@
 </footer>
     
     <script>
-        // 언어 선택 기능
         document.addEventListener('DOMContentLoaded', function() {
+            // 언어 선택 기능
             const languageButtons = document.querySelectorAll('.language-button');
+            const languageContents = document.querySelectorAll('[lang]');
             
             languageButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
+                    const selectedLang = this.getAttribute('data-lang');
                     
                     // 활성 버튼 변경
                     languageButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
                     
                     // 언어별 콘텐츠 표시
-                    document.querySelectorAll('[lang]').forEach(element => {
-                        if (element.getAttribute('lang') === lang) {
+                    languageContents.forEach(element => {
+                        if (element.getAttribute('lang') === selectedLang) {
                             element.classList.add('active');
                         } else {
                             element.classList.remove('active');
@@ -1725,94 +1726,99 @@
                     });
                 });
             });
-        });
-        
-        // 스크롤 시 헤더 스타일 변경
-        window.addEventListener('scroll', function() {
+            
+            // 스크롤 시 헤더 스타일 변경
             const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            function checkScroll() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
             }
-        });
-        
-        // 탭 기능
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // 활성 탭 버튼 업데이트
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // 해당 탭 내용 표시
-                const tabId = this.getAttribute('data-tab');
-                tabContents.forEach(content => {
-                    if (content.id === tabId) {
-                        content.classList.add('active');
-                    } else {
-                        content.classList.remove('active');
-                    }
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // 페이지 로드 시 초기 확인
+            
+            // 탭 기능
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // 활성 탭 버튼 업데이트
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 해당 탭 내용 표시
+                    tabContents.forEach(content => {
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        } else {
+                            content.classList.remove('active');
+                        }
+                    });
                 });
             });
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 모바일 메뉴 토글 기능
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
             const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
-
-            // 모바일 메뉴 토글 기능
-            mobileMenuToggle.addEventListener('click', function() {
-                this.classList.toggle('active');
-                mobileMenuOverlay.classList.toggle('active');
-                document.body.classList.toggle('menu-open');
-            });
-
-            // 모바일 메뉴 링크 클릭 시 메뉴 닫기
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenuToggle.classList.remove('active');
-                    mobileMenuOverlay.classList.remove('active');
-                    document.body.classList.remove('menu-open');
+            
+            if (mobileMenuToggle && mobileMenuOverlay) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mobileMenuOverlay.classList.toggle('active');
+                    document.body.classList.toggle('menu-open');
+                });
+                
+                // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenuToggle.classList.remove('active');
+                        mobileMenuOverlay.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    });
+                });
+            }
+            
+            // 스크롤 시 요소 페이드인
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 50) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkFade);
+            // 페이지 로드 시 초기 확인을 위해 약간의 지연 후 실행
+            setTimeout(checkFade, 100);
+            
+            // 스무스 스크롤링
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
-
-            // 기존의 다른 스크립트 코드들 유지...
-        });
-        
-        // 스크롤 시 요소 페이드인
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        function checkFade() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 50) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', checkFade);
-        window.addEventListener('load', checkFade);
-        
-        // 스무스 스크롤링
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // 비디오 자동 재생 기능 - 호버 시 재생
-        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 비디오 자동 재생 기능 - 호버 시 재생
             const autoVideos = document.querySelectorAll('.auto-video');
             
             autoVideos.forEach(videoContainer => {
@@ -1839,33 +1845,35 @@
                     const videoId = this.getAttribute('data-video-id');
                     const iframeContainer = this.querySelector('.youtube-iframe');
                     
-                    // 비디오가 아직 로드되지 않았을 때만 iframe 생성
-                    if (iframeContainer.innerHTML === '') {
-                        const iframe = document.createElement('iframe');
-                        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-                        iframe.setAttribute('frameborder', '0');
-                        iframe.setAttribute('allowfullscreen', 'true');
-                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                        iframe.style.width = '100%';
-                        iframe.style.height = '100%';
-                        
-                        iframeContainer.appendChild(iframe);
-                        iframeContainer.style.display = 'block';
-                        
-                        // 프리뷰 비디오와 썸네일 숨기기
-                        const previewContainer = this.querySelector('.preview-video-container');
-                        const thumbnail = this.querySelector('.video-thumbnail');
-                        if (previewContainer) previewContainer.style.display = 'none';
-                        if (thumbnail) thumbnail.style.display = 'none';
-                    } else {
-                        // 이미 로드된 비디오는 보이게만 설정
-                        iframeContainer.style.display = 'block';
-                        
-                        // 프리뷰 비디오와 썸네일 숨기기
-                        const previewContainer = this.querySelector('.preview-video-container');
-                        const thumbnail = this.querySelector('.video-thumbnail');
-                        if (previewContainer) previewContainer.style.display = 'none';
-                        if (thumbnail) thumbnail.style.display = 'none';
+                    if (videoId && iframeContainer) {
+                        // 비디오가 아직 로드되지 않았을 때만 iframe 생성
+                        if (iframeContainer.innerHTML === '') {
+                            const iframe = document.createElement('iframe');
+                            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+                            iframe.setAttribute('frameborder', '0');
+                            iframe.setAttribute('allowfullscreen', 'true');
+                            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                            iframe.style.width = '100%';
+                            iframe.style.height = '100%';
+                            
+                            iframeContainer.appendChild(iframe);
+                            iframeContainer.style.display = 'block';
+                            
+                            // 프리뷰 비디오와 썸네일 숨기기
+                            const previewContainer = this.querySelector('.preview-video-container');
+                            const thumbnail = this.querySelector('.video-thumbnail');
+                            if (previewContainer) previewContainer.style.display = 'none';
+                            if (thumbnail) thumbnail.style.display = 'none';
+                        } else {
+                            // 이미 로드된 비디오는 보이게만 설정
+                            iframeContainer.style.display = 'block';
+                            
+                            // 프리뷰 비디오와 썸네일 숨기기
+                            const previewContainer = this.querySelector('.preview-video-container');
+                            const thumbnail = this.querySelector('.video-thumbnail');
+                            if (previewContainer) previewContainer.style.display = 'none';
+                            if (thumbnail) thumbnail.style.display = 'none';
+                        }
                     }
                 });
             });
