@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAKEOVEN | AI VISUAL PRODUCTION</title>
+    <title>FAKEOVEN | AI CREATIVE STUDIO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
@@ -329,12 +329,15 @@
             font-weight: 300;
         }
         
+        /* Each fake mirrors its own truth 문구 스타일 */
         .vision-statement {
             margin-top: var(--spacing-medium);
             font-style: italic;
-            font-size: clamp(16px, 2vw, 22px);
+            font-size: clamp(18px, 2.5vw, 24px);
             letter-spacing: 0.05em;
             opacity: 0.9;
+            display: block;
+            margin-top: 30px;
         }
         
         /* Section Styles */
@@ -433,7 +436,7 @@
             opacity: 1;
         }
         
-        /* 영상 작업 2개씩 배치 */
+        /* 영상 작업 2개씩 배치 (PC 버전) */
         .works-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개만 배치 */
@@ -563,11 +566,11 @@
             background-color: rgba(0, 0, 0, 0.05);
         }
         
-        /* 컨셉 그리드 - 4x3 그리드 형태로 변경 */
+        /* 컨셉 그리드 - 4x3 그리드 형태로 변경 (PC 버전) */
         .concepts-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개씩 배치 */
-            gap: calc(var(--spacing-unit) * 3);
+            gap: calc(var(--spacing-unit) * 2);
         }
         
         .concept-item {
@@ -592,6 +595,32 @@
             transition: transform 0.5s ease;
         }
         
+        /* GIF 이미지 호버 효과 */
+        .concept-still-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+            transition: opacity 0.3s ease;
+        }
+        
+        .concept-gif-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .concept-item:hover .concept-still-image {
+            opacity: 0;
+        }
+        
         .concept-overlay {
             position: absolute;
             top: 0;
@@ -608,10 +637,7 @@
             padding: var(--spacing-medium);
             opacity: 0;
             transition: opacity 0.3s ease;
-        }
-        
-        .concept-item:hover .concept-image img {
-            transform: scale(1.05);
+            z-index: 3; /* 오버레이가 GIF보다 위에 표시되도록 */
         }
         
         .concept-item:hover .concept-overlay {
@@ -724,6 +750,45 @@
             opacity: 1;
         }
         
+        /* 언어 선택기 스타일 */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .language-button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .language-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .language-button.active {
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+        }
+        
+        /* 언어별 컨텐츠 스타일 */
+        [lang] {
+            display: none;
+        }
+        
+        [lang].active {
+            display: block;
+        }
+        
         /* Fade-in Animation */
         .fade-in {
             opacity: 0;
@@ -736,7 +801,7 @@
             transform: translateY(0);
         }
         
-        /* Responsive Styles */
+        /* Responsive Styles - 모바일 버전 */
         @media (max-width: 768px) {
             nav {
                 padding: 0 calc(var(--spacing-unit) * 2);
@@ -760,6 +825,34 @@
 
             header.scrolled .mobile-menu-toggle span {
                 background-color: var(--main-color);
+            }
+            
+            /* 모바일에서 영상 한 열로 표시 */
+            .works-grid {
+                grid-template-columns: 1fr;
+                gap: calc(var(--spacing-unit) * 4);
+            }
+            
+            /* 모바일에서 컨셉 3열로 표시하고 간격 줄이기 */
+            .concepts-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: calc(var(--spacing-unit) * 1);
+            }
+            
+            .concept-overlay h3 {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+            
+            .concept-overlay p {
+                font-size: 12px;
+                max-width: 100%;
+            }
+            
+            /* 언어 선택기 위치 조정 */
+            .language-selector {
+                top: 10px;
+                right: 50px;
             }
         }
         
@@ -801,8 +894,31 @@
                 <li><a href="#concepts">CONCEPTS</a></li>
                 <li><a href="#contact">CONTACT</a></li>
             </ul>
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+    
+    <!-- 모바일 메뉴 오버레이 -->
+    <div class="mobile-menu-overlay">
+        <ul class="menu">
+            <li><a href="#hero">BRAND</a></li>
+            <li><a href="#works">WORKS</a></li>
+            <li><a href="#concepts">CONCEPTS</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </div>
+    
+    <!-- 언어 선택기 -->
+    <div class="language-selector">
+        <button class="language-button active" data-lang="ko">KR</button>
+        <button class="language-button" data-lang="en">EN</button>
+        <button class="language-button" data-lang="ja">JP</button>
+        <button class="language-button" data-lang="fr">FR</button>
+    </div>
     
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
@@ -814,25 +930,104 @@
         </div>
         <div class="hero-content fade-in">
             <h1>FAKEOVEN</h1>
-            <p class="korean-description">
-                페이크오븐은 *AI* *크리에이티브* *스튜디오*입니다. *우리만의* *독창적인* *비주얼* *언어로* *영상과* *이미지를* *만들고* *캐릭터*, *스토리* *IP*를 *기획하고* *개발합니다*.
-            </p>
-            <p class="english-description">
-                We are an AI creative studio. We make films, photos, and ads, as well as characters, stories, and beyond. AI sparks, and we listen—but we also create. This is how we navigate this dynamic world.
-                <br>*Each fake mirrors its own truth.*
-            </p>
+            
+            <!-- 한국어 콘텐츠 -->
+            <div lang="ko" class="active">
+                <p class="korean-description">
+                    페이크오븐은 AI 크리에이티브 스튜디오입니다. 우리만의 독창적인 비주얼 언어로 영상과 이미지를 만들고 캐릭터, 스토리 IP를 기획하고 개발합니다.
+                </p>
+                <p class="english-description">
+                    We are an AI creative studio. We make films, photos, and ads, as well as characters, stories, and beyond. AI sparks, and we listen—but we also create. This is how we navigate this dynamic world.
+                </p>
+                <em class="vision-statement">Each fake mirrors its own truth.</em>
+            </div>
+            
+            <!-- 영어 콘텐츠 -->
+            <div lang="en">
+                <p class="english-description">
+                    FAKEOVEN is an AI creative studio. We create films and images with our unique visual language, and develop characters and story IPs.
+                </p>
+                <p class="english-description">
+                    We make films, photos, and ads, as well as characters, stories, and beyond. AI sparks, and we listen—but we also create. This is how we navigate this dynamic world.
+                </p>
+                <em class="vision-statement">Each fake mirrors its own truth.</em>
+            </div>
+            
+            <!-- 일본어 콘텐츠 -->
+            <div lang="ja">
+                <p class="japanese-description">
+                    フェイクオーブンはAIクリエイティブスタジオです。独自のビジュアル言語で映像や画像を作成し、キャラクターやストーリーIPを企画・開発しています。
+                </p>
+                <p class="english-description">
+                    私たちは映画、写真、広告、そしてキャラクターやストーリーなどを制作しています。AIが火花を散らし、私たちはそれを聞きながらも、自ら創造しています。これがこのダイナミックな世界をナビゲートする方法です。
+                </p>
+                <em class="vision-statement">Each fake mirrors its own truth.</em>
+            </div>
+            
+            <!-- 프랑스어 콘텐츠 -->
+            <div lang="fr">
+                <p class="french-description">
+                    FAKEOVEN est un studio créatif d'IA. Nous créons des films et des images avec notre langage visuel unique, et développons des personnages et des propriétés intellectuelles narratives.
+                </p>
+                <p class="english-description">
+                    Nous réalisons des films, des photos et des publicités, ainsi que des personnages, des histoires et bien plus encore. L'IA émet des étincelles, nous écoutons - mais nous créons également. C'est ainsi que nous naviguons dans ce monde dynamique.
+                </p>
+                <em class="vision-statement">Each fake mirrors its own truth.</em>
+            </div>
         </div>
     </section>
     
     <!-- Works Section -->
     <section id="works" class="works-section">
         <div class="container">
-            <h2 class="section-title fade-in">WORKS</h2>
+            <!-- 한국어 콘텐츠 -->
+            <div lang="ko" class="active">
+                <h2 class="section-title fade-in">WORKS</h2>
+            </div>
+            
+            <!-- 영어 콘텐츠 -->
+            <div lang="en">
+                <h2 class="section-title fade-in">WORKS</h2>
+            </div>
+            
+            <!-- 일본어 콘텐츠 -->
+            <div lang="ja">
+                <h2 class="section-title fade-in">作品</h2>
+            </div>
+            
+            <!-- 프랑스어 콘텐츠 -->
+            <div lang="fr">
+                <h2 class="section-title fade-in">PROJETS</h2>
+            </div>
             
             <div class="works-tabs fade-in">
-                <button class="tab-button active" data-tab="all">All</button>
-                <button class="tab-button" data-tab="videos">Videos</button>
-                <button class="tab-button" data-tab="photos">Photos</button>
+                <!-- 한국어 탭 -->
+                <div lang="ko" class="active">
+                    <button class="tab-button active" data-tab="all">All</button>
+                    <button class="tab-button" data-tab="videos">Videos</button>
+                    <button class="tab-button" data-tab="photos">Photos</button>
+                </div>
+                
+                <!-- 영어 탭 -->
+                <div lang="en">
+                    <button class="tab-button active" data-tab="all">All</button>
+                    <button class="tab-button" data-tab="videos">Videos</button>
+                    <button class="tab-button" data-tab="photos">Photos</button>
+                </div>
+                
+                <!-- 일본어 탭 -->
+                <div lang="ja">
+                    <button class="tab-button active" data-tab="all">すべて</button>
+                    <button class="tab-button" data-tab="videos">映像</button>
+                    <button class="tab-button" data-tab="photos">写真</button>
+                </div>
+                
+                <!-- 프랑스어 탭 -->
+                <div lang="fr">
+                    <button class="tab-button active" data-tab="all">Tout</button>
+                    <button class="tab-button" data-tab="videos">Vidéos</button>
+                    <button class="tab-button" data-tab="photos">Photos</button>
+                </div>
             </div>
             
             <div class="tab-content active" id="all">
@@ -1039,16 +1234,56 @@
     <!-- Concepts Section -->
     <section id="concepts" class="concepts-section">
         <div class="container">
-            <h2 class="section-title fade-in">CONCEPTS</h2>
+            <!-- 한국어 콘텐츠 -->
+            <div lang="ko" class="active">
+                <h2 class="section-title fade-in">CONCEPTS</h2>
+            </div>
+            
+            <!-- 영어 콘텐츠 -->
+            <div lang="en">
+                <h2 class="section-title fade-in">CONCEPTS</h2>
+            </div>
+            
+            <!-- 일본어 콘텐츠 -->
+            <div lang="ja">
+                <h2 class="section-title fade-in">コンセプト</h2>
+            </div>
+            
+            <!-- 프랑스어 콘텐츠 -->
+            <div lang="fr">
+                <h2 class="section-title fade-in">CONCEPTS</h2>
+            </div>
             
             <div class="concepts-grid">
                 <!-- Beauty Shot Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/e1/fa/3c/e1fa3c2c4df2afdb3cc77b3c3a0829e4.jpg" alt="Beauty Shot Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/e1/fa/3c/e1fa3c2c4df2afdb3cc77b3c3a0829e4.jpg" alt="Beauty Shot Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/e1/fa/3c/e1fa3c2c4df2afdb3cc77b3c3a0829e4.jpg" alt="Beauty Shot Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Beauty Shot</h3>
-                            <p>Elegant and expressive portraits highlighting natural beauty</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Beauty Shot</h3>
+                                <p>자연스러운 아름다움을 강조한 우아하고 표현력 있는 인물 사진</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Beauty Shot</h3>
+                                <p>Elegant and expressive portraits highlighting natural beauty</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>ビューティーショット</h3>
+                                <p>自然な美しさを強調するエレガントで表現力豊かなポートレート</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Beauty Shot</h3>
+                                <p>Portraits élégants et expressifs mettant en valeur la beauté naturelle</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1056,10 +1291,32 @@
                 <!-- Fantasy Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/67/e9/3a/67e93a1e4c6b1a5c5f6f1e10cbc761a0.jpg" alt="Fantasy Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/67/e9/3a/67e93a1e4c6b1a5c5f6f1e10cbc761a0.jpg" alt="Fantasy Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/67/e9/3a/67e93a1e4c6b1a5c5f6f1e10cbc761a0.jpg" alt="Fantasy Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Fantasy</h3>
-                            <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Fantasy</h3>
+                                <p>초현실적 요소와 마법적인 분위기가 있는 꿈같은 이미지</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Fantasy</h3>
+                                <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>ファンタジー</h3>
+                                <p>シュールな要素と魔法的な雰囲気を持つ夢のようなイメージ</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Fantaisie</h3>
+                                <p>Imagerie onirique avec éléments surréalistes et atmosphères magiques</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1067,10 +1324,32 @@
                 <!-- Sci-Fi Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/34/25/fc/3425fc9faa87c4f1bb6fd5a1fa7b9db9.jpg" alt="Sci-Fi Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/34/25/fc/3425fc9faa87c4f1bb6fd5a1fa7b9db9.jpg" alt="Sci-Fi Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/34/25/fc/3425fc9faa87c4f1bb6fd5a1fa7b9db9.jpg" alt="Sci-Fi Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Sci-Fi</h3>
-                            <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Sci-Fi</h3>
+                                <p>기술적 요소와 극적인 조명이 있는 미래적인 미학</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Sci-Fi</h3>
+                                <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>SF</h3>
+                                <p>テクノロジカルな要素とドラマチックな照明を備えた未来的な美学</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Science-Fiction</h3>
+                                <p>Esthétique futuriste avec éléments technologiques et éclairage dramatique</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1078,10 +1357,32 @@
                 <!-- 2D Animation Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/c1/38/6a/c1386af4b4d0aa9d9f977c2e95bf5404.jpg" alt="2D Animation Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/c1/38/6a/c1386af4b4d0aa9d9f977c2e95bf5404.jpg" alt="2D Animation Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/c1/38/6a/c1386af4b4d0aa9d9f977c2e95bf5404.jpg" alt="2D Animation Concept GIF">
                         <div class="concept-overlay">
-                            <h3>2D Animation</h3>
-                            <p>Stylized animated visuals with a distinctive artistic approach</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>2D Animation</h3>
+                                <p>독특한 예술적 접근 방식을 가진 양식화된 애니메이션 비주얼</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>2D Animation</h3>
+                                <p>Stylized animated visuals with a distinctive artistic approach</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>2Dアニメーション</h3>
+                                <p>独特の芸術的アプローチを持つ様式化されたアニメーションビジュアル</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Animation 2D</h3>
+                                <p>Visuels animés stylisés avec une approche artistique distinctive</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1089,10 +1390,32 @@
                 <!-- Fashion Film Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/0f/42/a0/0f42a0e055ead7f018c02dcce47ed259.jpg" alt="Fashion Film Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/0f/42/a0/0f42a0e055ead7f018c02dcce47ed259.jpg" alt="Fashion Film Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/0f/42/a0/0f42a0e055ead7f018c02dcce47ed259.jpg" alt="Fashion Film Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Fashion Film</h3>
-                            <p>Cinematic fashion narratives with artistic direction and visual storytelling</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Fashion Film</h3>
+                                <p>예술적 방향성과 시각적 스토리텔링이 있는 영화적 패션 나레이티브</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Fashion Film</h3>
+                                <p>Cinematic fashion narratives with artistic direction and visual storytelling</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>ファッションフィルム</h3>
+                                <p>芸術的な方向性とビジュアルストーリーテリングを備えた映画的なファッションナラティブ</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Film de Mode</h3>
+                                <p>Récits de mode cinématographiques avec direction artistique et narration visuelle</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1100,10 +1423,32 @@
                 <!-- Abstract Motion Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/d9/39/79/d939797bab47fe58ea53e081e1e3c7a3.jpg" alt="Abstract Motion Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/d9/39/79/d939797bab47fe58ea53e081e1e3c7a3.jpg" alt="Abstract Motion Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/d9/39/79/d939797bab47fe58ea53e081e1e3c7a3.jpg" alt="Abstract Motion Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Abstract Motion</h3>
-                            <p>Experimental visual explorations through color, form, and movement</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Abstract Motion</h3>
+                                <p>색상, 형태, 움직임을 통한 실험적인 시각적 탐구</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Abstract Motion</h3>
+                                <p>Experimental visual explorations through color, form, and movement</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>抽象的モーション</h3>
+                                <p>色、形、動きを通じた実験的なビジュアル探求</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Mouvement Abstrait</h3>
+                                <p>Explorations visuelles expérimentales à travers la couleur, la forme et le mouvement</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1111,10 +1456,32 @@
                 <!-- Ambient Reality Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/57/3d/08/573d083992e655a8216b808b2af2fe1e.jpg" alt="Ambient Reality Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/57/3d/08/573d083992e655a8216b808b2af2fe1e.jpg" alt="Ambient Reality Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/57/3d/08/573d083992e655a8216b808b2af2fe1e.jpg" alt="Ambient Reality Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Ambient Reality</h3>
-                            <p>Atmospheric environments blending physical and digital elements</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Ambient Reality</h3>
+                                <p>물리적 요소와 디지털 요소가 혼합된 분위기 있는 환경</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Ambient Reality</h3>
+                                <p>Atmospheric environments blending physical and digital elements</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>アンビエントリアリティ</h3>
+                                <p>物理的要素とデジタル要素を融合した雰囲気のある環境</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Réalité Ambiante</h3>
+                                <p>Environnements atmosphériques mélangeant éléments physiques et numériques</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1122,10 +1489,32 @@
                 <!-- Digital Surrealism Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/41/ae/ce/41aece60a9a8c38d20c1eebc7e8e44d7.jpg" alt="Digital Surrealism Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/41/ae/ce/41aece60a9a8c38d20c1eebc7e8e44d7.jpg" alt="Digital Surrealism Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/41/ae/ce/41aece60a9a8c38d20c1eebc7e8e44d7.jpg" alt="Digital Surrealism Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Digital Surrealism</h3>
-                            <p>Contemporary dreamscapes merging impossible realities</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Digital Surrealism</h3>
+                                <p>불가능한 현실이 융합된 현대적인 꿈의 풍경</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Digital Surrealism</h3>
+                                <p>Contemporary dreamscapes merging impossible realities</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>デジタルシュールレアリズム</h3>
+                                <p>不可能な現実が融合した現代的な夢の風景</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Surréalisme Numérique</h3>
+                                <p>Paysages oniriques contemporains fusionnant des réalités impossibles</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1133,10 +1522,32 @@
                 <!-- Tactile Textures Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/1c/2d/a5/1c2da58ad4b65b61b3919df8abb259ce.jpg" alt="Tactile Textures Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/1c/2d/a5/1c2da58ad4b65b61b3919df8abb259ce.jpg" alt="Tactile Textures Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/1c/2d/a5/1c2da58ad4b65b61b3919df8abb259ce.jpg" alt="Tactile Textures Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Tactile Textures</h3>
-                            <p>Sensory visual experiences exploring materiality and surface</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Tactile Textures</h3>
+                                <p>물질성과 표면을 탐구하는 감각적인 시각 경험</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Tactile Textures</h3>
+                                <p>Sensory visual experiences exploring materiality and surface</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>触覚的テクスチャ</h3>
+                                <p>物質性と表面を探求する感覚的な視覚体験</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Textures Tactiles</h3>
+                                <p>Expériences visuelles sensorielles explorant la matérialité et la surface</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1144,10 +1555,32 @@
                 <!-- Neon Noir Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/24/c7/e7/24c7e72f3db48c6eb35ba5b60bc4e203.jpg" alt="Neon Noir Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/24/c7/e7/24c7e72f3db48c6eb35ba5b60bc4e203.jpg" alt="Neon Noir Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/24/c7/e7/24c7e72f3db48c6eb35ba5b60bc4e203.jpg" alt="Neon Noir Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Neon Noir</h3>
-                            <p>Cyberpunk-inspired cityscapes with vibrant neon aesthetics</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Neon Noir</h3>
+                                <p>활기찬 네온 미학이 있는 사이버펑크 영감의 도시 풍경</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Neon Noir</h3>
+                                <p>Cyberpunk-inspired cityscapes with vibrant neon aesthetics</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>ネオンノワール</h3>
+                                <p>鮮やかなネオン美学を持つサイバーパンクにインスパイアされた都市風景</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Neon Noir</h3>
+                                <p>Paysages urbains inspirés du cyberpunk avec une esthétique néon vibrante</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1155,10 +1588,32 @@
                 <!-- Hyper Reality Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/e0/ce/a5/e0cea59c4fca7068b15906f0d5afc58c.jpg" alt="Hyper Reality Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/e0/ce/a5/e0cea59c4fca7068b15906f0d5afc58c.jpg" alt="Hyper Reality Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/e0/ce/a5/e0cea59c4fca7068b15906f0d5afc58c.jpg" alt="Hyper Reality Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Hyper Reality</h3>
-                            <p>Intensified visual experiences blending digital and physical worlds</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Hyper Reality</h3>
+                                <p>디지털 세계와 물리적 세계가 혼합된 강화된 시각적 경험</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Hyper Reality</h3>
+                                <p>Intensified visual experiences blending digital and physical worlds</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>ハイパーリアリティ</h3>
+                                <p>デジタル世界と物理的世界を融合した強化された視覚体験</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Hyper Réalité</h3>
+                                <p>Expériences visuelles intensifiées mélangeant mondes numériques et physiques</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1166,10 +1621,32 @@
                 <!-- Liquid Motion Concept -->
                 <div class="concept-item fade-in">
                     <div class="concept-image">
-                        <img src="https://i.pinimg.com/564x/97/f4/73/97f473c95b325c7a2dac5da10ca357c8.jpg" alt="Liquid Motion Concept">
+                        <img class="concept-still-image" src="https://i.pinimg.com/564x/97/f4/73/97f473c95b325c7a2dac5da10ca357c8.jpg" alt="Liquid Motion Concept">
+                        <img class="concept-gif-image" src="https://i.pinimg.com/564x/97/f4/73/97f473c95b325c7a2dac5da10ca357c8.jpg" alt="Liquid Motion Concept GIF">
                         <div class="concept-overlay">
-                            <h3>Liquid Motion</h3>
-                            <p>Fluid dynamics and organic movement in experimental visuals</p>
+                            <!-- 한국어 콘텐츠 -->
+                            <div lang="ko" class="active">
+                                <h3>Liquid Motion</h3>
+                                <p>실험적 시각에서의 유체 역학과 유기적 움직임</p>
+                            </div>
+                            
+                            <!-- 영어 콘텐츠 -->
+                            <div lang="en">
+                                <h3>Liquid Motion</h3>
+                                <p>Fluid dynamics and organic movement in experimental visuals</p>
+                            </div>
+                            
+                            <!-- 일본어 콘텐츠 -->
+                            <div lang="ja">
+                                <h3>リキッドモーション</h3>
+                                <p>実験的なビジュアルにおける流体力学と有機的な動き</p>
+                            </div>
+                            
+                            <!-- 프랑스어 콘텐츠 -->
+                            <div lang="fr">
+                                <h3>Mouvement Liquide</h3>
+                                <p>Dynamique des fluides et mouvement organique dans des visuels expérimentaux</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1180,7 +1657,25 @@
 <!-- Contact Section -->
 <section id="contact" class="contact-section">
     <div class="container">
-        <h2 class="section-title contact-title fade-in">CONTACT</h2>
+        <!-- 한국어 콘텐츠 -->
+        <div lang="ko" class="active">
+            <h2 class="section-title contact-title fade-in">CONTACT</h2>
+        </div>
+        
+        <!-- 영어 콘텐츠 -->
+        <div lang="en">
+            <h2 class="section-title contact-title fade-in">CONTACT</h2>
+        </div>
+        
+        <!-- 일본어 콘텐츠 -->
+        <div lang="ja">
+            <h2 class="section-title contact-title fade-in">お問い合わせ</h2>
+        </div>
+        
+        <!-- 프랑스어 콘텐츠 -->
+        <div lang="fr">
+            <h2 class="section-title contact-title fade-in">CONTACT</h2>
+        </div>
         
         <div class="contact-info fade-in">
             <p><a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
@@ -1208,6 +1703,30 @@
 </footer>
     
     <script>
+        // 언어 선택 기능
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageButtons = document.querySelectorAll('.language-button');
+            
+            languageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    
+                    // 활성 버튼 변경
+                    languageButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 언어별 콘텐츠 표시
+                    document.querySelectorAll('[lang]').forEach(element => {
+                        if (element.getAttribute('lang') === lang) {
+                            element.classList.add('active');
+                        } else {
+                            element.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+        
         // 스크롤 시 헤더 스타일 변경
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -1241,28 +1760,28 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
 
-    // 모바일 메뉴 토글 기능
-    mobileMenuToggle.addEventListener('click', function() {
-        this.classList.toggle('active');
-        mobileMenuOverlay.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
-    });
+            // 모바일 메뉴 토글 기능
+            mobileMenuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenuOverlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
 
-    // 모바일 메뉴 링크 클릭 시 메뉴 닫기
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenuToggle.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            document.body.classList.remove('menu-open');
+            // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+
+            // 기존의 다른 스크립트 코드들 유지...
         });
-    });
-
-    // 기존의 다른 스크립트 코드들 유지...
-});
         
         // 스크롤 시 요소 페이드인
         const fadeElements = document.querySelectorAll('.fade-in');
