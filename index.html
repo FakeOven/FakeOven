@@ -208,6 +208,17 @@
             position: relative;
             padding: 5px 0;
         }
+        
+        .menu a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor; /* 현재 텍스트 색상에 맞춰 밑줄 색상 변경 */
+        }
+        
         .menu-open {
             overflow: hidden;
             position: fixed;
@@ -263,6 +274,7 @@
             line-height: 1.6;
             font-weight: 300;
             letter-spacing: 0.03em;
+            display: none; /* 기본적으로 숨김 */
         }
 
         .hero-content .english-description {
@@ -274,6 +286,37 @@
             font-weight: 400;
             letter-spacing: 0.05em;
             line-height: 1.8;
+            display: block; /* 기본값으로 표시 */
+        }
+        
+        /* 언어 토글 버튼 스타일 */
+        .language-toggle {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .language-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
         
         /* 이미지 슬라이드쇼 스타일 */
@@ -319,7 +362,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* 이미지 위 오버레이 */
+            background: rgba(0, 0, 0, 0.3); /* 오퍼시티 더 옅게 변경 */
             z-index: 1;
         }
         
@@ -509,12 +552,12 @@ footer {
     }
 }
 
-/* Footer 수정 - 배경색은 검정으로, 구분선은 기존 회색 유지 */
+/* Footer 수정 - 배경색은 검정으로, 선 제거 */
 footer {
     padding: var(--spacing-medium) 0;
     text-align: center;
-    border-top: 1px solid var(--subtle-color); /* 구분선은 어두운 회색 유지 */
     background-color: #000;
+    border: none;
 }
 
 .copyright {
@@ -600,16 +643,23 @@ footer {
         </div>
         <div class="hero-content fade-in">
             <h1>FAKEOVEN</h1>
-            <p class="korean-description">
-                페이크오븐은 AI 크리에이티브 스튜디오입니다.<span class="mobile-break"></span> 우리만의 독창적인 비주얼로<br>
-                영상과 이미지를 만들며<span class="mobile-break"></span> 캐릭터, 스토리 IP를 기획하고 개발합니다.
-            </p>
+            
             <p class="english-description">
                 We are an AI creative studio.<span class="mobile-break"></span> We make films, photos, and ads,<br>
                 <span class="mobile-break"></span>as well as characters, stories, and beyond.<span class="mobile-break"></span> AI sparks, and we listen<br>
                 <span class="mobile-break"></span>—but we also create.<span class="mobile-break"></span> This is how we navigate this dynamic world.<br>
                 <span class="mobile-break"></span>"Each fake mirrors its own truth."
             </p>
+            
+            <p class="korean-description">
+                페이크오븐은 AI 크리에이티브 스튜디오입니다.<span class="mobile-break"></span> 우리만의 독창적인 비주얼로<br>
+                영상과 이미지를 만들며<span class="mobile-break"></span> 캐릭터, 스토리 IP를 기획하고 개발합니다.
+            </p>
+            
+            <div class="language-toggle">
+                <button class="language-btn active" data-lang="en">EN</button>
+                <button class="language-btn" data-lang="kr">KR</button>
+            </div>
         </div>
     </section>
     
@@ -648,6 +698,31 @@ footer {
         document.addEventListener('DOMContentLoaded', function() {
             // 슬라이드쇼 시작
             startSlideshow();
+            
+            // 언어 전환 기능
+            const langButtons = document.querySelectorAll('.language-btn');
+            const enDesc = document.querySelector('.english-description');
+            const krDesc = document.querySelector('.korean-description');
+            
+            langButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 모든 버튼에서 active 클래스 제거
+                    langButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // 현재 버튼에 active 클래스 추가
+                    this.classList.add('active');
+                    
+                    // 언어에 따라 설명 표시/숨김
+                    const lang = this.getAttribute('data-lang');
+                    if (lang === 'en') {
+                        enDesc.style.display = 'block';
+                        krDesc.style.display = 'none';
+                    } else {
+                        enDesc.style.display = 'none';
+                        krDesc.style.display = 'block';
+                    }
+                });
+            });
             
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
