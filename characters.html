@@ -126,6 +126,16 @@
             padding: 5px 0;
         }
         
+        .menu a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-color);
+        }
+        
         .menu a::after {
             content: '';
             position: absolute;
@@ -235,16 +245,6 @@
             background-color: var(--bg-color);
         }
         
-        .section-title {
-            text-align: center;
-            margin-bottom: var(--spacing-large);
-            font-size: clamp(24px, 3vw, 36px);
-            letter-spacing: 0.1em;
-            font-family: var(--section-title-font);
-            font-weight: 600;
-            color: var(--text-color);
-        }
-        
         /* Coming Soon 섹션 */
         .coming-soon-section {
             display: flex;
@@ -322,11 +322,6 @@
                 height: 50px;
             }
             
-            .section-title {
-                font-size: 22px;
-                margin-bottom: var(--spacing-medium);
-            }
-            
             /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
             .mobile-menu-toggle.active {
                 position: fixed;
@@ -358,7 +353,7 @@
             <ul class="menu">
                 <li><a href="works.html">WORKS</a></li>
                 <li><a href="concepts.html">CONCEPTS</a></li>
-                <li><a href="characters.html">CHARACTERS</a></li>
+                <li><a href="characters.html" class="active">CHARACTERS</a></li>
                 <li><a href="game.html">GAME</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
             </ul>
@@ -374,7 +369,7 @@
         <ul class="menu">
             <li><a href="works.html">WORKS</a></li>
             <li><a href="concepts.html">CONCEPTS</a></li>
-            <li><a href="characters.html">CHARACTERS</a></li>
+            <li><a href="characters.html" class="active">CHARACTERS</a></li>
             <li><a href="game.html">GAME</a></li>
             <li><a href="contact.html">CONTACT</a></li>
         </ul>
