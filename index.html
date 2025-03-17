@@ -6,7 +6,7 @@
     <title>FAKEOVEN | AI CREATIVE STUDIO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
     <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
@@ -24,8 +24,9 @@
         :root {
             --main-color: #000;
             --secondary-color: #777;
-            --bg-color: #fff;
-            --subtle-color: #f5f5f5;
+            --bg-color: #000; /* 배경색을 검정으로 변경 */
+            --text-color: #fff; /* 텍스트 색상을 흰색으로 변경 */
+            --subtle-color: #333; /* 변경된 미묘한 색상 */
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
@@ -36,7 +37,7 @@
             --work-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
             --menu-font: 'Montserrat', 'Noto Sans KR', sans-serif;
             --brand-font: 'Chicle', cursive;
-             --desc-font: 'Rock Salt', cursive;
+            --desc-font: 'Rock Salt', cursive;
         }
         
         body {
@@ -44,7 +45,7 @@
             margin: 0;
             padding: 0;
             background-color: #000; /* 배경색을 검정으로 변경 */
-            color: var(--main-color);
+            color: var(--text-color);
             width: 100%;
             overflow-x: hidden;
             line-height: 1.5;
@@ -165,7 +166,7 @@
         }
 
         header.scrolled {
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(0, 0, 0, 0.95); /* 배경색 검정으로 변경 */
             box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
             padding: var(--spacing-unit) 0;
         }
@@ -215,7 +216,7 @@
         }
 
         header.scrolled .menu a {
-            color: var(--main-color);
+            color: var(--text-color); /* 텍스트 색상을 흰색으로 변경 */
         }
         
         .menu a::after {
@@ -439,7 +440,7 @@
             }
 
             header.scrolled .mobile-menu-toggle span {
-                background-color: var(--main-color);
+                background-color: white; /* 변경: 검정으로 스크롤 시에도 흰색으로 유지 */
             }
             
             /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
@@ -512,7 +513,7 @@ footer {
 footer {
     padding: var(--spacing-medium) 0;
     text-align: center;
-    border-top: 1px solid var(--subtle-color); /* 구분선은 회색 유지 */
+    border-top: 1px solid var(--subtle-color); /* 구분선은 어두운 회색 유지 */
     background-color: #000;
 }
 
@@ -520,6 +521,33 @@ footer {
     font-size: 12px;
     color: var(--secondary-color); /* 카피라이트 텍스트는 회색 유지 */
     margin-bottom: var(--spacing-unit);
+}
+
+/* 이미지와 배경 사이의 흰 선 제거 */
+.hero-section {
+    border-bottom: none;
+}
+
+.hero-background {
+    border-bottom: none;
+}
+
+.slideshow-item {
+    border-bottom: none;
+}
+
+.hero-background::after {
+    border-bottom: none;
+}
+
+/* 슬라이드쇼와 메인 콘텐츠 사이 간격 없이 */
+.hero-section::after {
+    display: none;
+}
+
+.hero-content {
+    border-top: none;
+    margin-top: 0;
 }
     </style>
 </head>
@@ -529,7 +557,7 @@ footer {
             <a href="./" class="logo">
                 <!-- 로고 이미지 두 버전 -->
                 <img class="light-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
-                <img class="dark-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
+                <img class="dark-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
                 <li><a href="works.html">WORKS</a></li>
@@ -633,12 +661,16 @@ footer {
                 
                 // 활성화 시 버튼이 항상 보이도록 위치 고정
                 if (this.classList.contains('active')) {
-                    // 위치는 CSS에서 처리하므로 여기서는 생략
+                    this.style.position = 'fixed';
+                    this.style.top = '20px';
+                    this.style.right = '20px';
+                    this.style.zIndex = '1200';
                 } else {
                     // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
                     this.style.position = '';
                     this.style.top = '';
                     this.style.right = '';
+                    this.style.zIndex = '';
                 }
             });
 
@@ -653,6 +685,7 @@ footer {
                     mobileMenuToggle.style.position = '';
                     mobileMenuToggle.style.top = '';
                     mobileMenuToggle.style.right = '';
+                    mobileMenuToggle.style.zIndex = '';
                 });
             });
         });
