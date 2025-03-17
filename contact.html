@@ -6,20 +6,393 @@
     <title>FAKEOVEN | CONTACT</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
     <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
-    <!-- 스타일 파일은 메인 페이지와 동일한 CSS 사용 -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 기본 변수 */
+        :root {
+            --main-color: #000;
+            --secondary-color: #777;
+            --bg-color: #000;
+            --text-color: #fff;
+            --subtle-color: #333;
+            --spacing-unit: 10px;
+            --spacing-medium: 40px;
+            --spacing-large: 80px;
+            --spacing-xl: 120px;
+            --transition: all 0.3s ease;
+            --section-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --menu-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --brand-font: 'Chicle', cursive;
+            --desc-font: 'Rock Salt', cursive;
+        }
+        
+        /* 기본 리셋 */
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            height: -webkit-fill-available;
+            background-color: var(--bg-color);
+        }
+        
+        body {
+            font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            width: 100%;
+            overflow-x: hidden;
+            line-height: 1.5;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+        
+        /* 이미지 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 링크 */
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        /* 헤더 스타일 */
+        header {
+            background-color: var(--bg-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+        
+        .logo {
+            height: 60px;
+            transition: var(--transition);
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu li {
+            margin-left: calc(var(--spacing-unit) * 4);
+        }
+        
+        .menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: var(--menu-font);
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .menu a:hover::after {
+            width: 100%;
+        }
+        
+        /* 모바일 메뉴 */
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            z-index: 1200;
+            position: relative;
+        }
+        
+        .mobile-menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+            transform-origin: left;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            background-color: white !important;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            background-color: white !important;
+        }
+        
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-menu-overlay.active {
+            display: flex;
+        }
+        
+        .mobile-menu-overlay .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .mobile-menu-overlay .menu li {
+            margin: 15px 0;
+        }
+        
+        .mobile-menu-overlay .menu a {
+            color: white;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+        
+        .menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* 컨테이너 */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+        
+        /* 섹션 스타일 */
+        section {
+            padding: var(--spacing-large) 0;
+            scroll-margin-top: 100px;
+            background-color: var(--bg-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-large);
+            font-size: clamp(24px, 3vw, 36px);
+            letter-spacing: 0.1em;
+            font-family: var(--section-title-font);
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        /* Contact 섹션 */
+        .contact-section {
+            padding-top: 120px;
+            padding-bottom: var(--spacing-xl);
+            text-align: center;
+        }
+        
+        .contact-info {
+            margin-bottom: var(--spacing-large);
+        }
+        
+        .contact-info p {
+            font-size: 20px;
+            margin-bottom: var(--spacing-medium);
+        }
+        
+        .contact-info a {
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .contact-info a:hover {
+            opacity: 0.8;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: var(--spacing-medium);
+        }
+        
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+        
+        .social-links img {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* 푸터 */
+        footer {
+            padding: var(--spacing-medium) 0;
+            text-align: center;
+            border-top: 1px solid var(--subtle-color);
+            background-color: var(--bg-color);
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-unit);
+        }
+        
+        .contact-footer {
+            background-color: var(--bg-color);
+        }
+        
+        /* 애니메이션 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                padding: 0 calc(var(--spacing-unit) * 2);
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+                margin-bottom: var(--spacing-medium);
+            }
+            
+            .contact-section {
+                padding-top: 100px;
+                padding-bottom: var(--spacing-large);
+            }
+            
+            .contact-info p {
+                font-size: 18px;
+            }
+            
+            .social-links {
+                gap: 20px;
+            }
+            
+            .social-links a {
+                width: 40px;
+                height: 40px;
+            }
+            
+            /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
+            .mobile-menu-toggle.active {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1200;
+            }
+        }
+
+        /* iOS 사파리 뷰포트 높이 문제 수정 */
+        @supports (-webkit-touch-callout: none) {
+            .contact-section {
+                min-height: -webkit-fill-available;
+                padding-bottom: calc(var(--spacing-large) + env(safe-area-inset-bottom, 0));
+            }
+            
+            footer {
+                margin-bottom: env(safe-area-inset-bottom, 0);
+                padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
+            }
+        }
+    </style>
 </head>
 <body>
     <header id="header">
         <nav>
             <a href="index.html" class="logo">
-                <img class="light-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
-                <img class="dark-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
                 <li><a href="works.html">WORKS</a></li>
@@ -78,16 +451,6 @@
     </footer>
     
     <script>
-        // 스크롤 시 헤더 스타일 변경
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
@@ -98,6 +461,18 @@
                 this.classList.toggle('active');
                 mobileMenuOverlay.classList.toggle('active');
                 document.body.classList.toggle('menu-open');
+                
+                // 활성화 시 버튼이 항상 보이도록 위치 고정
+                if (this.classList.contains('active')) {
+                    this.style.position = 'fixed';
+                    this.style.top = '20px';
+                    this.style.right = '20px';
+                } else {
+                    // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
+                    this.style.position = '';
+                    this.style.top = '';
+                    this.style.right = '';
+                }
             });
 
             // 모바일 메뉴 링크 클릭 시 메뉴 닫기
@@ -106,23 +481,31 @@
                     mobileMenuToggle.classList.remove('active');
                     mobileMenuOverlay.classList.remove('active');
                     document.body.classList.remove('menu-open');
+                    
+                    // 원래 위치로 돌아가기
+                    mobileMenuToggle.style.position = '';
+                    mobileMenuToggle.style.top = '';
+                    mobileMenuToggle.style.right = '';
                 });
             });
+            
+            // 스크롤 시 요소 페이드인
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 50) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkFade);
+            window.addEventListener('load', checkFade);
         });
-        
-        // 스크롤 시 요소 페이드인
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        function checkFade() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 50) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', checkFade);
-        window.addEventListener('load', checkFade);
+    </script>
+</body>
+</html>
