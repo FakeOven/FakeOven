@@ -43,7 +43,7 @@
             font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
+            background-color: #000; /* 배경색을 검정으로 변경 */
             color: var(--main-color);
             width: 100%;
             overflow-x: hidden;
@@ -242,9 +242,10 @@
             align-items: center;
             text-align: center;
             padding: 0 var(--spacing-medium);
-            margin-bottom: var(--spacing-large);
+            margin-bottom: 0; /* 마진 제거 */
             position: relative;
             overflow: hidden;
+            background-color: #000; /* 히어로 섹션 배경색 지정 */
         }
 
         .hero-content h1 {
@@ -363,11 +364,11 @@
         }
         
         section:nth-child(odd) {
-            background-color: var(--bg-color);
+            background-color: #000; /* 배경색 검정으로 변경 */
         }
         
         section:nth-child(even) {
-            background-color: var(--bg-color); /* 배경색 통일 */
+            background-color: #000; /* 배경색 검정으로 변경 */
         }
         
         .section-title {
@@ -477,6 +478,7 @@
 /* 추가할 CSS */
 html {
     height: -webkit-fill-available;
+    background-color: #000; /* HTML 배경색 검정으로 변경 */
 }
 
 body {
@@ -492,6 +494,7 @@ body {
 footer {
     margin-bottom: env(safe-area-inset-bottom, 0);
     padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
+    background-color: #000; /* 푸터 배경색 검정으로 변경 */
 }
 
 /* 추가로 iOS에서 스크롤 문제를 방지하기 위한 조치 */
@@ -505,16 +508,17 @@ footer {
     }
 }
 
-/* Footer */
+/* Footer 수정 - 배경색은 검정으로, 구분선은 기존 회색 유지 */
 footer {
     padding: var(--spacing-medium) 0;
     text-align: center;
-    border-top: 1px solid var(--subtle-color);
+    border-top: 1px solid var(--subtle-color); /* 구분선은 회색 유지 */
+    background-color: #000;
 }
 
 .copyright {
     font-size: 12px;
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* 카피라이트 텍스트는 회색 유지 */
     margin-bottom: var(--spacing-unit);
 }
     </style>
@@ -522,7 +526,7 @@ footer {
 <body>
     <header id="header">
         <nav>
-            <a href="index.html" class="logo">
+            <a href="./" class="logo">
                 <!-- 로고 이미지 두 버전 -->
                 <img class="light-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
                 <img class="dark-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
