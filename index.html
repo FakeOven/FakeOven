@@ -723,6 +723,47 @@
                 display: block;
             }
         }
+        /* 모바일 사파리 뷰포트 높이 문제 해결을 위한 CSS */
+
+/* 추가할 CSS */
+html {
+    height: -webkit-fill-available;
+}
+
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+.hero-section {
+    height: 100vh; /* 기존 코드 */
+    min-height: -webkit-fill-available; /* 추가 */
+}
+
+footer {
+    margin-bottom: env(safe-area-inset-bottom, 0);
+    padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
+}
+
+/* 추가로 iOS에서 스크롤 문제를 방지하기 위한 조치 */
+@supports (-webkit-touch-callout: none) {
+    .hero-section {
+        height: -webkit-fill-available;
+    }
+
+    section {
+        padding-bottom: calc(var(--spacing-large) + env(safe-area-inset-bottom, 0));
+    }
+    
+    .contact-section {
+        padding-bottom: calc(var(--spacing-xl) + env(safe-area-inset-bottom, 10px));
+    }
+}
+
+/* 페이지의 마지막 섹션에 추가 여백 */
+.contact-section {
+    padding-bottom: calc(var(--spacing-xl) + 20px);
+}
     </style>
 </head>
 <body>
