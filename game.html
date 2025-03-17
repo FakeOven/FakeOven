@@ -442,199 +442,142 @@
     </footer>
     
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 필요한 요소 가져오기
-        const imageItems = document.querySelectorAll('.image-item');
-        const fusionBtn = document.querySelector('.fusion-btn');
-        const selectionInfo = document.querySelector('.selection-info');
-        const resultImage = document.querySelector('.result-image');
-        const resultImageEl = document.querySelector('.result-image img');
-        const progressContainer = document.querySelector('.progress-container');
-        const progressBar = document.querySelector('.progress-bar');
-        const imageGeneration = document.querySelector('.image-generation');
-        
-        // 변수 설정
-        let selectedImages = [];
-        const maxSelections = 2;
-        
-        // 미리 정의된 결과 이미지 (실제로는 AI 프로세스가 필요하지만, 여기서는 미리 정의)
-        const fusionResults = {
-            "Cyberpunk City+Fantasy Forest": "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Abstract Art": "https://images.unsplash.com/photo-1604871000636-074fa5117945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Portrait": "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Space": "https://images.unsplash.com/photo-1520034475321-cbe63696469a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Architecture": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Ocean": "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Technology": "https://images.unsplash.com/photo-1573455494060-c5595004fb6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Animal": "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Flowers": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Geometric": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+City Lights": "https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        document.addEventListener('DOMContentLoaded', function() {
+            // 필요한 요소 가져오기
+            const imageItems = document.querySelectorAll('.image-item');
+            const fusionBtn = document.querySelector('.fusion-btn');
+            const selectionInfo = document.querySelector('.selection-info');
+            const resultImage = document.querySelector('.result-image');
+            const resultImageEl = document.querySelector('.result-image img');
+            const progressContainer = document.querySelector('.progress-container');
+            const progressBar = document.querySelector('.progress-bar');
+            const imageGeneration = document.querySelector('.image-generation');
             
-            "Fantasy Forest+Abstract Art": "https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Portrait": "https://images.unsplash.com/photo-1578680671705-0d686c3c5070?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Space": "https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Architecture": "https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Ocean": "https://images.unsplash.com/photo-1596825620610-5c19ab914d76?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Technology": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Animal": "https://images.unsplash.com/photo-1516616121069-ad8c3928b3df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Flowers": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Geometric": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-            "Fantasy Forest+City Lights": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            // 변수 설정
+            let selectedImages = [];
+            const maxSelections = 2;
             
-            "Abstract Art+Portrait": "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Space": "https://images.unsplash.com/photo-1541356665065-22676f35dd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Architecture": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Ocean": "https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Technology": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Animal": "https://images.unsplash.com/photo-1583309219338-a582f1f9ca6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Flowers": "https://images.unsplash.com/photo-1551913902-c92207136625?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Geometric": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+City Lights": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            // 미리 정의된 결과 이미지 (실제로는 AI 프로세스가 필요하지만, 여기서는 미리 정의)
+            const fusionResults = {
+                "Cyberpunk City+Fantasy Forest": "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Cyberpunk City+Abstract Art": "https://images.unsplash.com/photo-1604871000636-074fa5117945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Cyberpunk City+Portrait": "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Cyberpunk City+Space": "https://images.unsplash.com/photo-1520034475321-cbe63696469a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Fantasy Forest+Abstract Art": "https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Fantasy Forest+Portrait": "https://images.unsplash.com/photo-1578680671705-0d686c3c5070?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Portrait+Abstract Art": "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                // 더 많은 조합을 정의할 수 있습니다
+            };
             
-            // 추가 조합들을 위한 기본 결과 이미지 생성 함수
-            generateFusionImage: function(combo) {
-                // 기본 이미지 목록 (충분히 예술적이고 다양한 이미지들)
-                const defaultImages = [
-                    "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1541356665065-22676f35dd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1604871000636-074fa5117945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ];
-                
-                // 조합에서 해시 값을 생성하여 이미지 선택의 일관성 유지
-                let hash = 0;
-                for (let i = 0; i < combo.length; i++) {
-                    hash = (hash + combo.charCodeAt(i)) % defaultImages.length;
-                }
-                
-                return defaultImages[hash];
-            }
-        };
-        
-        // 결과 URL 가져오기 함수
-        function getResultImageUrl(combo) {
-            // 미리 정의된 결과가 있으면 사용
-            if (fusionResults[combo]) {
-                return fusionResults[combo];
-            }
-            
-            // 없으면 자동 생성
-            return fusionResults.generateFusionImage(combo);
-        }
-        
-        // 이미지 클릭 이벤트 처리
-        imageItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const imageName = this.getAttribute('data-name');
-                
-                // 이미 선택된 경우, 선택 취소
-                if (this.classList.contains('selected')) {
-                    this.classList.remove('selected');
-                    selectedImages = selectedImages.filter(img => img !== imageName);
-                } 
-                // 아직 최대 선택 개수에 도달하지 않았다면 선택
-                else if (selectedImages.length < maxSelections) {
-                    this.classList.add('selected');
-                    selectedImages.push(imageName);
-                }
-                
-                // 선택 정보 업데이트
-                updateSelectionInfo();
-                
-                // 버튼 활성화/비활성화
-                if (selectedImages.length === maxSelections) {
-                    fusionBtn.disabled = false;
-                } else {
-                    fusionBtn.disabled = true;
-                }
-            });
-        });
-        
-        // 선택 정보 업데이트 함수
-        function updateSelectionInfo() {
-            selectionInfo.textContent = `Select 2 images to combine (${selectedImages.length} selected)`;
-            
-            if (selectedImages.length === 1) {
-                selectionInfo.textContent += `: ${selectedImages[0]}`;
-            } else if (selectedImages.length === 2) {
-                selectionInfo.textContent += `: ${selectedImages[0]} + ${selectedImages[1]}`;
-            }
-        }
-        
-        // 융합 버튼 클릭 이벤트
-        fusionBtn.addEventListener('click', function() {
-            if (selectedImages.length !== 2) return;
-            
-            // 융합 과정 시작
-            startFusion();
-        });
-        
-        // 융합 프로세스 시뮬레이션
-        function startFusion() {
-            // 버튼 비활성화
-            fusionBtn.disabled = true;
-            
-            // 진행 상황 표시
-            progressContainer.style.display = 'block';
-            imageGeneration.textContent = 'Generating AI fusion...';
-            
-            // 결과 이미지 초기화
-            resultImage.classList.remove('visible');
-            
-            // 진행 바 애니메이션
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 1;
-                progressBar.style.width = `${progress}%`;
-                
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    completeFusion();
-                }
-            }, 30); // 진행 속도 조절
-        }
-        
-        // 융합 완료 처리
-        function completeFusion() {
-            // 결과 조합 키 생성
-            const combo = selectedImages.sort().join('+');
-            
-            // 결과 이미지 URL 가져오기
-            const resultUrl = getResultImageUrl(combo);
-            
-            // 이미지 설정
-            resultImageEl.src = resultUrl;
-            
-            // 완료 메시지
-            imageGeneration.textContent = 'Fusion Complete!';
-            
-            // 잠시 후 결과 표시
-            setTimeout(() => {
-                resultImage.classList.add('visible');
-                
-                // 다음 융합을 위한 준비
-                setTimeout(() => {
-                    progressContainer.style.display = 'none';
-                    resetSelections();
-                }, 1000);
-            }, 500);
-        }
-        
-        // 선택 초기화
-        function resetSelections() {
-            selectedImages = [];
+            // 이미지 클릭 이벤트 처리
             imageItems.forEach(item => {
-                item.classList.remove('selected');
+                item.addEventListener('click', function() {
+                    const imageName = this.getAttribute('data-name');
+                    
+                    // 이미 선택된 경우, 선택 취소
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        selectedImages = selectedImages.filter(img => img !== imageName);
+                    } 
+                    // 아직 최대 선택 개수에 도달하지 않았다면 선택
+                    else if (selectedImages.length < maxSelections) {
+                        this.classList.add('selected');
+                        selectedImages.push(imageName);
+                    }
+                    
+                    // 선택 정보 업데이트
+                    updateSelectionInfo();
+                    
+                    // 버튼 활성화/비활성화
+                    if (selectedImages.length === maxSelections) {
+                        fusionBtn.disabled = false;
+                    } else {
+                        fusionBtn.disabled = true;
+                    }
+                });
             });
-            updateSelectionInfo();
-            fusionBtn.disabled = true;
-        }
-    });
-</script>
+            
+            // 선택 정보 업데이트 함수
+            function updateSelectionInfo() {
+                selectionInfo.textContent = `Select 2 images to combine (${selectedImages.length} selected)`;
+                
+                if (selectedImages.length === 1) {
+                    selectionInfo.textContent += `: ${selectedImages[0]}`;
+                } else if (selectedImages.length === 2) {
+                    selectionInfo.textContent += `: ${selectedImages[0]} + ${selectedImages[1]}`;
+                }
+            }
+            
+            // 융합 버튼 클릭 이벤트
+            fusionBtn.addEventListener('click', function() {
+                if (selectedImages.length !== 2) return;
+                
+                // 융합 과정 시작
+                startFusion();
+            });
+            
+            // 융합 프로세스 시뮬레이션
+            function startFusion() {
+                // 버튼 비활성화
+                fusionBtn.disabled = true;
+                
+                // 진행 상황 표시
+                progressContainer.style.display = 'block';
+                imageGeneration.textContent = 'Generating AI fusion...';
+                
+                // 결과 이미지 초기화
+                resultImage.classList.remove('visible');
+                
+                // 진행 바 애니메이션
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 1;
+                    progressBar.style.width = `${progress}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        completeFusion();
+                    }
+                }, 30); // 진행 속도 조절
+            }
+            
+            // 융합 완료 처리
+            function completeFusion() {
+                // 결과 조합 키 생성
+                const combo = selectedImages.sort().join('+');
+                
+                // 결과 이미지 URL 가져오기 (없다면 기본 이미지)
+                const resultUrl = fusionResults[combo] || 
+                    'https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                
+                // 이미지 설정
+                resultImageEl.src = resultUrl;
+                
+                // 완료 메시지
+                imageGeneration.textContent = 'Fusion Complete!';
+                
+                // 잠시 후 결과 표시
+                setTimeout(() => {
+                    resultImage.classList.add('visible');
+                    
+                    // 다음 융합을 위한 준비
+                    setTimeout(() => {
+                        progressContainer.style.display = 'none';
+                        resetSelections();
+                    }, 1000);
+                }, 500);
+            }
+            
+            // 선택 초기화
+            function resetSelections() {
+                selectedImages = [];
+                imageItems.forEach(item => {
+                    item.classList.remove('selected');
+                });
+                updateSelectionInfo();
+                fusionBtn.disabled = true;
+            }
+        });
+    </script>
 </body>
 </html>
