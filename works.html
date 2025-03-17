@@ -14,11 +14,11 @@
     <style>
         /* 기본 변수 */
         :root {
-            --main-color: #000;
+            --main-color: #333; /* 텍스트 색상 어둡게 */
             --secondary-color: #777;
-            --bg-color: #000; /* 배경색 검정으로 변경 */
-            --text-color: #fff; /* 텍스트 색상 흰색으로 */
-            --subtle-color: #333; /* 미묘한 색상도 어둡게 변경 */
+            --bg-color: #fff; /* 배경색 흰색으로 변경 */
+            --text-color: #333; /* 텍스트 색상 어둡게 */
+            --subtle-color: #eee; /* 미묘한 색상 밝게 변경 */
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
@@ -85,7 +85,7 @@
             padding: calc(var(--spacing-unit) * 2) 0;
             z-index: 1000;
             transition: var(--transition);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
         }
         
         nav {
@@ -127,6 +127,16 @@
             padding: 5px 0;
         }
         
+        .menu a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-color);
+        }
+        
         .menu a::after {
             content: '';
             position: absolute;
@@ -166,7 +176,7 @@
         
         .mobile-menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg);
-            background-color: white !important;
+            background-color: black !important;
         }
         
         .mobile-menu-toggle.active span:nth-child(2) {
@@ -175,7 +185,7 @@
         
         .mobile-menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg);
-            background-color: white !important;
+            background-color: black !important;
         }
         
         .mobile-menu-overlay {
@@ -185,7 +195,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.95);
+            background-color: rgba(255,255,255,0.95);
             z-index: 1100;
             flex-direction: column;
             justify-content: center;
@@ -207,7 +217,7 @@
         }
         
         .mobile-menu-overlay .menu a {
-            color: white;
+            color: black;
             font-size: 24px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -234,16 +244,6 @@
             padding: var(--spacing-large) 0;
             scroll-margin-top: 100px;
             background-color: var(--bg-color);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: var(--spacing-large);
-            font-size: clamp(24px, 3vw, 36px);
-            letter-spacing: 0.1em;
-            font-family: var(--section-title-font);
-            font-weight: 600;
-            color: var(--text-color);
         }
         
         /* Works 섹션 */
@@ -377,8 +377,20 @@
         footer {
             padding: var(--spacing-medium) 0;
             text-align: center;
-            border-top: 1px solid var(--subtle-color);
+            position: relative;
             background-color: var(--bg-color);
+        }
+        
+        /* 가운데에만 선이 있는 스타일 */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(to right, rgba(120, 120, 120, 0), rgba(120, 120, 120, 0.5) 20%, rgba(120, 120, 120, 0.5) 80%, rgba(120, 120, 120, 0));
         }
         
         .copyright {
@@ -421,18 +433,13 @@
                 height: 50px;
             }
             
-            .section-title {
-                font-size: 22px;
-                margin-bottom: var(--spacing-medium);
+            .works-section {
+                padding-top: 100px;
+                padding-bottom: var(--spacing-large);
             }
             
             .work-caption h3 {
                 font-size: 18px;
-            }
-            
-            .works-section {
-                padding-top: 100px;
-                padding-bottom: var(--spacing-large);
             }
             
             /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
@@ -462,10 +469,10 @@
     <header id="header">
         <nav>
             <a href="index.html" class="logo">
-                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
-                <li><a href="works.html">WORKS</a></li>
+                <li><a href="works.html" class="active">WORKS</a></li>
                 <li><a href="concepts.html">CONCEPTS</a></li>
                 <li><a href="characters.html">CHARACTERS</a></li>
                 <li><a href="game.html">GAME</a></li>
@@ -481,7 +488,7 @@
     
     <div class="mobile-menu-overlay">
         <ul class="menu">
-            <li><a href="works.html">WORKS</a></li>
+            <li><a href="works.html" class="active">WORKS</a></li>
             <li><a href="concepts.html">CONCEPTS</a></li>
             <li><a href="characters.html">CHARACTERS</a></li>
             <li><a href="game.html">GAME</a></li>
@@ -492,9 +499,8 @@
     <!-- Works Section -->
     <section id="works" class="works-section">
         <div class="container">
-            <h2 class="section-title fade-in">WORKS</h2>
+            <!-- 섹션 타이틀 제거 -->
             
-            <!-- 탭 버튼 제거하고 바로 작품 표시 -->
             <div class="works-grid">
                 <!-- 1. 出勤無用曲 출근금지곡 -->
                 <div class="work-item fade-in">
@@ -531,7 +537,7 @@
                     </div>
                     <div class="work-caption">
                         <h3>PARROT FUNK STAR SHOW <span class="award-tag">(2024 K-AIFF)</span></h3>
-                        <span class="subtitle">앵무 펑크 스타쇼(2024대한민국AI국제영화제 수상작)</span>
+                        <span class="subtitle">앵무 펑크 스타쇼(2024 K-AIFF)</span>
                         <p>AI MUSIC VIDEO</p>
                     </div>
                 </div>
@@ -601,11 +607,13 @@
                     this.style.position = 'fixed';
                     this.style.top = '20px';
                     this.style.right = '20px';
+                    this.style.zIndex = '1200';
                 } else {
                     // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
                     this.style.position = '';
                     this.style.top = '';
                     this.style.right = '';
+                    this.style.zIndex = '';
                 }
             });
             
@@ -620,6 +628,7 @@
                     mobileMenuToggle.style.position = '';
                     mobileMenuToggle.style.top = '';
                     mobileMenuToggle.style.right = '';
+                    mobileMenuToggle.style.zIndex = '';
                 });
             });
             
