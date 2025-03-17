@@ -3,15 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAKEOVEN | AI IMAGE FUSION GAME</title>
+    <title>FAKEOVEN | GAME</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&family=Homemade+Apple&family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
     <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <style>
+        /* 기본 변수 */
+        :root {
+            --main-color: #333;
+            --secondary-color: #777;
+            --accent-color: #ff4d5a;
+            --bg-color: #fff;
+            --text-color: #333;
+            --subtle-color: #eee;
+            --spacing-unit: 10px;
+            --spacing-medium: 40px;
+            --spacing-large: 80px;
+            --spacing-xl: 120px;
+            --transition: all 0.3s ease;
+            --section-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --menu-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --brand-font: 'Chicle', cursive;
+        }
+        
+        /* 기본 리셋 */
         * {
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
@@ -20,44 +39,51 @@
             padding: 0;
         }
         
-        :root {
-            --main-color: #000;
-            --secondary-color: #777;
-            --accent-color: #ff4d5a;
-            --bg-color: #000;
-            --text-color: #fff;
-            --game-bg-color: #111;
-            --subtle-color: #333;
-            --spacing-unit: 10px;
-            --spacing-medium: 40px;
-            --spacing-large: 80px;
-            --spacing-xl: 120px;
-            --transition: all 0.3s ease;
-            --title-font: 'Abril Fatface', serif;
-            --body-font: 'Montserrat', sans-serif;
+        html {
+            height: -webkit-fill-available;
+            background-color: var(--bg-color);
         }
         
         body {
-            font-family: var(--body-font);
+            font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--game-bg-color);
-            color: white;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             width: 100%;
             overflow-x: hidden;
             line-height: 1.5;
             font-weight: 300;
             letter-spacing: 0.02em;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
         }
         
+        /* 이미지 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 링크 */
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        /* 헤더 스타일 */
         header {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: var(--bg-color);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            padding: 15px 0;
+            padding: calc(var(--spacing-unit) * 2) 0;
             z-index: 1000;
+            transition: var(--transition);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
         }
         
         nav {
@@ -65,17 +91,17 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 calc(var(--spacing-unit) * 3);
-            max-width: 1400px;
-            margin: 0 auto;
         }
         
         .logo {
             height: 60px;
+            transition: var(--transition);
         }
         
         .logo img {
             height: 100%;
             width: auto;
+            display: block;
         }
         
         .menu {
@@ -89,19 +115,39 @@
         
         .menu a {
             text-decoration: none;
-            color: white;
-            font-family: var(--body-font);
-            font-size: 16px;
+            color: var(--text-color);
+            font-family: var(--menu-font);
+            font-size: 18px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             position: relative;
             padding: 5px 0;
+        }
+        
+        .menu a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-color);
+        }
+        
+        .menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-color);
             transition: var(--transition);
         }
         
-        .menu a:hover {
-            color: var(--accent-color);
+        .menu a:hover::after {
+            width: 100%;
         }
         
         /* 모바일 메뉴 */
@@ -120,15 +166,30 @@
         
         .mobile-menu-toggle span {
             width: 100%;
-            height: 3px;
+            height: 2px;
             background-color: var(--text-color);
             transition: all 0.3s ease;
             transform-origin: left;
+            border-radius: 2px;
+        }
+        
+        /* 첫 번째 줄은 짧게 */
+        .mobile-menu-toggle span:nth-child(1) {
+            width: 70%;
+            margin-left: auto;
+        }
+
+        /* 세 번째 줄도 짧게 */
+        .mobile-menu-toggle span:nth-child(3) {
+            width: 70%;
+            margin-left: auto;
         }
         
         .mobile-menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg);
-            background-color: white !important;
+            background-color: black !important;
+            width: 100%;
+            margin-left: 0;
         }
         
         .mobile-menu-toggle.active span:nth-child(2) {
@@ -137,7 +198,9 @@
         
         .mobile-menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg);
-            background-color: white !important;
+            background-color: black !important;
+            width: 100%;
+            margin-left: 0;
         }
         
         .mobile-menu-overlay {
@@ -147,7 +210,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.95);
+            background-color: rgba(255,255,255,0.95);
             z-index: 1100;
             flex-direction: column;
             justify-content: center;
@@ -169,7 +232,7 @@
         }
         
         .mobile-menu-overlay .menu a {
-            color: white;
+            color: black;
             font-size: 24px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -183,239 +246,150 @@
             height: 100%;
         }
         
-        .game-container {
-            min-height: 100vh;
-            padding-top: 100px;
+        /* 컨테이너 */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+        
+        /* 섹션 스타일 */
+        section {
+            padding: var(--spacing-large) 0;
+            scroll-margin-top: 100px;
+            background-color: var(--bg-color);
+        }
+        
+        /* 게임 섹션 */
+        .game-section {
+            padding-top: 120px;
             padding-bottom: var(--spacing-xl);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .game-title {
-            font-family: var(--title-font);
-            font-size: 48px;
-            margin-bottom: var(--spacing-large);
-            text-align: center;
-            letter-spacing: 0.05em;
-            color: white;
             position: relative;
         }
         
-        .game-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-        
-        .game-description {
-            max-width: 700px;
+        .section-title {
             text-align: center;
             margin-bottom: var(--spacing-large);
-            line-height: 1.8;
-            font-size: 18px;
-            color: #ddd;
-            padding: 0 20px;
-        }
-        
-        .game-area {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            padding: 0 20px;
-        }
-        
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            width: 100%;
-        }
-        
-        .image-item {
-            aspect-ratio: 1/1;
-            overflow: hidden;
-            border-radius: 10px;
-            cursor: pointer;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .image-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .image-item.selected {
-            border: 3px solid var(--accent-color);
-        }
-        
-        .image-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: filter 0.3s ease;
-        }
-        
-        .image-item:hover img {
-            filter: brightness(1.1);
-        }
-        
-        .fusion-controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-        }
-        
-        .btn {
-            background-color: var(--accent-color);
-            color: white;
-            font-family: var(--body-font);
-            font-weight: 700;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 18px;
+            font-size: clamp(24px, 3vw, 36px);
             letter-spacing: 0.1em;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 77, 90, 0.3);
+            font-family: var(--section-title-font);
+            font-weight: 600;
+            color: var(--text-color);
         }
         
-        .btn:hover {
-            background-color: #ff6978;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 77, 90, 0.4);
+        /* 게임 그리드 */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: var(--spacing-medium);
         }
         
-        .btn:disabled {
-            background-color: #777;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .result-container {
-            margin-top: 40px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        
-        .result-image {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 1/1;
-            border-radius: 10px;
+        .game-item {
+            background-color: #f8f8f8;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .result-image.visible {
-            opacity: 1;
-            transform: scale(1);
+        .game-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
         }
         
-        .result-image img {
+        .game-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+        
+        .game-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
         }
         
-        .selection-info {
-            margin-top: 20px;
-            text-align: center;
-            color: #ddd;
-            font-size: 16px;
+        .game-item:hover .game-image img {
+            transform: scale(1.05);
         }
         
-        .image-generation {
-            text-align: center;
-            font-size: 20px;
-            margin-top: 20px;
-            color: var(--accent-color);
-            font-family: var(--body-font);
-            font-weight: 500;
+        .game-caption {
+            padding: 20px;
         }
         
-        .progress-container {
-            width: 100%;
-            max-width: 400px;
-            height: 10px;
-            background-color: #333;
-            border-radius: 5px;
-            margin-top: 15px;
-            overflow: hidden;
-            display: none;
+        .game-caption h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--main-color);
         }
         
-        .progress-bar {
-            height: 100%;
+        .game-caption p {
+            font-size: 14px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .game-btn {
+            display: inline-block;
+            padding: 8px 16px;
             background-color: var(--accent-color);
-            width: 0%;
-            transition: width 0.3s ease;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background 0.3s ease;
         }
         
+        .game-btn:hover {
+            background-color: #e64050;
+        }
+        
+        /* 푸터 */
         footer {
-            background-color: #000;
             padding: var(--spacing-medium) 0;
             text-align: center;
+            position: relative;
+            background-color: var(--bg-color);
         }
         
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* 가운데에만 선이 있는 스타일 */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(to right, rgba(120, 120, 120, 0), rgba(120, 120, 120, 0.5) 20%, rgba(120, 120, 120, 0.5) 80%, rgba(120, 120, 120, 0));
         }
         
         .copyright {
-            font-size: 14px;
-            color: #777;
+            font-size: 12px;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-unit);
         }
         
-        .back-to-home {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+        /* 애니메이션 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
         
-        .back-to-home:hover {
-            color: #ff6978;
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
+        /* 모바일 반응형 */
         @media (max-width: 768px) {
-            .image-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .game-title {
-                font-size: 36px;
-            }
-            
-            .game-description {
-                font-size: 16px;
-            }
-            
             .menu {
                 display: none;
             }
@@ -424,9 +398,26 @@
                 display: flex;
             }
             
-            .btn {
-                padding: 12px 30px;
-                font-size: 16px;
+            nav {
+                padding: 0 calc(var(--spacing-unit) * 2);
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+                margin-bottom: var(--spacing-medium);
+            }
+            
+            .game-section {
+                padding-top: 100px;
+                padding-bottom: var(--spacing-large);
+            }
+            
+            .game-grid {
+                grid-template-columns: 1fr;
             }
             
             /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
@@ -437,19 +428,32 @@
                 z-index: 1200;
             }
         }
+
+        /* iOS 사파리 뷰포트 높이 문제 수정 */
+        @supports (-webkit-touch-callout: none) {
+            .game-section {
+                min-height: -webkit-fill-available;
+                padding-bottom: calc(var(--spacing-large) + env(safe-area-inset-bottom, 0));
+            }
+            
+            footer {
+                margin-bottom: env(safe-area-inset-bottom, 0);
+                padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
+    <header id="header">
         <nav>
             <a href="index.html" class="logo">
-                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
                 <li><a href="works.html">WORKS</a></li>
                 <li><a href="concepts.html">CONCEPTS</a></li>
                 <li><a href="characters.html">CHARACTERS</a></li>
-                <li><a href="game.html" style="color: var(--accent-color);">GAME</a></li>
+                <li><a href="game.html" class="active">GAME</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
             </ul>
             <button class="mobile-menu-toggle">
@@ -465,256 +469,121 @@
             <li><a href="works.html">WORKS</a></li>
             <li><a href="concepts.html">CONCEPTS</a></li>
             <li><a href="characters.html">CHARACTERS</a></li>
-            <li><a href="game.html">GAME</a></li>
+            <li><a href="game.html" class="active">GAME</a></li>
             <li><a href="contact.html">CONTACT</a></li>
         </ul>
     </div>
     
-    <div class="game-container">
-        <h1 class="game-title">AI Image Fusion</h1>
-        <p class="game-description">
-            Create stunning AI-generated art by selecting and merging images. Choose two images from the grid below, and our AI will blend them into a unique creation that combines their visual elements.
-        </p>
-        
-        <div class="game-area">
-            <div class="selection-info">Select 2 images to combine (0 selected)</div>
+    <!-- Game Section -->
+    <section id="game" class="game-section">
+        <div class="container">
+            <h2 class="section-title fade-in">GAME</h2>
             
-            <div class="image-grid">
-                <div class="image-item" data-name="Cyberpunk City">
-                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Cyberpunk City">
+            <div class="game-grid">
+                <!-- 1. AI Image Fusion -->
+                <div class="game-item fade-in">
+                    <div class="game-image">
+                        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI Image Fusion">
+                    </div>
+                    <div class="game-caption">
+                        <h3>AI Image Fusion</h3>
+                        <p>Combine two images to create unique AI-generated artwork.</p>
+                        <a href="#" class="game-btn">Play</a>
+                    </div>
                 </div>
-                <div class="image-item" data-name="Fantasy Forest">
-                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Fantasy Forest">
+                
+                <!-- 2. Character Creator (Coming Soon) -->
+                <div class="game-item fade-in">
+                    <div class="game-image">
+                        <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Character Creator">
+                    </div>
+                    <div class="game-caption">
+                        <h3>Character Creator</h3>
+                        <p>Design your own AI character with customizable features.</p>
+                        <span class="game-btn" style="background-color: #999;">Coming Soon</span>
+                    </div>
                 </div>
-                <div class="image-item" data-name="Abstract Art">
-                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Abstract Art">
-                </div>
-                <div class="image-item" data-name="Portrait">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Portrait">
-                </div>
-                <div class="image-item" data-name="Space">
-                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Space">
-                </div>
-                <div class="image-item" data-name="Architecture">
-                    <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Architecture">
-                </div>
-                <div class="image-item" data-name="Ocean">
-                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Ocean">
-                </div>
-                <div class="image-item" data-name="Technology">
-                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Technology">
-                </div>
-                <div class="image-item" data-name="Animal">
-                    <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Animal">
-                </div>
-                <div class="image-item" data-name="Flowers">
-                    <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Flowers">
-                </div>
-                <div class="image-item" data-name="Geometric">
-                    <img src="https://images.unsplash.com/photo-1507646227500-4d389b0012be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Geometric">
-                </div>
-                <div class="image-item" data-name="City Lights">
-                    <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="City Lights">
-                </div>
-            </div>
-            
-            <div class="fusion-controls">
-                <button class="btn fusion-btn" disabled>Fuse Images</button>
-                <div class="progress-container">
-                    <div class="progress-bar"></div>
-                </div>
-            </div>
-            
-            <div class="result-container">
-                <div class="image-generation"></div>
-                <div class="result-image">
-                    <img src="" alt="Fused Image Result">
+                
+                <!-- 3. Style Transfer (Coming Soon) -->
+                <div class="game-item fade-in">
+                    <div class="game-image">
+                        <img src="https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Style Transfer">
+                    </div>
+                    <div class="game-caption">
+                        <h3>Style Transfer</h3>
+                        <p>Transform your photos into different artistic styles.</p>
+                        <span class="game-btn" style="background-color: #999;">Coming Soon</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     
     <footer>
-        <div class="footer-content">
-            <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
-            <a href="index.html" class="back-to-home">Back to Home</a>
+        <div class="container">
+            <p class="copyright">&copy; 2025 FAKEOVEN. ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
     
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 모바일 메뉴 처리
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
 
-        // 모바일 메뉴 토글 기능
-        mobileMenuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenuOverlay.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-            
-            // 활성화 시 버튼이 항상 보이도록 위치 고정
-            if (this.classList.contains('active')) {
-                this.style.position = 'fixed';
-                this.style.top = '20px';
-                this.style.right = '20px';
-                this.style.zIndex = '1200';
-            } else {
-                // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
-                this.style.position = '';
-                this.style.top = '';
-                this.style.right = '';
-                this.style.zIndex = '';
-            }
-        });
-
-        // 모바일 메뉴 링크 클릭 시 메뉴 닫기
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenuToggle.classList.remove('active');
-                mobileMenuOverlay.classList.remove('active');
-                document.body.classList.remove('menu-open');
+            // 모바일 메뉴 토글
+            mobileMenuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenuOverlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
                 
-                // 원래 위치로 돌아가기
-                mobileMenuToggle.style.position = '';
-                mobileMenuToggle.style.top = '';
-                mobileMenuToggle.style.right = '';
-                mobileMenuToggle.style.zIndex = '';
-            });
-        });
-    
-        // 필요한 요소 가져오기
-        const imageItems = document.querySelectorAll('.image-item');
-        const fusionBtn = document.querySelector('.fusion-btn');
-        const selectionInfo = document.querySelector('.selection-info');
-        const resultImage = document.querySelector('.result-image');
-        const resultImageEl = document.querySelector('.result-image img');
-        const progressContainer = document.querySelector('.progress-container');
-        const progressBar = document.querySelector('.progress-bar');
-        const imageGeneration = document.querySelector('.image-generation');
-        
-        // 변수 설정
-        let selectedImages = [];
-        const maxSelections = 2;
-        
-        // 이미지 클릭 이벤트 처리
-        imageItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const imageName = this.getAttribute('data-name');
-                
-                // 이미 선택된 경우, 선택 취소
-                if (this.classList.contains('selected')) {
-                    this.classList.remove('selected');
-                    selectedImages = selectedImages.filter(img => img !== imageName);
-                } 
-                // 아직 최대 선택 개수에 도달하지 않았다면 선택
-                else if (selectedImages.length < maxSelections) {
-                    this.classList.add('selected');
-                    selectedImages.push(imageName);
-                }
-                
-                // 선택 정보 업데이트
-                updateSelectionInfo();
-                
-                // 버튼 활성화/비활성화
-                if (selectedImages.length === maxSelections) {
-                    fusionBtn.disabled = false;
+                // 활성화 시 버튼이 항상 보이도록 위치 고정
+                if (this.classList.contains('active')) {
+                    this.style.position = 'fixed';
+                    this.style.top = '20px';
+                    this.style.right = '20px';
+                    this.style.zIndex = '1200';
                 } else {
-                    fusionBtn.disabled = true;
+                    // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
+                    this.style.position = '';
+                    this.style.top = '';
+                    this.style.right = '';
+                    this.style.zIndex = '';
                 }
             });
-        });
-        
-        // 선택 정보 업데이트 함수
-        function updateSelectionInfo() {
-            selectionInfo.textContent = `Select 2 images to combine (${selectedImages.length} selected)`;
             
-            if (selectedImages.length === 1) {
-                selectionInfo.textContent += `: ${selectedImages[0]}`;
-            } else if (selectedImages.length === 2) {
-                selectionInfo.textContent += `: ${selectedImages[0]} + ${selectedImages[1]}`;
+            // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                    
+                    // 원래 위치로 돌아가기
+                    mobileMenuToggle.style.position = '';
+                    mobileMenuToggle.style.top = '';
+                    mobileMenuToggle.style.right = '';
+                    mobileMenuToggle.style.zIndex = '';
+                });
+            });
+            
+            // 스크롤 시 요소 페이드인
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 50) {
+                        element.classList.add('visible');
+                    }
+                });
             }
-        }
-        
-        // 랜덤 이미지 URL 생성 함수
-        function getRandomImageUrl() {
-            const baseUrls = [
-                "https://images.unsplash.com/photo-1579546929518-9e396f3cc809",
-                "https://images.unsplash.com/photo-1550745165-9bc0b252726f",
-                "https://images.unsplash.com/photo-1541356665065-22676f35dd40",
-                "https://images.unsplash.com/photo-1604871000636-074fa5117945",
-                "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc",
-                "https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e"
-            ];
             
-            return `${baseUrls[Math.floor(Math.random() * baseUrls.length)]}?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80`;
-        }
-        
-        // 융합 버튼 클릭 이벤트
-        fusionBtn.addEventListener('click', function() {
-            if (selectedImages.length !== 2) return;
-            
-            // 융합 과정 시작
-            startFusion();
+            window.addEventListener('scroll', checkFade);
+            window.addEventListener('load', checkFade);
         });
-        
-        // 융합 프로세스 시뮬레이션
-        function startFusion() {
-            // 버튼 비활성화
-            fusionBtn.disabled = true;
-            
-            // 진행 상황 표시
-            progressContainer.style.display = 'block';
-            imageGeneration.textContent = 'Generating AI fusion...';
-            
-            // 결과 이미지 초기화
-            resultImage.classList.remove('visible');
-            
-            // 진행 바 애니메이션
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 1;
-                progressBar.style.width = `${progress}%`;
-                
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    completeFusion();
-                }
-            }, 30); // 진행 속도 조절
-        }
-        
-        // 융합 완료 처리
-        function completeFusion() {
-            // 결과 이미지 URL 설정 (랜덤 이미지)
-            const resultUrl = getRandomImageUrl();
-            resultImageEl.src = resultUrl;
-            
-            // 완료 메시지
-            imageGeneration.textContent = 'Fusion Complete!';
-            
-            // 잠시 후 결과 표시
-            setTimeout(() => {
-                resultImage.classList.add('visible');
-                
-                // 다음 융합을 위한 준비
-                setTimeout(() => {
-                    progressContainer.style.display = 'none';
-                    resetSelections();
-                }, 1000);
-            }, 500);
-        }
-        
-        // 선택 초기화
-        function resetSelections() {
-            selectedImages = [];
-            imageItems.forEach(item => {
-                item.classList.remove('selected');
-            });
-            updateSelectionInfo();
-            fusionBtn.disabled = true;
-        }
-    });
     </script>
 </body>
 </html>
