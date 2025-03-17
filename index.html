@@ -6,7 +6,7 @@
     <title>FAKEOVEN | AI CREATIVE STUDIO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Homemade+Apple&family=Abril+Fatface&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
 <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
 <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
@@ -35,8 +35,8 @@
             --tab-button-font: 'Montserrat', 'Noto Sans KR', sans-serif;
             --work-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
             --menu-font: 'Montserrat', 'Noto Sans KR', sans-serif;
-            --brand-font: 'Chicle', cursive;
-            --desc-font: 'Rock Salt', cursive;
+            --brand-font: 'Abril Fatface', serif;
+            --desc-font: 'Homemade Apple', cursive;
         }
         
         body {
@@ -639,8 +639,32 @@
             transform: translateY(0);
         }
         
-        /* Responsive Styles */
+        /* 모바일 버전 문단 스타일 */
         @media (max-width: 768px) {
+            .hero-content .korean-description br {
+                display: none;
+            }
+            
+            .hero-content .korean-description {
+                text-align: center;
+            }
+            
+            .hero-content .english-description br {
+                display: none;
+            }
+            
+            .hero-content .english-description {
+                text-align: center;
+            }
+            
+            .korean-mobile-breaks {
+                display: block;
+            }
+            
+            .english-mobile-breaks {
+                display: block;
+            }
+            
             nav {
                 padding: 0 calc(var(--spacing-unit) * 2);
             }
@@ -688,6 +712,58 @@
         header.scrolled .dark-logo {
             display: block;
         }
+        
+        /* 모바일에서만 표시되는 줄바꿈 */
+        .mobile-break {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-break {
+                display: block;
+            }
+        }
+        /* 모바일 사파리 뷰포트 높이 문제 해결을 위한 CSS */
+
+/* 추가할 CSS */
+html {
+    height: -webkit-fill-available;
+}
+
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+.hero-section {
+    height: 100vh; /* 기존 코드 */
+    min-height: -webkit-fill-available; /* 추가 */
+}
+
+footer {
+    margin-bottom: env(safe-area-inset-bottom, 0);
+    padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
+}
+
+/* 추가로 iOS에서 스크롤 문제를 방지하기 위한 조치 */
+@supports (-webkit-touch-callout: none) {
+    .hero-section {
+        height: -webkit-fill-available;
+    }
+
+    section {
+        padding-bottom: calc(var(--spacing-large) + env(safe-area-inset-bottom, 0));
+    }
+    
+    .contact-section {
+        padding-bottom: calc(var(--spacing-xl) + env(safe-area-inset-bottom, 10px));
+    }
+}
+
+/* 페이지의 마지막 섹션에 추가 여백 */
+.contact-section {
+    padding-bottom: calc(var(--spacing-xl) + 20px);
+}
     </style>
 </head>
 <body>
@@ -701,6 +777,7 @@
             <ul class="menu">
                 <li><a href="#hero">BRAND</a></li>
                 <li><a href="#works">WORKS</a></li>
+                <li><a href="game.html">GAME</a></li>
                 <li><a href="#concepts">CONCEPTS</a></li>
                 <li><a href="#contact">CONTACT</a></li>
             </ul>
@@ -718,6 +795,7 @@
         <ul class="menu">
             <li><a href="#hero">BRAND</a></li>
             <li><a href="#works">WORKS</a></li>
+            <li><a href="game.html">GAME</a></li>
             <li><a href="#concepts">CONCEPTS</a></li>
             <li><a href="#contact">CONTACT</a></li>
         </ul>
@@ -738,14 +816,14 @@
         <div class="hero-content fade-in">
             <h1>FAKEOVEN</h1>
             <p class="korean-description">
-                페이크오븐은 AI 크리에이티브 스튜디오입니다. 우리만의 독창적인 비주얼로<br>
-                영상과 이미지를 만들며 캐릭터, 스토리 IP를 기획하고 개발합니다.
+                페이크오븐은 AI 크리에이티브 스튜디오입니다.<span class="mobile-break"></span> 우리만의 독창적인 비주얼로<br>
+                영상과 이미지를 만들며<span class="mobile-break"></span> 캐릭터, 스토리 IP를 기획하고 개발합니다.
             </p>
             <p class="english-description">
-                We are an AI creative studio. We make films, photos, and ads,<br>
-                as well as characters, stories, and beyond. AI sparks, and we listen<br>
-                —but we also create. This is how we navigate this dynamic world.<br>
-                "Each fake mirrors its own truth."
+                We are an AI creative studio.<span class="mobile-break"></span> We make films, photos, and ads,<br>
+                <span class="mobile-break"></span>as well as characters, stories, and beyond.<span class="mobile-break"></span> AI sparks, and we listen<br>
+                <span class="mobile-break"></span>—but we also create.<span class="mobile-break"></span> This is how we navigate this dynamic world.<br>
+                <span class="mobile-break"></span>"Each fake mirrors its own truth."
             </p>
         </div>
     </section>
