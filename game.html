@@ -6,7 +6,7 @@
     <title>FAKEOVEN | AI IMAGE FUSION GAME</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Homemade+Apple&family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&family=Homemade+Apple&family=Abril+Fatface&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
     <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
@@ -24,9 +24,10 @@
             --main-color: #000;
             --secondary-color: #777;
             --accent-color: #ff4d5a;
-            --bg-color: #fff;
+            --bg-color: #000;
+            --text-color: #fff;
             --game-bg-color: #111;
-            --subtle-color: #f5f5f5;
+            --subtle-color: #333;
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
@@ -101,6 +102,85 @@
         
         .menu a:hover {
             color: var(--accent-color);
+        }
+        
+        /* 모바일 메뉴 */
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            z-index: 1200;
+            position: relative;
+        }
+        
+        .mobile-menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+            transform-origin: left;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            background-color: white !important;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            background-color: white !important;
+        }
+        
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-menu-overlay.active {
+            display: flex;
+        }
+        
+        .mobile-menu-overlay .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .mobile-menu-overlay .menu li {
+            margin: 15px 0;
+        }
+        
+        .mobile-menu-overlay .menu a {
+            color: white;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+        
+        .menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
         }
         
         .game-container {
@@ -336,21 +416,25 @@
                 font-size: 16px;
             }
             
-            .nav {
-                padding: 0 15px;
+            .menu {
+                display: none;
             }
             
-            .menu li {
-                margin-left: 15px;
-            }
-            
-            .menu a {
-                font-size: 14px;
+            .mobile-menu-toggle {
+                display: flex;
             }
             
             .btn {
                 padding: 12px 30px;
                 font-size: 16px;
+            }
+            
+            /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
+            .mobile-menu-toggle.active {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1200;
             }
         }
     </style>
@@ -362,16 +446,29 @@
                 <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
-                <li><a href="#hero">BRAND</a></li>
-                <li><a href="#works">WORKS</a></li>
+                <li><a href="works.html">WORKS</a></li>
+                <li><a href="concepts.html">CONCEPTS</a></li>
                 <li><a href="characters.html">CHARACTERS</a></li>
-                <li><a href="game.html" style="color: var(--accent-color);">Game</a></li>
-                <li><a href="#concepts">CONCEPTS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-                <li><a href="game.html" style="color: var(--accent-color);">Game</a></li>
+                <li><a href="game.html" style="color: var(--accent-color);">GAME</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
             </ul>
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+    
+    <div class="mobile-menu-overlay">
+        <ul class="menu">
+            <li><a href="works.html">WORKS</a></li>
+            <li><a href="concepts.html">CONCEPTS</a></li>
+            <li><a href="characters.html">CHARACTERS</a></li>
+            <li><a href="game.html">GAME</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </div>
     
     <div class="game-container">
         <h1 class="game-title">AI Image Fusion</h1>
@@ -446,6 +543,47 @@
     
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // 모바일 메뉴 처리
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
+
+        // 모바일 메뉴 토글 기능
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+            
+            // 활성화 시 버튼이 항상 보이도록 위치 고정
+            if (this.classList.contains('active')) {
+                this.style.position = 'fixed';
+                this.style.top = '20px';
+                this.style.right = '20px';
+                this.style.zIndex = '1200';
+            } else {
+                // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
+                this.style.position = '';
+                this.style.top = '';
+                this.style.right = '';
+                this.style.zIndex = '';
+            }
+        });
+
+        // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                
+                // 원래 위치로 돌아가기
+                mobileMenuToggle.style.position = '';
+                mobileMenuToggle.style.top = '';
+                mobileMenuToggle.style.right = '';
+                mobileMenuToggle.style.zIndex = '';
+            });
+        });
+    
         // 필요한 요소 가져오기
         const imageItems = document.querySelectorAll('.image-item');
         const fusionBtn = document.querySelector('.fusion-btn');
@@ -459,76 +597,6 @@
         // 변수 설정
         let selectedImages = [];
         const maxSelections = 2;
-        
-        // 미리 정의된 결과 이미지 (실제로는 AI 프로세스가 필요하지만, 여기서는 미리 정의)
-        const fusionResults = {
-            "Cyberpunk City+Fantasy Forest": "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Abstract Art": "https://images.unsplash.com/photo-1604871000636-074fa5117945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Portrait": "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Space": "https://images.unsplash.com/photo-1520034475321-cbe63696469a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Architecture": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Ocean": "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Technology": "https://images.unsplash.com/photo-1573455494060-c5595004fb6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Animal": "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Flowers": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+Geometric": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Cyberpunk City+City Lights": "https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            
-            "Fantasy Forest+Abstract Art": "https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Portrait": "https://images.unsplash.com/photo-1578680671705-0d686c3c5070?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Space": "https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Architecture": "https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Ocean": "https://images.unsplash.com/photo-1596825620610-5c19ab914d76?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Technology": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Animal": "https://images.unsplash.com/photo-1516616121069-ad8c3928b3df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Flowers": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Fantasy Forest+Geometric": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-            "Fantasy Forest+City Lights": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            
-            "Abstract Art+Portrait": "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Space": "https://images.unsplash.com/photo-1541356665065-22676f35dd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Architecture": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Ocean": "https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Technology": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Animal": "https://images.unsplash.com/photo-1583309219338-a582f1f9ca6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Flowers": "https://images.unsplash.com/photo-1551913902-c92207136625?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+Geometric": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "Abstract Art+City Lights": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            
-            // 추가 조합들을 위한 기본 결과 이미지 생성 함수
-            generateFusionImage: function(combo) {
-                // 기본 이미지 목록 (충분히 예술적이고 다양한 이미지들)
-                const defaultImages = [
-                    "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1541356665065-22676f35dd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1604871000636-074fa5117945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ];
-                
-                // 조합에서 해시 값을 생성하여 이미지 선택의 일관성 유지
-                let hash = 0;
-                for (let i = 0; i < combo.length; i++) {
-                    hash = (hash + combo.charCodeAt(i)) % defaultImages.length;
-                }
-                
-                return defaultImages[hash];
-            }
-        };
-        
-        // 결과 URL 가져오기 함수
-        function getResultImageUrl(combo) {
-            // 미리 정의된 결과가 있으면 사용
-            if (fusionResults[combo]) {
-                return fusionResults[combo];
-            }
-            
-            // 없으면 자동 생성
-            return fusionResults.generateFusionImage(combo);
-        }
         
         // 이미지 클릭 이벤트 처리
         imageItems.forEach(item => {
@@ -569,6 +637,20 @@
             }
         }
         
+        // 랜덤 이미지 URL 생성 함수
+        function getRandomImageUrl() {
+            const baseUrls = [
+                "https://images.unsplash.com/photo-1579546929518-9e396f3cc809",
+                "https://images.unsplash.com/photo-1550745165-9bc0b252726f",
+                "https://images.unsplash.com/photo-1541356665065-22676f35dd40",
+                "https://images.unsplash.com/photo-1604871000636-074fa5117945",
+                "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc",
+                "https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e"
+            ];
+            
+            return `${baseUrls[Math.floor(Math.random() * baseUrls.length)]}?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80`;
+        }
+        
         // 융합 버튼 클릭 이벤트
         fusionBtn.addEventListener('click', function() {
             if (selectedImages.length !== 2) return;
@@ -604,13 +686,8 @@
         
         // 융합 완료 처리
         function completeFusion() {
-            // 결과 조합 키 생성
-            const combo = selectedImages.sort().join('+');
-            
-            // 결과 이미지 URL 가져오기
-            const resultUrl = getResultImageUrl(combo);
-            
-            // 이미지 설정
+            // 결과 이미지 URL 설정 (랜덤 이미지)
+            const resultUrl = getRandomImageUrl();
             resultImageEl.src = resultUrl;
             
             // 완료 메시지
@@ -638,6 +715,6 @@
             fusionBtn.disabled = true;
         }
     });
-</script>
+    </script>
 </body>
 </html>
