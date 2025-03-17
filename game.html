@@ -14,12 +14,12 @@
     <style>
         /* 기본 변수 */
         :root {
-            --main-color: #333;
-            --secondary-color: #777;
+    --main-color: #fff;
+    --secondary-color: #777;
             --accent-color: #ff4d5a;
-            --bg-color: #fff;
-            --text-color: #333;
-            --subtle-color: #eee;
+    --bg-color: #000; /* 배경색 검정으로 변경 */
+    --text-color: #fff; /* 텍스트 색상 흰색으로 */
+    --subtle-color: #333; /* 미묘한 색상도 어둡게 변경 */
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
@@ -48,8 +48,8 @@
             font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
             width: 100%;
             overflow-x: hidden;
             line-height: 1.5;
@@ -75,7 +75,7 @@
         
         /* 헤더 스타일 */
         header {
-            background-color: var(--bg-color);
+               background-color: var(--bg-color);
             position: fixed;
             top: 0;
             left: 0;
@@ -83,7 +83,7 @@
             padding: calc(var(--spacing-unit) * 2) 0;
             z-index: 1000;
             transition: var(--transition);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
         }
         
         nav {
@@ -176,7 +176,7 @@
         /* 첫 번째 줄은 짧게 */
         .mobile-menu-toggle span:nth-child(1) {
             width: 70%;
-            margin-left: auto;
+            margin-left: auto;    
         }
 
         /* 세 번째 줄도 짧게 */
@@ -187,7 +187,7 @@
         
         .mobile-menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg);
-            background-color: black !important;
+            background-color: white !important;
             width: 100%;
             margin-left: 0;
         }
@@ -198,7 +198,7 @@
         
         .mobile-menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg);
-            background-color: black !important;
+            background-color: white !important;
             width: 100%;
             margin-left: 0;
         }
@@ -210,7 +210,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255,255,255,0.95);
+            background-color: rgba(0,0,0,0.95);
             z-index: 1100;
             flex-direction: column;
             justify-content: center;
@@ -232,7 +232,7 @@
         }
         
         .mobile-menu-overlay .menu a {
-            color: black;
+            color: white;
             font-size: 24px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -261,94 +261,31 @@
             background-color: var(--bg-color);
         }
         
-        /* 게임 섹션 */
-        .game-section {
-            padding-top: 120px;
-            padding-bottom: var(--spacing-xl);
-            position: relative;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: var(--spacing-large);
-            font-size: clamp(24px, 3vw, 36px);
-            letter-spacing: 0.1em;
-            font-family: var(--section-title-font);
-            font-weight: 600;
-            color: var(--text-color);
-        }
-        
-        /* 게임 그리드 */
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: var(--spacing-medium);
-        }
-        
-        .game-item {
-            background-color: #f8f8f8;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .game-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .game-image {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-        }
-        
-        .game-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .game-item:hover .game-image img {
-            transform: scale(1.05);
-        }
-        
-        .game-caption {
-            padding: 20px;
-        }
-        
-        .game-caption h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--main-color);
-        }
-        
-        .game-caption p {
-            font-size: 14px;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-        }
-        
-        .game-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: var(--accent-color);
-            color: white;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: background 0.3s ease;
-        }
-        
-        .game-btn:hover {
-            background-color: #e64050;
-        }
+        /* Coming Soon 섹션으로 변경 */
+.game-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background-color: var(--bg-color);
+}
+
+.coming-soon-title {
+    font-size: clamp(32px, 5vw, 64px);
+    margin-bottom: var(--spacing-medium);
+    font-family: var(--section-title-font);
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* 기존 게임 그리드 제거 */
+.game-grid {
+    display: none;
+}
         
         /* 푸터 */
         footer {
@@ -477,46 +414,8 @@
     <!-- Game Section -->
     <section id="game" class="game-section">
         <div class="container">
-            <h2 class="section-title fade-in">GAME</h2>
-            
-            <div class="game-grid">
-                <!-- 1. AI Image Fusion -->
-                <div class="game-item fade-in">
-                    <div class="game-image">
-                        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI Image Fusion">
-                    </div>
-                    <div class="game-caption">
-                        <h3>AI Image Fusion</h3>
-                        <p>Combine two images to create unique AI-generated artwork.</p>
-                        <a href="#" class="game-btn">Play</a>
-                    </div>
-                </div>
-                
-                <!-- 2. Character Creator (Coming Soon) -->
-                <div class="game-item fade-in">
-                    <div class="game-image">
-                        <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Character Creator">
-                    </div>
-                    <div class="game-caption">
-                        <h3>Character Creator</h3>
-                        <p>Design your own AI character with customizable features.</p>
-                        <span class="game-btn" style="background-color: #999;">Coming Soon</span>
-                    </div>
-                </div>
-                
-                <!-- 3. Style Transfer (Coming Soon) -->
-                <div class="game-item fade-in">
-                    <div class="game-image">
-                        <img src="https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Style Transfer">
-                    </div>
-                    <div class="game-caption">
-                        <h3>Style Transfer</h3>
-                        <p>Transform your photos into different artistic styles.</p>
-                        <span class="game-btn" style="background-color: #999;">Coming Soon</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <h1 class="coming-soon-title fade-in">COMING SOON</h1>
+</div>
     </section>
     
     <footer>
