@@ -440,6 +440,7 @@
                 position: fixed;
                 top: 20px;
                 right: 20px;
+                z-index: 1200; /* z-index 추가 */
             }
         }
 
@@ -460,7 +461,7 @@
 <body>
     <header id="header">
         <nav>
-            <a href="./" class="logo">
+            <a href="index.html" class="logo">
                 <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
@@ -597,35 +598,17 @@
                 
                 // 활성화 시 버튼이 항상 보이도록 위치 고정
                 if (this.classList.contains('active')) {
-                    // CSS에서 처리
+                    this.style.position = 'fixed';
+                    this.style.top = '20px';
+                    this.style.right = '20px';
                 } else {
                     // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
                     this.style.position = '';
                     this.style.top = '';
                     this.style.right = '';
                 }
-        });
-        
-        // 스크롤 시 요소 페이드인
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        function checkFade() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 50) {
-                    element.classList.add('visible');
-                }
             });
-        }
-        
-        window.addEventListener('scroll', checkFade);
-        window.addEventListener('load', checkFade);
-    </script>
-</body>
-</html>
-
+            
             // 모바일 메뉴 링크 클릭 시 메뉴 닫기
             mobileMenuLinks.forEach(link => {
                 link.addEventListener('click', function() {
@@ -702,3 +685,24 @@
                     }
                 });
             });
+            
+            // 스크롤 시 요소 페이드인
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 50) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkFade);
+            window.addEventListener('load', checkFade);
+        });
+    </script>
+</body>
+</html>
