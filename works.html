@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FAKEOVEN | WORKS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,9 @@
         :root {
             --main-color: #000;
             --secondary-color: #777;
-            --bg-color: #fff;
-            --subtle-color: #f5f5f5;
+            --bg-color: #000; /* 배경색 검정으로 변경 */
+            --text-color: #fff; /* 텍스트 색상 흰색으로 */
+            --subtle-color: #333; /* 미묘한 색상도 어둡게 변경 */
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
@@ -40,23 +41,43 @@
             padding: 0;
         }
         
+        html {
+            height: -webkit-fill-available;
+            background-color: var(--bg-color);
+        }
+        
         body {
             font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
-            color: var(--main-color);
+            color: var(--text-color);
             width: 100%;
             overflow-x: hidden;
             line-height: 1.5;
             font-weight: 300;
             letter-spacing: 0.02em;
             min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+        
+        /* 이미지 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 링크 */
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
         }
         
         /* 헤더 스타일 */
         header {
-            background-color: #ffffff;
+            background-color: var(--bg-color);
             position: fixed;
             top: 0;
             left: 0;
@@ -64,7 +85,7 @@
             padding: calc(var(--spacing-unit) * 2) 0;
             z-index: 1000;
             transition: var(--transition);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
         }
         
         nav {
@@ -96,7 +117,7 @@
         
         .menu a {
             text-decoration: none;
-            color: var(--main-color);
+            color: var(--text-color);
             font-family: var(--menu-font);
             font-size: 18px;
             font-weight: 700;
@@ -113,7 +134,7 @@
             height: 1px;
             bottom: 0;
             left: 0;
-            background-color: var(--main-color);
+            background-color: var(--text-color);
             transition: var(--transition);
         }
         
@@ -131,19 +152,21 @@
             height: 25px;
             background: transparent;
             border: none;
-            z-index: 1100;
+            z-index: 1200;
+            position: relative;
         }
         
         .mobile-menu-toggle span {
             width: 100%;
             height: 3px;
-            background-color: var(--main-color);
+            background-color: var(--text-color);
             transition: all 0.3s ease;
             transform-origin: left;
         }
         
         .mobile-menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg);
+            background-color: white !important;
         }
         
         .mobile-menu-toggle.active span:nth-child(2) {
@@ -152,6 +175,7 @@
         
         .mobile-menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg);
+            background-color: white !important;
         }
         
         .mobile-menu-overlay {
@@ -161,8 +185,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            z-index: 1000;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1100;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -209,6 +233,7 @@
         section {
             padding: var(--spacing-large) 0;
             scroll-margin-top: 100px;
+            background-color: var(--bg-color);
         }
         
         .section-title {
@@ -218,6 +243,7 @@
             letter-spacing: 0.1em;
             font-family: var(--section-title-font);
             font-weight: 600;
+            color: var(--text-color);
         }
         
         /* Works 섹션 */
@@ -245,7 +271,7 @@
             position: relative;
             overflow: hidden;
             aspect-ratio: 16/9;
-            background-color: var(--subtle-color);
+            background-color: var(--bg-color);
         }
         
         .work-image img {
@@ -269,6 +295,7 @@
             margin-bottom: 4px;
             font-family: var(--work-title-font);
             letter-spacing: 0.02em;
+            color: var(--text-color);
         }
         
         .work-caption .subtitle {
@@ -342,7 +369,7 @@
             display: inline-block;
             margin-left: 10px;
             font-size: 14px;
-            color: #555;
+            color: #aaa;
             font-weight: 500;
         }
         
@@ -351,6 +378,7 @@
             padding: var(--spacing-medium) 0;
             text-align: center;
             border-top: 1px solid var(--subtle-color);
+            background-color: var(--bg-color);
         }
         
         .copyright {
@@ -406,24 +434,34 @@
                 padding-top: 100px;
                 padding-bottom: var(--spacing-large);
             }
+            
+            /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
+            .mobile-menu-toggle.active {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+            }
         }
 
-        /* 아이폰 높이 문제 수정 */
-        html {
-            height: -webkit-fill-available;
-        }
-
-        body {
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
+        /* iOS 사파리 뷰포트 높이 문제 수정 */
+        @supports (-webkit-touch-callout: none) {
+            .works-section {
+                min-height: -webkit-fill-available;
+                padding-bottom: calc(var(--spacing-large) + env(safe-area-inset-bottom, 0));
+            }
+            
+            footer {
+                margin-bottom: env(safe-area-inset-bottom, 0);
+                padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
+            }
         }
     </style>
 </head>
 <body>
     <header id="header">
         <nav>
-            <a href="index.html" class="logo">
-                <img class="dark-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
+            <a href="./" class="logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
                 <li><a href="works.html">WORKS</a></li>
@@ -546,7 +584,6 @@
     </footer>
     
     <script>
-        // 모바일 메뉴 토글 기능
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
@@ -557,7 +594,37 @@
                 this.classList.toggle('active');
                 mobileMenuOverlay.classList.toggle('active');
                 document.body.classList.toggle('menu-open');
+                
+                // 활성화 시 버튼이 항상 보이도록 위치 고정
+                if (this.classList.contains('active')) {
+                    // CSS에서 처리
+                } else {
+                    // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
+                    this.style.position = '';
+                    this.style.top = '';
+                    this.style.right = '';
+                }
+        });
+        
+        // 스크롤 시 요소 페이드인
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 50) {
+                    element.classList.add('visible');
+                }
             });
+        }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+    </script>
+</body>
+</html>
 
             // 모바일 메뉴 링크 클릭 시 메뉴 닫기
             mobileMenuLinks.forEach(link => {
@@ -565,6 +632,11 @@
                     mobileMenuToggle.classList.remove('active');
                     mobileMenuOverlay.classList.remove('active');
                     document.body.classList.remove('menu-open');
+                    
+                    // 원래 위치로 돌아가기
+                    mobileMenuToggle.style.position = '';
+                    mobileMenuToggle.style.top = '';
+                    mobileMenuToggle.style.right = '';
                 });
             });
             
@@ -576,7 +648,7 @@
                 
                 // 모바일 터치 이벤트 처리
                 if ('ontouchstart' in window || navigator.maxTouchPoints) {
-                    // 모바일에서는 터치 이벤트 생략하고 클릭 이벤트로만 처리
+                    // 모바일에서는 호버 대신 클릭으로 처리
                 } else {
                     // 마우스 올렸을 때 비디오 재생
                     videoContainer.addEventListener('mouseenter', () => {
@@ -626,62 +698,7 @@
                         const previewContainer = this.querySelector('.preview-video-container');
                         const thumbnail = this.querySelector('.video-thumbnail');
                         if (previewContainer) previewContainer.style.display = 'none';
-                        if (thumbnail) thumbnail.style.display = 'none'
-// 비디오 관련 함수에 있는 닫히지 않은 부분을 수정한 코드
-
-                // 클릭 시 유튜브 전체 영상 보기
-                videoContainer.addEventListener('click', function() {
-                    const videoId = this.getAttribute('data-video-id');
-                    const iframeContainer = this.querySelector('.youtube-iframe');
-                    
-                    // 비디오가 아직 로드되지 않았을 때만 iframe 생성
-                    if (iframeContainer.innerHTML === '') {
-                        const iframe = document.createElement('iframe');
-                        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-                        iframe.setAttribute('frameborder', '0');
-                        iframe.setAttribute('allowfullscreen', 'true');
-                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                        iframe.style.width = '100%';
-                        iframe.style.height = '100%';
-                        
-                        iframeContainer.appendChild(iframe);
-                        iframeContainer.style.display = 'block';
-                        
-                        // 프리뷰 비디오와 썸네일 숨기기
-                        const previewContainer = this.querySelector('.preview-video-container');
-                        const thumbnail = this.querySelector('.video-thumbnail');
-                        if (previewContainer) previewContainer.style.display = 'none';
-                        if (thumbnail) thumbnail.style.display = 'none';
-                    } else {
-                        // 이미 로드된 비디오는 보이게만 설정
-                        iframeContainer.style.display = 'block';
-                        
-                        // 프리뷰 비디오와 썸네일 숨기기
-                        const previewContainer = this.querySelector('.preview-video-container');
-                        const thumbnail = this.querySelector('.video-thumbnail');
-                        if (previewContainer) previewContainer.style.display = 'none';
                         if (thumbnail) thumbnail.style.display = 'none';
                     }
                 });
             });
-        });
-        
-        // 스크롤 시 요소 페이드인
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        function checkFade() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 50) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', checkFade);
-        window.addEventListener('load', checkFade);
-    </script>
-</body>
-</html>
