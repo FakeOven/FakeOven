@@ -6,19 +6,423 @@
     <title>FAKEOVEN | WORKS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
     <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
-    <!-- 스타일 파일은 메인 페이지와 동일한 CSS 사용 -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 기본 변수 */
+        :root {
+            --main-color: #000;
+            --secondary-color: #777;
+            --bg-color: #fff;
+            --subtle-color: #f5f5f5;
+            --spacing-unit: 10px;
+            --spacing-medium: 40px;
+            --spacing-large: 80px;
+            --spacing-xl: 120px;
+            --transition: all 0.3s ease;
+            --section-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --tab-button-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --work-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --menu-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --brand-font: 'Chicle', cursive;
+            --desc-font: 'Rock Salt', cursive;
+        }
+        
+        /* 기본 리셋 */
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--main-color);
+            width: 100%;
+            overflow-x: hidden;
+            line-height: 1.5;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            min-height: 100vh;
+        }
+        
+        /* 헤더 스타일 */
+        header {
+            background-color: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+        
+        .logo {
+            height: 60px;
+            transition: var(--transition);
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu li {
+            margin-left: calc(var(--spacing-unit) * 4);
+        }
+        
+        .menu a {
+            text-decoration: none;
+            color: var(--main-color);
+            font-family: var(--menu-font);
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--main-color);
+            transition: var(--transition);
+        }
+        
+        .menu a:hover::after {
+            width: 100%;
+        }
+        
+        /* 모바일 메뉴 */
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            z-index: 1100;
+        }
+        
+        .mobile-menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--main-color);
+            transition: all 0.3s ease;
+            transform-origin: left;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+        
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-menu-overlay.active {
+            display: flex;
+        }
+        
+        .mobile-menu-overlay .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .mobile-menu-overlay .menu li {
+            margin: 15px 0;
+        }
+        
+        .mobile-menu-overlay .menu a {
+            color: white;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+        
+        .menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* 컨테이너 */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+        
+        /* 섹션 스타일 */
+        section {
+            padding: var(--spacing-large) 0;
+            scroll-margin-top: 100px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-large);
+            font-size: clamp(24px, 3vw, 36px);
+            letter-spacing: 0.1em;
+            font-family: var(--section-title-font);
+            font-weight: 600;
+        }
+        
+        /* Works 섹션 */
+        .works-section {
+            padding-top: 120px;
+            padding-bottom: var(--spacing-xl);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: var(--spacing-medium);
+        }
+        
+        .work-item {
+            margin-bottom: var(--spacing-medium);
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .work-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background-color: var(--subtle-color);
+        }
+        
+        .work-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .work-item:hover .work-image img {
+            transform: scale(1.03);
+        }
+        
+        .work-caption {
+            padding: calc(var(--spacing-unit) * 2) 0;
+        }
+        
+        .work-caption h3 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            font-family: var(--work-title-font);
+            letter-spacing: 0.02em;
+        }
+        
+        .work-caption .subtitle {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .work-caption p {
+            font-size: 14px;
+            color: var(--secondary-color);
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+        
+        /* 비디오 관련 스타일 */
+        .auto-video {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .preview-video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        .preview-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .auto-video:hover .preview-video {
+            opacity: 1;
+        }
+        
+        .youtube-iframe {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            display: none;
+        }
+        
+        /* 수상작 표시 스타일 */
+        .award-tag {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        /* 푸터 */
+        footer {
+            padding: var(--spacing-medium) 0;
+            text-align: center;
+            border-top: 1px solid var(--subtle-color);
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-unit);
+        }
+        
+        /* 애니메이션 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                padding: 0 calc(var(--spacing-unit) * 2);
+            }
+            
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+                margin-bottom: var(--spacing-medium);
+            }
+            
+            .work-caption h3 {
+                font-size: 18px;
+            }
+            
+            .works-section {
+                padding-top: 100px;
+                padding-bottom: var(--spacing-large);
+            }
+        }
+
+        /* 아이폰 높이 문제 수정 */
+        html {
+            height: -webkit-fill-available;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+    </style>
 </head>
 <body>
     <header id="header">
         <nav>
             <a href="index.html" class="logo">
-                <img class="light-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
                 <img class="dark-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
@@ -142,22 +546,13 @@
     </footer>
     
     <script>
-        // 스크롤 시 헤더 스타일 변경
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
+        // 모바일 메뉴 토글 기능
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
             const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
 
-            // 모바일 메뉴 토글 기능
+            // 모바일 메뉴 토글
             mobileMenuToggle.addEventListener('click', function() {
                 this.classList.toggle('active');
                 mobileMenuOverlay.classList.toggle('active');
@@ -179,22 +574,61 @@
             autoVideos.forEach(videoContainer => {
                 const video = videoContainer.querySelector('.preview-video');
                 
-                // 마우스 올렸을 때 비디오 재생
-                videoContainer.addEventListener('mouseenter', () => {
-                    if (video) {
-                        video.play().catch(e => {
-                            console.log("Auto-play prevented: ", e);
-                        });
-                    }
-                });
+                // 모바일 터치 이벤트 처리
+                if ('ontouchstart' in window || navigator.maxTouchPoints) {
+                    // 모바일에서는 터치 이벤트 생략하고 클릭 이벤트로만 처리
+                } else {
+                    // 마우스 올렸을 때 비디오 재생
+                    videoContainer.addEventListener('mouseenter', () => {
+                        if (video) {
+                            video.play().catch(e => {
+                                console.log("Auto-play prevented: ", e);
+                            });
+                        }
+                    });
+                    
+                    // 마우스가 떠났을 때 비디오 중지
+                    videoContainer.addEventListener('mouseleave', () => {
+                        if (video) {
+                            video.pause();
+                        }
+                    });
+                }
                 
-                // 마우스가 떠났을 때 비디오 중지
-                videoContainer.addEventListener('mouseleave', () => {
-                    if (video) {
-                        video.pause();
-                    }
-                });
-                
+                // 클릭 시 유튜브 전체 영상 보기
+                videoContainer.addEventListener('click', function() {
+                    const videoId = this.getAttribute('data-video-id');
+                    const iframeContainer = this.querySelector('.youtube-iframe');
+                    
+                    // 비디오가 아직 로드되지 않았을 때만 iframe 생성
+                    if (iframeContainer.innerHTML === '') {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+                        iframe.setAttribute('frameborder', '0');
+                        iframe.setAttribute('allowfullscreen', 'true');
+                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                        iframe.style.width = '100%';
+                        iframe.style.height = '100%';
+                        
+                        iframeContainer.appendChild(iframe);
+                        iframeContainer.style.display = 'block';
+                        
+                        // 프리뷰 비디오와 썸네일 숨기기
+                        const previewContainer = this.querySelector('.preview-video-container');
+                        const thumbnail = this.querySelector('.video-thumbnail');
+                        if (previewContainer) previewContainer.style.display = 'none';
+                        if (thumbnail) thumbnail.style.display = 'none';
+                    } else {
+                        // 이미 로드된 비디오는 보이게만 설정
+                        iframeContainer.style.display = 'block';
+                        
+                        // 프리뷰 비디오와 썸네일 숨기기
+                        const previewContainer = this.querySelector('.preview-video-container');
+                        const thumbnail = this.querySelector('.video-thumbnail');
+                        if (previewContainer) previewContainer.style.display = 'none';
+                        if (thumbnail) thumbnail.style.display = 'none';
+                        // 비디오 관련 함수에 있는 닫히지 않은 부분을 수정한 코드
+
                 // 클릭 시 유튜브 전체 영상 보기
                 videoContainer.addEventListener('click', function() {
                     const videoId = this.getAttribute('data-video-id');
