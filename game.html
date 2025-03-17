@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAKEOVEN | AI IMAGE FUSION GAME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Homemade+Apple&family=Abril+Fatface&display=swap" rel="stylesheet">
+    <!-- 파비콘 설정 -->
+    <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --main-color: #000;
+            --secondary-color: #777;
+            --accent-color: #ff4d5a;
+            --bg-color: #fff;
+            --game-bg-color: #111;
+            --subtle-color: #f5f5f5;
+            --spacing-unit: 10px;
+            --spacing-medium: 40px;
+            --spacing-large: 80px;
+            --spacing-xl: 120px;
+            --transition: all 0.3s ease;
+            --title-font: 'Abril Fatface', serif;
+            --body-font: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            margin: 0;
+            padding: 0;
+            background-color: var(--game-bg-color);
+            color: white;
+            width: 100%;
+            overflow-x: hidden;
+            line-height: 1.5;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 calc(var(--spacing-unit) * 3);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            height: 60px;
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu li {
+            margin-left: calc(var(--spacing-unit) * 4);
+        }
+        
+        .menu a {
+            text-decoration: none;
+            color: white;
+            font-family: var(--body-font);
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+        
+        .menu a:hover {
+            color: var(--accent-color);
+        }
+        
+        .game-container {
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: var(--spacing-xl);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .game-title {
+            font-family: var(--title-font);
+            font-size: 48px;
+            margin-bottom: var(--spacing-large);
+            text-align: center;
+            letter-spacing: 0.05em;
+            color: white;
+            position: relative;
+        }
+        
+        .game-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .game-description {
+            max-width: 700px;
+            text-align: center;
+            margin-bottom: var(--spacing-large);
+            line-height: 1.8;
+            font-size: 18px;
+            color: #ddd;
+            padding: 0 20px;
+        }
+        
+        .game-area {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 0 20px;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .image-item {
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .image-item.selected {
+            border: 3px solid var(--accent-color);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s ease;
+        }
+        
+        .image-item:hover img {
+            filter: brightness(1.1);
+        }
+        
+        .fusion-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            font-family: var(--body-font);
+            font-weight: 700;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 77, 90, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: #ff6978;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 77, 90, 0.4);
+        }
+        
+        .btn:disabled {
+            background-color: #777;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result-container {
+            margin-top: 40px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .result-image {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .result-image.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .result-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .selection-info {
+            margin-top: 20px;
+            text-align: center;
+            color: #ddd;
+            font-size: 16px;
+        }
+        
+        .image-generation {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
+            color: var(--accent-color);
+            font-family: var(--body-font);
+            font-weight: 500;
+        }
+        
+        .progress-container {
+            width: 100%;
+            max-width: 400px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            margin-top: 15px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        footer {
+            background-color: #000;
+            padding: var(--spacing-medium) 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .back-to-home {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .back-to-home:hover {
+            color: #ff6978;
+        }
+        
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .game-title {
+                font-size: 36px;
+            }
+            
+            .game-description {
+                font-size: 16px;
+            }
+            
+            .nav {
+                padding: 0 15px;
+            }
+            
+            .menu li {
+                margin-left: 15px;
+            }
+            
+            .menu a {
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
+            </a>
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#works">Works</a></li>
+                <li><a href="game.html" style="color: var(--accent-color);">Game</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="game-container">
+        <h1 class="game-title">AI Image Fusion</h1>
+        <p class="game-description">
+            Create stunning AI-generated art by selecting and merging images. Choose two images from the grid below, and our AI will blend them into a unique creation that combines their visual elements.
+        </p>
+        
+        <div class="game-area">
+            <div class="selection-info">Select 2 images to combine (0 selected)</div>
+            
+            <div class="image-grid">
+                <div class="image-item" data-name="Cyberpunk City">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Cyberpunk City">
+                </div>
+                <div class="image-item" data-name="Fantasy Forest">
+                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Fantasy Forest">
+                </div>
+                <div class="image-item" data-name="Abstract Art">
+                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Abstract Art">
+                </div>
+                <div class="image-item" data-name="Portrait">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Portrait">
+                </div>
+                <div class="image-item" data-name="Space">
+                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Space">
+                </div>
+                <div class="image-item" data-name="Architecture">
+                    <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Architecture">
+                </div>
+                <div class="image-item" data-name="Ocean">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Ocean">
+                </div>
+                <div class="image-item" data-name="Technology">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Technology">
+                </div>
+                <div class="image-item" data-name="Animal">
+                    <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Animal">
+                </div>
+                <div class="image-item" data-name="Flowers">
+                    <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Flowers">
+                </div>
+                <div class="image-item" data-name="Geometric">
+                    <img src="https://images.unsplash.com/photo-1507646227500-4d389b0012be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Geometric">
+                </div>
+                <div class="image-item" data-name="City Lights">
+                    <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="City Lights">
+                </div>
+            </div>
+            
+            <div class="fusion-controls">
+                <button class="btn fusion-btn" disabled>Fuse Images</button>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            
+            <div class="result-container">
+                <div class="image-generation"></div>
+                <div class="result-image">
+                    <img src="" alt="Fused Image Result">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
+            <a href="index.html" class="back-to-home">Back to Home</a>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 필요한 요소 가져오기
+            const imageItems = document.querySelectorAll('.image-item');
+            const fusionBtn = document.querySelector('.fusion-btn');
+            const selectionInfo = document.querySelector('.selection-info');
+            const resultImage = document.querySelector('.result-image');
+            const resultImageEl = document.querySelector('.result-image img');
+            const progressContainer = document.querySelector('.progress-container');
+            const progressBar = document.querySelector('.progress-bar');
+            const imageGeneration = document.querySelector('.image-generation');
+            
+            // 변수 설정
+            let selectedImages = [];
+            const maxSelections = 2;
+            
+            // 미리 정의된 결과 이미지 (실제로는 AI 프로세스가 필요하지만, 여기서는 미리 정의)
+            const fusionResults = {
+                "Cyberpunk City+Fantasy Forest": "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Cyberpunk City+Abstract Art": "https://images.unsplash.com/photo-1604871000636-074fa5117945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Cyberpunk City+Portrait": "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Cyberpunk City+Space": "https://images.unsplash.com/photo-1520034475321-cbe63696469a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Fantasy Forest+Abstract Art": "https://images.unsplash.com/photo-1575286368486-a9bd023a3d1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Fantasy Forest+Portrait": "https://images.unsplash.com/photo-1578680671705-0d686c3c5070?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "Portrait+Abstract Art": "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                // 더 많은 조합을 정의할 수 있습니다
+            };
+            
+            // 이미지 클릭 이벤트 처리
+            imageItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const imageName = this.getAttribute('data-name');
+                    
+                    // 이미 선택된 경우, 선택 취소
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        selectedImages = selectedImages.filter(img => img !== imageName);
+                    } 
+                    // 아직 최대 선택 개수에 도달하지 않았다면 선택
+                    else if (selectedImages.length < maxSelections) {
+                        this.classList.add('selected');
+                        selectedImages.push(imageName);
+                    }
+                    
+                    // 선택 정보 업데이트
+                    updateSelectionInfo();
+                    
+                    // 버튼 활성화/비활성화
+                    if (selectedImages.length === maxSelections) {
+                        fusionBtn.disabled = false;
+                    } else {
+                        fusionBtn.disabled = true;
+                    }
+                });
+            });
+            
+            // 선택 정보 업데이트 함수
+            function updateSelectionInfo() {
+                selectionInfo.textContent = `Select 2 images to combine (${selectedImages.length} selected)`;
+                
+                if (selectedImages.length === 1) {
+                    selectionInfo.textContent += `: ${selectedImages[0]}`;
+                } else if (selectedImages.length === 2) {
+                    selectionInfo.textContent += `: ${selectedImages[0]} + ${selectedImages[1]}`;
+                }
+            }
+            
+            // 융합 버튼 클릭 이벤트
+            fusionBtn.addEventListener('click', function() {
+                if (selectedImages.length !== 2) return;
+                
+                // 융합 과정 시작
+                startFusion();
+            });
+            
+            // 융합 프로세스 시뮬레이션
+            function startFusion() {
+                // 버튼 비활성화
+                fusionBtn.disabled = true;
+                
+                // 진행 상황 표시
+                progressContainer.style.display = 'block';
+                imageGeneration.textContent = 'Generating AI fusion...';
+                
+                // 결과 이미지 초기화
+                resultImage.classList.remove('visible');
+                
+                // 진행 바 애니메이션
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 1;
+                    progressBar.style.width = `${progress}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        completeFusion();
+                    }
+                }, 30); // 진행 속도 조절
+            }
+            
+            // 융합 완료 처리
+            function completeFusion() {
+                // 결과 조합 키 생성
+                const combo = selectedImages.sort().join('+');
+                
+                // 결과 이미지 URL 가져오기 (없다면 기본 이미지)
+                const resultUrl = fusionResults[combo] || 
+                    'https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                
+                // 이미지 설정
+                resultImageEl.src = resultUrl;
+                
+                // 완료 메시지
+                imageGeneration.textContent = 'Fusion Complete!';
+                
+                // 잠시 후 결과 표시
+                setTimeout(() => {
+                    resultImage.classList.add('visible');
+                    
+                    // 다음 융합을 위한 준비
+                    setTimeout(() => {
+                        progressContainer.style.display = 'none';
+                        resetSelections();
+                    }, 1000);
+                }, 500);
+            }
+            
+            // 선택 초기화
+            function resetSelections() {
+                selectedImages = [];
+                imageItems.forEach(item => {
+                    item.classList.remove('selected');
+                });
+                updateSelectionInfo();
+                fusionBtn.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
