@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAKEOVEN | CHARACTERS</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .characters-page {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        .three-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .characters-description {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            color: #333;
+            background: rgba(255,255,255,0.7);
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module">
+        import CharactersPage from './CharactersPage.js';
+
+        ReactDOM.render(
+            React.createElement(CharactersPage),
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
