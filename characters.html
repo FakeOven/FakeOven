@@ -4,49 +4,447 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAKEOVEN | CHARACTERS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
+    <!-- 파비콘 설정 -->
     <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <style>
-        body, html {
+        /* 기본 변수 */
+        :root {
+            --main-color: #000;
+            --secondary-color: #777;
+            --bg-color: #000; /* 배경색 검정으로 변경 */
+            --text-color: #fff; /* 텍스트 색상 흰색으로 */
+            --accent-color: #ff4d5a;
+            --subtle-color: #333; /* 미묘한 색상도 어둡게 변경 */
+            --spacing-unit: 10px;
+            --spacing-medium: 40px;
+            --spacing-large: 80px;
+            --spacing-xl: 120px;
+            --transition: all 0.3s ease;
+            --section-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --menu-font: 'Montserrat', 'Noto Sans KR', sans-serif;
+            --brand-font: 'Chicle', cursive;
+            --desc-font: 'Rock Salt', cursive;
+        }
+        
+        /* 기본 리셋 */
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
         }
-        .characters-page {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
+        
+        html {
+            height: -webkit-fill-available;
+            background-color: var(--bg-color);
         }
-        .three-canvas {
-            position: absolute;
+        
+        body {
+            font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            width: 100%;
+            overflow-x: hidden;
+            line-height: 1.5;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+        
+        /* 이미지 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 링크 */
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        /* 헤더 스타일 */
+        header {
+            background-color: var(--bg-color);
+            position: fixed;
             top: 0;
             left: 0;
-            z-index: 1;
+            right: 0;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
         }
-        .characters-description {
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+        
+        .logo {
+            height: 60px;
+            transition: var(--transition);
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu li {
+            margin-left: calc(var(--spacing-unit) * 4);
+        }
+        
+        .menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: var(--menu-font);
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .menu a::after {
+            content: '';
             position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 2;
-            color: #333;
-            background: rgba(255,255,255,0.7);
-            padding: 15px;
-            border-radius: 10px;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .menu a:hover::after {
+            width: 100%;
+        }
+        
+        /* 모바일 메뉴 */
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            z-index: 1200;
+            position: relative;
+        }
+        
+        .mobile-menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+            transform-origin: left;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            background-color: white !important;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            background-color: white !important;
+        }
+        
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-menu-overlay.active {
+            display: flex;
+        }
+        
+        .mobile-menu-overlay .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .mobile-menu-overlay .menu li {
+            margin: 15px 0;
+        }
+        
+        .mobile-menu-overlay .menu a {
+            color: white;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+        
+        .menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* 컨테이너 */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+        
+        /* 섹션 스타일 */
+        section {
+            padding: var(--spacing-large) 0;
+            scroll-margin-top: 100px;
+            background-color: var(--bg-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-large);
+            font-size: clamp(24px, 3vw, 36px);
+            letter-spacing: 0.1em;
+            font-family: var(--section-title-font);
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        /* Coming Soon 섹션 */
+        .coming-soon-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-color: var(--bg-color);
+        }
+        
+        .coming-soon-title {
+            font-size: clamp(32px, 5vw, 64px);
+            margin-bottom: var(--spacing-medium);
+            font-family: var(--section-title-font);
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .coming-soon-subtitle {
+            font-size: clamp(16px, 2vw, 24px);
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--secondary-color);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        
+        /* 푸터 */
+        footer {
+            padding: var(--spacing-medium) 0;
+            text-align: center;
+            border-top: 1px solid var(--subtle-color);
+            background-color: var(--bg-color);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-unit);
+        }
+        
+        /* 애니메이션 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                padding: 0 calc(var(--spacing-unit) * 2);
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+                margin-bottom: var(--spacing-medium);
+            }
+            
+            /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
+            .mobile-menu-toggle.active {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1200; /* z-index 추가 */
+            }
+        }
+
+        /* iOS 사파리 뷰포트 높이 문제 수정 */
+        @supports (-webkit-touch-callout: none) {
+            .coming-soon-section {
+                min-height: -webkit-fill-available;
+            }
+            
+            footer {
+                margin-bottom: env(safe-area-inset-bottom, 0);
+                padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
+            }
         }
     </style>
-    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="module">
-        import CharactersPage from './CharactersPage.js';
+    <header id="header">
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
+            </a>
+            <ul class="menu">
+                <li><a href="works.html">WORKS</a></li>
+                <li><a href="concepts.html">CONCEPTS</a></li>
+                <li><a href="characters.html">CHARACTERS</a></li>
+                <li><a href="game.html">GAME</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+    
+    <div class="mobile-menu-overlay">
+        <ul class="menu">
+            <li><a href="works.html">WORKS</a></li>
+            <li><a href="concepts.html">CONCEPTS</a></li>
+            <li><a href="characters.html">CHARACTERS</a></li>
+            <li><a href="game.html">GAME</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </div>
+    
+    <!-- Coming Soon Section -->
+    <section class="coming-soon-section">
+        <h1 class="coming-soon-title fade-in">COMING SOON</h1>
+        <p class="coming-soon-subtitle fade-in">Our character catalog is currently in development. Please check back later for exciting AI-generated characters from FAKEOVEN.</p>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p class="copyright">&copy; 2025 FAKEOVEN. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
 
-        ReactDOM.render(
-            React.createElement(CharactersPage),
-            document.getElementById('root')
-        );
+            // 모바일 메뉴 토글
+            mobileMenuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenuOverlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+                
+                // 활성화 시 버튼이 항상 보이도록 위치 고정
+                if (this.classList.contains('active')) {
+                    this.style.position = 'fixed';
+                    this.style.top = '20px';
+                    this.style.right = '20px';
+                    this.style.zIndex = '1200';
+                } else {
+                    // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
+                    this.style.position = '';
+                    this.style.top = '';
+                    this.style.right = '';
+                    this.style.zIndex = '';
+                }
+            });
+            
+            // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                    
+                    // 원래 위치로 돌아가기
+                    mobileMenuToggle.style.position = '';
+                    mobileMenuToggle.style.top = '';
+                    mobileMenuToggle.style.right = '';
+                    mobileMenuToggle.style.zIndex = '';
+                });
+            });
+            
+            // 스크롤 시 요소 페이드인
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    element.classList.add('visible');
+                });
+            }
+            
+            window.addEventListener('load', checkFade);
+        });
     </script>
 </body>
 </html>
