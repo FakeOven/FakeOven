@@ -238,11 +238,15 @@
         }
         
         /* 섹션 스타일 */
-        section {
-            padding: var(--spacing-large) 0;
-            scroll-margin-top: 100px;
-            background-color: var(--bg-color);
-        }
+        .section-title {
+             text-align: center;
+             margin-bottom: var(--spacing-large);
+             font-size: clamp(24px, 3vw, 36px);
+             letter-spacing: 0.1em;
+             font-family: var(--section-title-font);
+             font-weight: 600;
+             color: var(--text-color);
+         }
         
         /* Contact 섹션 */
         .contact-section {
@@ -298,6 +302,7 @@
         footer {
             padding: var(--spacing-medium) 0;
             text-align: center;
+            border-top: 1px solid var(--subtle-color);
             position: relative;
             background-color: var(--bg-color);
         }
@@ -319,6 +324,12 @@
             color: var(--secondary-color);
             margin-bottom: var(--spacing-unit);
         }
+
+            .section-title {
+                 font-size: 22px;
+                 margin-bottom: var(--spacing-medium);
+             }
+                
         
         .contact-footer {
             background-color: var(--bg-color);
@@ -429,8 +440,8 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <!-- 섹션 타이틀 제거 -->
-            
+            <h2 class="section-title contact-title fade-in">CONTACT</h2>
+            <!-- 섹션 타이틀 다시 추가 -->            
             <div class="contact-info fade-in">
                 <p><a href="mailto:ai@fakeoven.com">ai@fakeoven.com</a></p>
             </div>
