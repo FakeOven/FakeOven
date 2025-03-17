@@ -14,12 +14,11 @@
     <style>
         /* 기본 변수 */
         :root {
-    --main-color: #333;
+        --main-color: #333;
     --secondary-color: #777;
     --bg-color: #fff; /* 배경색 흰색으로 변경 */
     --text-color: #333; /* 텍스트 색상 어둡게 */
-            --accent-color: #ff4d5a;
-   --subtle-color: #eee;
+    --subtle-color: #eee;
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
@@ -280,6 +279,8 @@ footer {
     background-color: var(--bg-color);
     border-top: none;
     position: relative;
+    padding: var(--spacing-medium) 20px; /* 좌우 패딩 추가 */
+    text-align: center;
 }
 
 footer::before {
@@ -292,12 +293,35 @@ footer::before {
     height: 1px;
     background: linear-gradient(to right, rgba(120, 120, 120, 0), rgba(120, 120, 120, 0.5) 20%, rgba(120, 120, 120, 0.5) 80%, rgba(120, 120, 120, 0));
 }
-        
         .copyright {
-            font-size: 12px;
-            color: var(--secondary-color);
-            margin-bottom: var(--spacing-unit);
-        }
+    font-size: 12px;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-unit);
+    margin-top: 15px; /* 상단 여백 추가 */
+    text-align: center; /* 텍스트 중앙 정렬 강제 설정 */
+    padding: 0 10px; /* 좌우 패딩 추가 */
+}
+        
+        /* 모바일 버전에서의 푸터 조정 */
+@media (max-width: 768px) {
+    footer {
+        padding: 25px 10px 15px; /* 상단 여백 증가, 좌우 패딩 설정 */
+    }
+    
+    .container {
+        padding: 0 10px; /* 컨테이너 패딩 조정 */
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .copyright {
+        width: 100%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+        
         
         /* 애니메이션 */
         .fade-in {
@@ -309,33 +333,6 @@ footer::before {
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-        
-        /* 모바일 반응형 */
-        @media (max-width: 768px) {
-            .menu {
-                display: none;
-            }
-            
-            .mobile-menu-toggle {
-                display: flex;
-            }
-            
-            nav {
-                padding: 0 calc(var(--spacing-unit) * 2);
-            }
-            
-            .logo {
-                height: 50px;
-            }
-            
-            /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
-            .mobile-menu-toggle.active {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                z-index: 1200; /* z-index 추가 */
-            }
         }
 
         /* iOS 사파리 뷰포트 높이 문제 수정 */
