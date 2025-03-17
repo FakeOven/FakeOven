@@ -8,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;700&family=Chicle&family=Rock+Salt&display=swap" rel="stylesheet">
     <!-- 파비콘 설정 -->
-<link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
-<link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/fkov_logo.ico">
     <style>
         /* 기존 스타일 + 모바일 메뉴 추가 스타일 */
         * {
@@ -375,258 +375,6 @@
             font-weight: 600; /* 섹션 제목 볼드 유지 */
         }
         
-        /* Works Section */
-        .works-section {
-            padding-top: var(--spacing-xl); /* 원상복구 */
-            padding-bottom: var(--spacing-xl);
-            position: relative; /* 상대 위치 설정 */
-            z-index: 3; /* 앞에 표시되도록 */
-        }
-        
-        /* 영상 작업 2개씩 배치 */
-        .works-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개만 배치 */
-            gap: calc(var(--spacing-unit) * 3);
-            margin-top: var(--spacing-medium);
-        }
-        
-        .work-item {
-            margin-bottom: var(--spacing-medium);
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .work-image {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            background-color: var(--subtle-color);
-        }
-        
-        .work-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .work-item:hover .work-image img {
-            transform: scale(1.03);
-        }
-        
-        .work-caption {
-            padding: calc(var(--spacing-unit) * 2) 0;
-        }
-        
-        .work-caption h3 {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 4px;
-            font-family: var(--work-title-font);
-            letter-spacing: 0.02em;
-        }
-        
-        .work-caption .subtitle {
-            font-size: 14px;
-            font-weight: 300;
-            color: var(--secondary-color);
-            margin-top: 0;
-            margin-bottom: 5px;
-            display: block;
-        }
-        
-        .work-caption p {
-            font-size: 14px;
-            color: var(--secondary-color);
-            margin-bottom: 0;
-            font-weight: 400;
-        }
-        
-        /* 자동 재생 비디오 스타일 수정 */
-        .auto-video {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        /* 수정: 썸네일 이미지 호버 상태 관리 */
-        .video-thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        .preview-video-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
-
-        .preview-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        /* 썸네일 호버 시 비디오 표시 */
-        .auto-video:hover .preview-video {
-            opacity: 1;
-        }
-
-        .youtube-iframe {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 3;
-            display: none;
-        }
-        
-        /* Concepts Section 수정 */
-        .concepts-section {
-            padding-top: var(--spacing-xl);
-            padding-bottom: var(--spacing-xl);
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 300px;
-            flex-direction: column;
-        }
-        
-        /* 미묘한 구분선 추가 */
-        .concepts-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 20%;
-            right: 20%;
-            height: 1px;
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-        
-        .coming-soon {
-            font-size: 24px;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            color: #aaa;
-            text-align: center;
-            font-family: 'Montserrat', sans-serif;
-            margin-top: 40px;
-        }
-        
-        /* Contact Section */
-        .contact-section {
-            padding: var(--spacing-xl) 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            background-color: var(--bg-color);
-        }
-        
-        /* 세련된 구분선 추가 */
-        .contact-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 15%;
-            right: 15%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
-        }
-        
-        /* 원래 Contact 섹션 스타일로 복구 */
-        .section-title.contact-title {
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .contact-info {
-            max-width: 500px;
-            text-align: center;
-            margin: 0 auto;
-        }
-
-        .contact-info p {
-            margin: calc(var(--spacing-unit) * 2) 0;
-            font-size: 16px;
-        }
-
-        .contact-info a {
-            color: var(--main-color);
-            font-weight: 500;
-            border-bottom: 1px solid transparent;
-            padding-bottom: 2px;
-            transition: var(--transition);
-        }
-
-        .contact-info a:hover {
-            border-bottom-color: var(--main-color);
-        }
-        
-        /* 수상작 표시 스타일 */
-        .award-tag {
-            display: inline-block;
-            margin-left: 10px;
-            font-size: 14px;
-            color: #555;
-            font-weight: 500;
-        }
-        
-        /* Footer */
-        footer {
-            padding: var(--spacing-medium) 0;
-            text-align: center;
-            border-top: 1px solid var(--subtle-color);
-        }
-        
-        .copyright {
-            font-size: 12px;
-            color: var(--secondary-color);
-            margin-bottom: var(--spacing-unit);
-        }
-        
-       .social-links {
-            display: flex;
-            justify-content: center;
-            gap: calc(var(--spacing-unit) * 4);
-            margin: var(--spacing-medium) 0;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            width: 30px;
-            height: 30px;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-links img {
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover img {
-            opacity: 1;
-        }
-        
         /* Fade-in Animation */
         .fade-in {
             opacity: 0;
@@ -688,16 +436,6 @@
             header.scrolled .mobile-menu-toggle span {
                 background-color: var(--main-color);
             }
-            
-            .works-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .works-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
         
         /* 추가: 로고 색상 변경을 위한 스타일 */
@@ -754,33 +492,36 @@ footer {
     section {
         padding-bottom: calc(var(--spacing-large) + env(safe-area-inset-bottom, 0));
     }
-    
-    .contact-section {
-        padding-bottom: calc(var(--spacing-xl) + env(safe-area-inset-bottom, 10px));
-    }
 }
 
-/* 페이지의 마지막 섹션에 추가 여백 */
-.contact-section {
-    padding-bottom: calc(var(--spacing-xl) + 20px);
+/* Footer */
+footer {
+    padding: var(--spacing-medium) 0;
+    text-align: center;
+    border-top: 1px solid var(--subtle-color);
+}
+
+.copyright {
+    font-size: 12px;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-unit);
 }
     </style>
 </head>
 <body>
     <header id="header">
         <nav>
-            <a href="#hero" class="logo">
+            <a href="index.html" class="logo">
                 <!-- 로고 이미지 두 버전 -->
                 <img class="light-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
                 <img class="dark-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
-                <li><a href="#hero">BRAND</a></li>
+                <li><a href="works.html">WORKS</a></li>
+                <li><a href="concepts.html">CONCEPTS</a></li>
                 <li><a href="characters.html">CHARACTERS</a></li>
                 <li><a href="game.html">GAME</a></li>
-                <li><a href="#works">WORKS</a></li>
-                <li><a href="#concepts">CONCEPTS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
             </ul>
             <!-- 모바일 메뉴 토글 버튼 추가 -->
             <button class="mobile-menu-toggle">
@@ -794,12 +535,11 @@ footer {
     <!-- 모바일 메뉴 오버레이 -->
     <div class="mobile-menu-overlay">
         <ul class="menu">
-            <li><a href="#hero">BRAND</a></li>
+            <li><a href="works.html">WORKS</a></li>
+            <li><a href="concepts.html">CONCEPTS</a></li>
             <li><a href="characters.html">CHARACTERS</a></li>
             <li><a href="game.html">GAME</a></li>
-            <li><a href="#works">WORKS</a></li>
-            <li><a href="#concepts">CONCEPTS</a></li>
-            <li><a href="#contact">CONTACT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
         </ul>
     </div>
     
@@ -830,130 +570,9 @@ footer {
         </div>
     </section>
     
-    <!-- Works Section -->
-    <section id="works" class="works-section">
-        <div class="container">
-            <h2 class="section-title fade-in">WORKS</h2>
-            
-            <!-- 탭 버튼 제거하고 바로 작품 표시 -->
-            <div class="works-grid">
-                <!-- 1. 出勤無用曲 출근금지곡 -->
-                <div class="work-item fade-in">
-                    <div class="work-image">
-                        <div class="auto-video" data-video-id="ImpUC9WWetw">
-                            <img class="video-thumbnail" src="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg" alt="出勤無用曲">
-                            <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video" poster="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg">
-                                    <source src="https://www.youtube.com/embed/ImpUC9WWetw" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="youtube-iframe"></div>
-                        </div>
-                    </div>
-                    <div class="work-caption">
-                        <h3 style="font-family: 'Noto Sans JP', sans-serif; font-weight: 700;">出勤無用曲</h3>
-                        <span class="subtitle">출근금지곡</span>
-                        <p>AI MUSIC VIDEO</p>
-                    </div>
-                </div>
-                
-                <!-- 2. Parrot Funk Star Show -->
-                <div class="work-item fade-in">
-                    <div class="work-image">
-                        <div class="auto-video" data-video-id="vxWbgvPWJfQ">
-                            <img class="video-thumbnail" src="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg" alt="PARROT FUNK STAR SHOW">
-                            <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video" poster="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg">
-                                    <source src="https://www.youtube.com/embed/vxWbgvPWJfQ" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="youtube-iframe"></div>
-                        </div>
-                    </div>
-                    <div class="work-caption">
-                        <h3>PARROT FUNK STAR SHOW <span class="award-tag">(2024 K-AIFF)</span></h3>
-                        <span class="subtitle">앵무 펑크 스타쇼(2024대한민국AI국제영화제 수상작)</span>
-                        <p>AI MUSIC VIDEO</p>
-                    </div>
-                </div>
-                
-                <!-- 3. LURK -->
-                <div class="work-item fade-in">
-                    <div class="work-image">
-                        <div class="auto-video" data-video-id="Q6rFUU8QkWg">
-                            <img class="video-thumbnail" src="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg" alt="LURK">
-                            <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video" poster="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg">
-                                    <source src="https://www.youtube.com/embed/Q6rFUU8QkWg" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="youtube-iframe"></div>
-                        </div>
-                    </div>
-                    <div class="work-caption">
-                        <h3>LURK</h3>
-                        <span class="subtitle">어둠 속의 포식자</span>
-                        <p>AI SHORT FILM</p>
-                    </div>
-                </div>
-                
-                <!-- 4. Running Beats -->
-                <div class="work-item fade-in">
-                    <div class="work-image">
-                        <div class="auto-video" data-video-id="jdFzTTSEKTE">
-                            <img class="video-thumbnail" src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="RUNNING BEATS">
-                            <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video" poster="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg">
-                                    <source src="https://www.youtube.com/embed/jdFzTTSEKTE" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="youtube-iframe"></div>
-                        </div>
-                    </div>
-                    <div class="work-caption">
-                        <h3>RUNNING BEATS</h3>
-                        <p>AI AUDIO VISUAL</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Concepts Section - 제목 추가 및 Coming Soon 스타일 변경 -->
-    <section id="concepts" class="concepts-section">
-        <div class="container">
-            <h2 class="section-title fade-in">CONCEPTS</h2>
-            <div class="coming-soon">COMING SOON</div>
-        </div>
-    </section>
-    
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title contact-title fade-in">CONTACT</h2>
-            
-            <div class="contact-info fade-in">
-                <p><a href="mailto:ai@fakeoven.com">ai@fakeoven.com</a></p>
-            </div>
-            
-            <div class="social-links fade-in">
-                <a href="https://youtube.com/@FakeOven" target="_blank" aria-label="YouTube">
-                    <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/yt_logo.svg.png?raw=true" alt="YouTube">
-                </a>
-                <a href="https://www.instagram.com/fakeoven.ai" target="_blank" aria-label="Instagram">
-                    <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/insta_logo3.png?raw=true" alt="Instagram">
-                </a>
-                <a href="https://pf.kakao.com/_yKBnn/chat" target="_blank" aria-label="KakaoTalk">
-                    <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/KakaoTalk_logo2.png?raw=true" alt="KakaoTalk">
-                </a>
-            </div>
-        </div>
-    </section>
-    
     <footer>
         <div class="container">
-            <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
-            <p class="copyright">페이크오븐｜대표이사 이지은｜사업자등록번호: 388-22-02026｜소재지: 서울특별시 성동구 연무장로13길 4-1 8층</p>
+            <p class="copyright">&copy; 2025 FAKEOVEN. ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
     
@@ -1006,64 +625,6 @@ footer {
                     document.body.classList.remove('menu-open');
                 });
             });
-            
-            // 비디오 자동 재생 기능 - 호버 시 재생
-            const autoVideos = document.querySelectorAll('.auto-video');
-            
-            autoVideos.forEach(videoContainer => {
-                const video = videoContainer.querySelector('.preview-video');
-                
-                // 마우스 올렸을 때 비디오 재생
-                videoContainer.addEventListener('mouseenter', () => {
-                    if (video) {
-                        video.play().catch(e => {
-                            console.log("Auto-play prevented: ", e);
-                        });
-                    }
-                });
-                
-                // 마우스가 떠났을 때 비디오 중지
-                videoContainer.addEventListener('mouseleave', () => {
-                    if (video) {
-                        video.pause();
-                    }
-                });
-                
-                // 클릭 시 유튜브 전체 영상 보기
-                videoContainer.addEventListener('click', function() {
-                    const videoId = this.getAttribute('data-video-id');
-                    const iframeContainer = this.querySelector('.youtube-iframe');
-                    
-                    // 비디오가 아직 로드되지 않았을 때만 iframe 생성
-                    if (iframeContainer.innerHTML === '') {
-                        const iframe = document.createElement('iframe');
-                        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-                        iframe.setAttribute('frameborder', '0');
-                        iframe.setAttribute('allowfullscreen', 'true');
-                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                        iframe.style.width = '100%';
-                        iframe.style.height = '100%';
-                        
-                        iframeContainer.appendChild(iframe);
-                        iframeContainer.style.display = 'block';
-                        
-                        // 프리뷰 비디오와 썸네일 숨기기
-                        const previewContainer = this.querySelector('.preview-video-container');
-                        const thumbnail = this.querySelector('.video-thumbnail');
-                        if (previewContainer) previewContainer.style.display = 'none';
-                        if (thumbnail) thumbnail.style.display = 'none';
-                    } else {
-                        // 이미 로드된 비디오는 보이게만 설정
-                        iframeContainer.style.display = 'block';
-                        
-                        // 프리뷰 비디오와 썸네일 숨기기
-                        const previewContainer = this.querySelector('.preview-video-container');
-                        const thumbnail = this.querySelector('.video-thumbnail');
-                        if (previewContainer) previewContainer.style.display = 'none';
-                        if (thumbnail) thumbnail.style.display = 'none';
-                    }
-                });
-            });
         });
         
         // 스크롤 시 요소 페이드인
@@ -1082,17 +643,6 @@ footer {
         
         window.addEventListener('scroll', checkFade);
         window.addEventListener('load', checkFade);
-        
-        // 스무스 스크롤링
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
     </script>
 </body>
 </html>
