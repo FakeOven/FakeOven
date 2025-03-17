@@ -115,6 +115,7 @@
             font-size: 24px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            font-weight: 700; /* 메뉴 폰트 굵게 변경 */
         }
         
         .container {
@@ -194,7 +195,7 @@
             color: white;
             font-family: var(--menu-font);
             font-size: 18px;
-            font-weight: 400;
+            font-weight: 700; /* 메뉴 폰트 굵게 변경 */
             text-transform: uppercase;
             letter-spacing: 0.15em;
             position: relative;
@@ -231,7 +232,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-end; /* 하단 배치로 변경 */
             align-items: center;
             text-align: center;
             padding: 0 var(--spacing-medium);
@@ -241,21 +242,21 @@
         }
 
         .hero-content h1 {
-            margin-bottom: var(--spacing-medium);
+            margin-bottom: calc(var(--spacing-unit) * 1.5); /* 줄임 */
         }
 
         .hero-content .korean-description {
             font-family: 'Noto Sans KR', sans-serif;
-            font-size: clamp(16px, 2.5vw, 22px);
+            font-size: clamp(14px, 2vw, 18px); /* 크기 줄임 */
             max-width: 800px;
-            margin: 0 auto var(--spacing-medium);
+            margin: 0 auto calc(var(--spacing-unit) * 1.5); /* 줄임 */
             line-height: 1.6;
             font-weight: 300;
             letter-spacing: 0.03em;
         }
 
         .hero-content .english-description {
-            font-size: clamp(14px, 2vw, 18px);
+            font-size: clamp(12px, 1.5vw, 16px); /* 크기 줄임 */
             max-width: 600px;
             margin: 0 auto;
             opacity: 0.8;
@@ -289,7 +290,7 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 0.8s ease-in-out;
+            transition: opacity 2s ease-in-out; /* 전환 시간 늘림 */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -306,52 +307,40 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5); /* 이미지 위 오버레이 */
             z-index: 1;
         }
         
-        /* 필름 그레인 효과 */
-        .film-grain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHljcnUxOHcwOHd2eGtnYTI5cmpxcm9oM2Vta2Iya20wMTc5OGh5YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4QeEivuG0qn37HpK/giphy.gif');
-            background-size: cover;
-            opacity: 0.07;
-            mix-blend-mode: overlay;
-            pointer-events: none;
-            z-index: 2;
-        }
+        /* 필름 그레인 효과 제거 */
         
         .hero-content {
             max-width: 800px;
             position: relative;
             z-index: 3;
             color: white;
+            padding-bottom: 50px; /* 하단 여백 추가 */
         }
         
         /* FAKEOVEN 제목 스타일 원상복구 */
         .hero-section h1 {
-            font-size: clamp(32px, 5vw, 60px);
-            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-size: clamp(28px, 4vw, 48px); /* 크기 줄임 */
+            margin-bottom: calc(var(--spacing-unit) * 1.5); /* 줄임 */
             line-height: 1.2;
             font-weight: 400;
         }
         
-        /* 본문 텍스트 원상복구 */
+        /* 본문 텍스트 변경 */
         .hero-section p {
-            font-size: clamp(16px, 2vw, 20px);
+            font-size: clamp(14px, 1.8vw, 18px); /* 크기 줄임 */
             max-width: 600px;
-            margin: 0 auto var(--spacing-medium);
+            margin: 0 auto calc(var(--spacing-unit) * 1.5); /* 줄임 */
             font-weight: 300;
         }
         
         .vision-statement {
             margin-top: var(--spacing-medium);
             font-style: italic;
-            font-size: clamp(16px, 2vw, 22px);
+            font-size: clamp(14px, 1.8vw, 18px); /* 크기 줄임 */
             letter-spacing: 0.05em;
             opacity: 0.9;
         }
@@ -385,71 +374,6 @@
             padding-bottom: var(--spacing-xl);
             position: relative; /* 상대 위치 설정 */
             z-index: 3; /* 앞에 표시되도록 */
-        }
-        
-        .works-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: var(--spacing-medium);
-            border-bottom: 1px solid var(--subtle-color);
-            padding-bottom: var(--spacing-unit);
-            text-align: center;
-        }
-        
-        .tab-button {
-            background: none;
-            border: none;
-            padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5); /* 간격 축소 */
-            margin: 0;
-            cursor: pointer;
-            font-family: var(--tab-button-font);
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--secondary-color);
-            transition: var(--transition);
-            position: relative;
-        }
-        
-        /* 탭 버튼 간격 조정 */
-        .tab-button[data-tab="all"] {
-            margin-right: 30px; /* ALL과 VIDEOS 사이 간격 증가 */
-        }
-        
-        .tab-button[data-tab="videos"] {
-            margin-right: 30px; /* VIDEOS와 PHOTOS 사이 간격 증가 */
-        }
-        
-        .tab-button::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -1px;
-            left: 0;
-            background-color: var(--main-color);
-            transition: var(--transition);
-        }
-        
-        .tab-button:hover,
-        .tab-button.active {
-            color: var(--main-color);
-        }
-        
-        .tab-button.active::after {
-            width: 100%;
-        }
-        
-        .tab-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .tab-content.active {
-            display: block;
-            opacity: 1;
         }
         
         /* 영상 작업 2개씩 배치 */
@@ -564,11 +488,15 @@
             display: none;
         }
         
-        /* Concepts Section */
+        /* Concepts Section - COMING SOON으로 변경 */
         .concepts-section {
             padding-top: var(--spacing-xl);
             padding-bottom: var(--spacing-xl);
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
         }
         
         /* 미묘한 구분선 추가 */
@@ -582,75 +510,13 @@
             background-color: rgba(0, 0, 0, 0.05);
         }
         
-        /* 컨셉 그리드 - 4x3 그리드 형태로 변경 */
-        .concepts-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개씩 배치 */
-            gap: calc(var(--spacing-unit) * 3);
-        }
-        
-        .concept-item {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 1/1;
-            cursor: pointer;
-        }
-        
-        .concept-image {
-            width: 100%;
-            height: 100%;
-            background-color: var(--subtle-color);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .concept-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .concept-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.4);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: var(--spacing-medium);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .concept-item:hover .concept-image img {
-            transform: scale(1.05);
-        }
-        
-        .concept-item:hover .concept-overlay {
-            opacity: 1;
-        }
-        
-        .concept-overlay h3 {
-            font-size: 20px;
-            margin-bottom: var(--spacing-unit);
+        .coming-soon {
+            font-size: 36px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-family: var(--work-title-font);
-            font-weight: 500;
-        }
-        
-        .concept-overlay p {
-            font-size: 14px;
-            max-width: 250px;
-            margin: 0 auto;
-            font-weight: 300;
+            letter-spacing: 0.2em;
+            color: #ccc;
+            text-align: center;
         }
         
         /* Contact Section */
@@ -784,19 +650,11 @@
             .works-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .concepts-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
         
         @media (min-width: 769px) and (max-width: 1024px) {
             .works-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .concepts-grid {
-                grid-template-columns: repeat(3, 1fr);
             }
         }
         
@@ -858,7 +716,6 @@
                 <div class="slideshow-item" style="background-image: url('https://github.com/FakeOven/FakeOvenLinks/blob/main/images/main_4_cybergirl.png?raw=true')"></div>
                 <div class="slideshow-item" style="background-image: url('https://github.com/FakeOven/FakeOvenLinks/blob/main/images/main_5_animeg.png?raw=true')"></div>
             </div>
-            <div class="film-grain"></div>
         </div>
         <div class="hero-content fade-in">
             <h1>FAKEOVEN</h1>
@@ -877,94 +734,16 @@
         <div class="container">
             <h2 class="section-title fade-in">WORKS</h2>
             
-            <div class="works-tabs fade-in">
-                <button class="tab-button active" data-tab="all">All</button>
-                <button class="tab-button" data-tab="videos">Videos</button>
-                <button class="tab-button" data-tab="photos">Photos</button>
-            </div>
-            
-            <div class="tab-content active" id="all">
-                <div class="works-grid">
-                    <!-- 1. 出勤無用曲 출근금지곡 -->
-                    <div class="work-item fade-in">
-                        <div class="work-image">
-                            <div class="auto-video" data-video-id="ImpUC9WWetw">
-                                <img class="video-thumbnail" src="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg" alt="出勤無用曲"> <div class="preview-video-container"> <video muted loop playsinline class="preview-video" poster="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg"> <source src="https://youtube.com/v/ImpUC9WWetw" type="video/mp4"> </video> </div> <div class="youtube-iframe"></div> </div> </div> <div class="work-caption"> <h3 style="font-family: 'Noto Sans JP', sans-serif; font-weight: 700;">出勤無用曲</h3> <span class="subtitle">출근금지곡</span> <p>AI MUSIC VIDEO</p> </div> </div>
-<!-- 2. Parrot Funk Star Show -->
-                <div class="work-item fade-in">
-                    <div class="work-image">
-                        <div class="auto-video" data-video-id="vxWbgvPWJfQ">
-                            <img class="video-thumbnail" src="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg" alt="Parrot Funk Star Show">
-                            <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video"
-                                       poster="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg">
-                                    <source src="https://youtube.com/v/vxWbgvPWJfQ" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="youtube-iframe"></div>
-                        </div>
-                    </div>
-                    <div class="work-caption">
-                        <h3>Parrot Funk Star Show</h3>
-                        <span class="subtitle">앵무 펑크 스타쇼</span>
-                        <p>AI MUSIC VIDEO</p>
-                    </div>
-                </div>
-                
-                <!-- 3. LURK -->
-                <div class="work-item fade-in">
-                    <div class="work-image">
-                        <div class="auto-video" data-video-id="Q6rFUU8QkWg">
-                            <img class="video-thumbnail" src="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg" alt="LURK">
-                            <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video"
-                                       poster="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg">
-                                    <source src="https://youtube.com/v/Q6rFUU8QkWg" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="youtube-iframe"></div>
-                        </div>
-                    </div>
-                    <div class="work-caption">
-                        <h3>LURK</h3>
-                        <span class="subtitle">어둠 속의 포식자</span>
-                        <p>AI SHORT FILM</p>
-                    </div>
-                </div>
-                
-                <!-- 4. Running Beats -->
-                <div class="work-item fade-in">
-                    <div class="work-image">
-                        <div class="auto-video" data-video-id="jdFzTTSEKTE">
-                            <img class="video-thumbnail" src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="Running Beats">
-                            <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video"
-                                       poster="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg">
-                                    <source src="https://youtube.com/v/jdFzTTSEKTE" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="youtube-iframe"></div>
-                        </div>
-                    </div>
-                    <div class="work-caption">
-                        <h3>Running Beats</h3>
-                        <p>AI AUDIO VISUAL</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tab-content" id="videos">
+            <!-- 탭 버튼 제거하고 바로 작품 표시 -->
             <div class="works-grid">
                 <!-- 1. 出勤無用曲 출근금지곡 -->
-                <div class="work-item">
+                <div class="work-item fade-in">
                     <div class="work-image">
                         <div class="auto-video" data-video-id="ImpUC9WWetw">
                             <img class="video-thumbnail" src="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg" alt="出勤無用曲">
                             <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video" 
-                                       poster="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg">
-                                    <source src="https://youtube.com/v/ImpUC9WWetw" type="video/mp4">
+                                <video muted loop playsinline class="preview-video" poster="https://img.youtube.com/vi/ImpUC9WWetw/maxresdefault.jpg">
+                                    <source src="https://www.youtube.com/embed/ImpUC9WWetw" type="video/mp4">
                                 </video>
                             </div>
                             <div class="youtube-iframe"></div>
@@ -978,14 +757,13 @@
                 </div>
                 
                 <!-- 2. Parrot Funk Star Show -->
-                <div class="work-item">
+                <div class="work-item fade-in">
                     <div class="work-image">
                         <div class="auto-video" data-video-id="vxWbgvPWJfQ">
                             <img class="video-thumbnail" src="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg" alt="Parrot Funk Star Show">
                             <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video"
-                                       poster="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg">
-                                    <source src="https://youtube.com/v/vxWbgvPWJfQ" type="video/mp4">
+                                <video muted loop playsinline class="preview-video" poster="https://img.youtube.com/vi/vxWbgvPWJfQ/maxresdefault.jpg">
+                                    <source src="https://www.youtube.com/embed/vxWbgvPWJfQ" type="video/mp4">
                                 </video>
                             </div>
                             <div class="youtube-iframe"></div>
@@ -999,14 +777,13 @@
                 </div>
                 
                 <!-- 3. LURK -->
-                <div class="work-item">
+                <div class="work-item fade-in">
                     <div class="work-image">
                         <div class="auto-video" data-video-id="Q6rFUU8QkWg">
                             <img class="video-thumbnail" src="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg" alt="LURK">
                             <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video"
-                                       poster="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg">
-                                    <source src="https://youtube.com/v/Q6rFUU8QkWg" type="video/mp4">
+                                <video muted loop playsinline class="preview-video" poster="https://img.youtube.com/vi/Q6rFUU8QkWg/maxresdefault.jpg">
+                                    <source src="https://www.youtube.com/embed/Q6rFUU8QkWg" type="video/mp4">
                                 </video>
                             </div>
                             <div class="youtube-iframe"></div>
@@ -1020,18 +797,17 @@
                 </div>
                 
                 <!-- 4. Running Beats -->
-                <div class="work-item">
+                <div class="work-item fade-in">
                     <div class="work-image">
                         <div class="auto-video" data-video-id="jdFzTTSEKTE">
                             <img class="video-thumbnail" src="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg" alt="Running Beats">
                             <div class="preview-video-container">
-                                <video muted loop playsinline class="preview-video"
-                                       poster="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg">
-                                    <source src="https://youtube.com/v/jdFzTTSEKTE" type="video/mp4">
+                                <video muted loop playsinline class="preview-video" poster="https://img.youtube.com/vi/jdFzTTSEKTE/maxresdefault.jpg">
+                                    <source src="https://www.youtube.com/embed/jdFzTTSEKTE" type="video/mp4">
                                 </video>
                             </div>
                             <div class="youtube-iframe"></div>
-                        </div>
+                            </div>
                     </div>
                     <div class="work-caption">
                         <h3>Running Beats</h3>
@@ -1040,355 +816,181 @@
                 </div>
             </div>
         </div>
-        
-        <div class="tab-content" id="photos">
-            <div class="works-grid">
-                <!-- Photo work items go here -->
-                <div class="work-item">
-                    <div class="work-image">
-                        <img src="https://images.unsplash.com/photo-1556139943-4bdca53adf1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Portrait Series">
-                    </div>
-                    <div class="work-caption">
-                        <h3>Portrait Series</h3>
-                        <p>AI Generated Portraits</p>
-                    </div>
-                </div>
-                
-                <div class="work-item">
-                    <div class="work-image">
-                        <img src="https://images.unsplash.com/photo-1664575198308-3959904fa430?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Product Photography">
-                    </div>
-                    <div class="work-caption">
-                        <h3>Product Photography</h3>
-                        <p>AI Product Visualization</p>
-                    </div>
-                </div>
+    </section>
+
+    <!-- Concepts Section - COMING SOON으로 변경 -->
+    <section id="concepts" class="concepts-section">
+        <div class="container">
+            <div class="coming-soon">COMING SOON</div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title contact-title fade-in">CONTACT</h2>
+            
+            <div class="contact-info fade-in">
+                <p><a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
+            </div>
+            
+            <div class="social-links fade-in">
+                <a href="https://youtube.com/@FakeOven" target="_blank" aria-label="YouTube">
+                    <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/yt_logo.svg.png?raw=true" alt="YouTube">
+                </a>
+                <a href="https://www.instagram.com/fakeoven.ai" target="_blank" aria-label="Instagram">
+                    <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/insta_logo3.png?raw=true" alt="Instagram">
+                </a>
+                <a href="https://pf.kakao.com/_yKBnn/chat" target="_blank" aria-label="KakaoTalk">
+                    <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/KakaoTalk_logo2.png?raw=true" alt="KakaoTalk">
+                </a>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Concepts Section -->
-<section id="concepts" class="concepts-section">
-    <div class="container">
-        <h2 class="section-title fade-in">CONCEPTS</h2>
-        
-        <div class="concepts-grid">
-            <!-- Beauty Shot Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/e1/fa/3c/e1fa3c2c4df2afdb3cc77b3c3a0829e4.jpg" alt="Beauty Shot Concept">
-                    <div class="concept-overlay">
-                        <h3>Beauty Shot</h3>
-                        <p>Elegant and expressive portraits highlighting natural beauty</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Fantasy Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/67/e9/3a/67e93a1e4c6b1a5c5f6f1e10cbc761a0.jpg" alt="Fantasy Concept">
-                    <div class="concept-overlay">
-                        <h3>Fantasy</h3>
-                        <p>Dreamlike imagery with surreal elements and magical atmospheres</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Sci-Fi Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/34/25/fc/3425fc9faa87c4f1bb6fd5a1fa7b9db9.jpg" alt="Sci-Fi Concept">
-                    <div class="concept-overlay">
-                        <h3>Sci-Fi</h3>
-                        <p>Futuristic aesthetics with technological elements and dramatic lighting</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 2D Animation Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/c1/38/6a/c1386af4b4d0aa9d9f977c2e95bf5404.jpg" alt="2D Animation Concept">
-                    <div class="concept-overlay">
-                        <h3>2D Animation</h3>
-                        <p>Stylized animated visuals with a distinctive artistic approach</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Fashion Film Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/0f/42/a0/0f42a0e055ead7f018c02dcce47ed259.jpg" alt="Fashion Film Concept">
-                    <div class="concept-overlay">
-                        <h3>Fashion Film</h3>
-                        <p>Cinematic fashion narratives with artistic direction and visual storytelling</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Abstract Motion Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/d9/39/79/d939797bab47fe58ea53e081e1e3c7a3.jpg" alt="Abstract Motion Concept">
-                    <div class="concept-overlay">
-                        <h3>Abstract Motion</h3>
-                        <p>Experimental visual explorations through color, form, and movement</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Ambient Reality Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/57/3d/08/573d083992e655a8216b808b2af2fe1e.jpg" alt="Ambient Reality Concept">
-                    <div class="concept-overlay">
-                        <h3>Ambient Reality</h3>
-                        <p>Atmospheric environments blending physical and digital elements</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Digital Surrealism Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/41/ae/ce/41aece60a9a8c38d20c1eebc7e8e44d7.jpg" alt="Digital Surrealism Concept">
-                    <div class="concept-overlay">
-                        <h3>Digital Surrealism</h3>
-                        <p>Contemporary dreamscapes merging impossible realities</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tactile Textures Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/1c/2d/a5/1c2da58ad4b65b61b3919df8abb259ce.jpg" alt="Tactile Textures Concept">
-                    <div class="concept-overlay">
-                        <h3>Tactile Textures</h3>
-                        <p>Sensory visual experiences exploring materiality and surface</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Neon Noir Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/24/c7/e7/24c7e72f3db48c6eb35ba5b60bc4e203.jpg" alt="Neon Noir Concept">
-                    <div class="concept-overlay">
-                        <h3>Neon Noir</h3>
-                        <p>Cyberpunk-inspired cityscapes with vibrant neon aesthetics</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hyper Reality Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/e0/ce/a5/e0cea59c4fca7068b15906f0d5afc58c.jpg" alt="Hyper Reality Concept">
-                    <div class="concept-overlay">
-                        <h3>Hyper Reality</h3>
-                        <p>Intensified visual experiences blending digital and physical worlds</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Liquid Motion Concept -->
-            <div class="concept-item fade-in">
-                <div class="concept-image">
-                    <img src="https://i.pinimg.com/564x/97/f4/73/97f473c95b325c7a2dac5da10ca357c8.jpg" alt="Liquid Motion Concept">
-                    <div class="concept-overlay">
-                        <h3>Liquid Motion</h3>
-                        <p>Fluid dynamics and organic movement in experimental visuals</p>
-                    </div>
-                </div>
-            </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
+            <p class="copyright">페이크오븐｜대표이사 이지은｜사업자등록번호: 388-22-02026｜소재지: 서울특별시 성동구 연무장로13길 4-1 8층</p>
         </div>
-    </div>
-</section>
-<!-- Contact Section --> <section id="contact" class="contact-section"> <div class="container"> <h2 class="section-title contact-title fade-in">CONTACT</h2>
-<div class="contact-info fade-in">
-        <p><a href="mailto:contact@fakeoven.com">contact@fakeoven.com</a></p>
-    </div>
+    </footer>
     
-    <div class="social-links fade-in">
-        <a href="https://youtube.com/@FakeOven" target="_blank" aria-label="YouTube">
-            <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/yt_logo.svg.png?raw=true" alt="YouTube">
-        </a>
-        <a href="https://www.instagram.com/fakeoven.ai" target="_blank" aria-label="Instagram">
-            <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/insta_logo3.png?raw=true" alt="Instagram">
-        </a>
-        <a href="https://pf.kakao.com/_yKBnn/chat" target="_blank" aria-label="KakaoTalk">
-            <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/KakaoTalk_logo2.png?raw=true" alt="KakaoTalk">
-        </a>
-    </div>
-</div>
-</section>
-<footer>
-<div class="container">
-    <p class="copyright">&copy; 2025 FAKEOVEN. All Rights Reserved.</p>
-    <p class="copyright">페이크오븐｜대표이사 이지은｜사업자등록번호: 388-22-02026｜소재지: 서울특별시 성동구 연무장로13길 4-1 8층</p>
-</div>
-</footer>
-<script>
-    // 스크롤 시 헤더 스타일 변경
-    window.addEventListener('scroll', function() {
-        const header = document.getElementById('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-    
-    // 이미지 슬라이드쇼 기능
-    function startSlideshow() {
-        const slides = document.querySelectorAll('.slideshow-item');
-        let currentSlide = 0;
-        
-        function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-        
-        // 1.2초마다 다음 슬라이드로 변경
-        setInterval(nextSlide, 1200);
-    }
-    
-    // 탭 기능
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // 활성 탭 버튼 업데이트
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // 해당 탭 내용 표시
-            const tabId = this.getAttribute('data-tab');
-            tabContents.forEach(content => {
-                if (content.id === tabId) {
-                    content.classList.add('active');
-                } else {
-                    content.classList.remove('active');
-                }
-            });
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // 슬라이드쇼 시작
-        startSlideshow();
-        
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
-
-        // 모바일 메뉴 토글 기능
-        mobileMenuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenuOverlay.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-        });
-
-        // 모바일 메뉴 링크 클릭 시 메뉴 닫기
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenuToggle.classList.remove('active');
-                mobileMenuOverlay.classList.remove('active');
-                document.body.classList.remove('menu-open');
-            });
-        });
-        
-        // 비디오 자동 재생 기능 - 호버 시 재생
-        const autoVideos = document.querySelectorAll('.auto-video');
-        
-        autoVideos.forEach(videoContainer => {
-            const video = videoContainer.querySelector('.preview-video');
-            
-            // 마우스 올렸을 때 비디오 재생
-            videoContainer.addEventListener('mouseenter', () => {
-                if (video) {
-                    video.play().catch(e => {
-                        console.log("Auto-play prevented: ", e);
-                    });
-                }
-            });
-            
-            // 마우스가 떠났을 때 비디오 중지
-            videoContainer.addEventListener('mouseleave', () => {
-                if (video) {
-                    video.pause();
-                }
-            });
-            
-            // 클릭 시 유튜브 전체 영상 보기
-            videoContainer.addEventListener('click', function() {
-                const videoId = this.getAttribute('data-video-id');
-                const iframeContainer = this.querySelector('.youtube-iframe');
-                
-                // 비디오가 아직 로드되지 않았을 때만 iframe 생성
-                if (iframeContainer.innerHTML === '') {
-                    const iframe = document.createElement('iframe');
-                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-                    iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allowfullscreen', 'true');
-                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                    iframe.style.width = '100%';
-                    iframe.style.height = '100%';
-                    
-                    iframeContainer.appendChild(iframe);
-                    iframeContainer.style.display = 'block';
-                    
-                    // 프리뷰 비디오와 썸네일 숨기기
-                    const previewContainer = this.querySelector('.preview-video-container');
-                    const thumbnail = this.querySelector('.video-thumbnail');
-                    if (previewContainer) previewContainer.style.display = 'none';
-                    if (thumbnail) thumbnail.style.display = 'none';
-                } else {
-                    // 이미 로드된 비디오는 보이게만 설정
-                    iframeContainer.style.display = 'block';
-                    
-                    // 프리뷰 비디오와 썸네일 숨기기
-                    const previewContainer = this.querySelector('.preview-video-container');
-                    const thumbnail = this.querySelector('.video-thumbnail');
-                    if (previewContainer) previewContainer.style.display = 'none';
-                    if (thumbnail) thumbnail.style.display = 'none';
-                }
-            });
-        });
-    });
-    
-    // 스크롤 시 요소 페이드인
-    const fadeElements = document.querySelectorAll('.fade-in');
-    
-    function checkFade() {
-        fadeElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementTop < windowHeight - 50) {
-                element.classList.add('visible');
+    <script>
+        // 스크롤 시 헤더 스타일 변경
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
         });
-    }
-    
-    window.addEventListener('scroll', checkFade);
-    window.addEventListener('load', checkFade);
-    
-    // 스무스 스크롤링
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
+        
+        // 이미지 슬라이드쇼 기능 - 4초로 변경
+        function startSlideshow() {
+            const slides = document.querySelectorAll('.slideshow-item');
+            let currentSlide = 0;
             
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            // 4초마다 다음 슬라이드로 변경
+            setInterval(nextSlide, 4000);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 슬라이드쇼 시작
+            startSlideshow();
+            
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
+
+            // 모바일 메뉴 토글 기능
+            mobileMenuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenuOverlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+
+            // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+            
+            // 비디오 자동 재생 기능 - 호버 시 재생
+            const autoVideos = document.querySelectorAll('.auto-video');
+            
+            autoVideos.forEach(videoContainer => {
+                const video = videoContainer.querySelector('.preview-video');
+                
+                // 마우스 올렸을 때 비디오 재생
+                videoContainer.addEventListener('mouseenter', () => {
+                    if (video) {
+                        video.play().catch(e => {
+                            console.log("Auto-play prevented: ", e);
+                        });
+                    }
+                });
+                
+                // 마우스가 떠났을 때 비디오 중지
+                videoContainer.addEventListener('mouseleave', () => {
+                    if (video) {
+                        video.pause();
+                    }
+                });
+                
+                // 클릭 시 유튜브 전체 영상 보기
+                videoContainer.addEventListener('click', function() {
+                    const videoId = this.getAttribute('data-video-id');
+                    const iframeContainer = this.querySelector('.youtube-iframe');
+                    
+                    // 비디오가 아직 로드되지 않았을 때만 iframe 생성
+                    if (iframeContainer.innerHTML === '') {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+                        iframe.setAttribute('frameborder', '0');
+                        iframe.setAttribute('allowfullscreen', 'true');
+                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                        iframe.style.width = '100%';
+                        iframe.style.height = '100%';
+                        
+                        iframeContainer.appendChild(iframe);
+                        iframeContainer.style.display = 'block';
+                        
+                        // 프리뷰 비디오와 썸네일 숨기기
+                        const previewContainer = this.querySelector('.preview-video-container');
+                        const thumbnail = this.querySelector('.video-thumbnail');
+                        if (previewContainer) previewContainer.style.display = 'none';
+                        if (thumbnail) thumbnail.style.display = 'none';
+                    } else {
+                        // 이미 로드된 비디오는 보이게만 설정
+                        iframeContainer.style.display = 'block';
+                        
+                        // 프리뷰 비디오와 썸네일 숨기기
+                        const previewContainer = this.querySelector('.preview-video-container');
+                        const thumbnail = this.querySelector('.video-thumbnail');
+                        if (previewContainer) previewContainer.style.display = 'none';
+                        if (thumbnail) thumbnail.style.display = 'none';
+                    }
+                });
             });
         });
-    });
-</script>
-</body> </html>
+        
+        // 스크롤 시 요소 페이드인
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 50) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+        
+        // 스무스 스크롤링
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
