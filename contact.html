@@ -14,11 +14,11 @@
     <style>
         /* 기본 변수 */
         :root {
-            --main-color: #000;
+            --main-color: #333;
             --secondary-color: #777;
-            --bg-color: #000;
-            --text-color: #fff;
-            --subtle-color: #333;
+            --bg-color: #fff; /* 배경색 흰색으로 변경 */
+            --text-color: #333; /* 텍스트 색상 어둡게 */
+            --subtle-color: #eee;
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
@@ -83,7 +83,7 @@
             padding: calc(var(--spacing-unit) * 2) 0;
             z-index: 1000;
             transition: var(--transition);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
         }
         
         nav {
@@ -125,6 +125,16 @@
             padding: 5px 0;
         }
         
+        .menu a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-color);
+        }
+        
         .menu a::after {
             content: '';
             position: absolute;
@@ -164,7 +174,7 @@
         
         .mobile-menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg);
-            background-color: white !important;
+            background-color: black !important;
         }
         
         .mobile-menu-toggle.active span:nth-child(2) {
@@ -173,7 +183,7 @@
         
         .mobile-menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg);
-            background-color: white !important;
+            background-color: black !important;
         }
         
         .mobile-menu-overlay {
@@ -183,7 +193,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.95);
+            background-color: rgba(255,255,255,0.95);
             z-index: 1100;
             flex-direction: column;
             justify-content: center;
@@ -205,7 +215,7 @@
         }
         
         .mobile-menu-overlay .menu a {
-            color: white;
+            color: black;
             font-size: 24px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -232,16 +242,6 @@
             padding: var(--spacing-large) 0;
             scroll-margin-top: 100px;
             background-color: var(--bg-color);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: var(--spacing-large);
-            font-size: clamp(24px, 3vw, 36px);
-            letter-spacing: 0.1em;
-            font-family: var(--section-title-font);
-            font-weight: 600;
-            color: var(--text-color);
         }
         
         /* Contact 섹션 */
@@ -298,8 +298,20 @@
         footer {
             padding: var(--spacing-medium) 0;
             text-align: center;
-            border-top: 1px solid var(--subtle-color);
+            position: relative;
             background-color: var(--bg-color);
+        }
+        
+        /* 가운데에만 선이 있는 스타일 */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(to right, rgba(120, 120, 120, 0), rgba(120, 120, 120, 0.5) 20%, rgba(120, 120, 120, 0.5) 80%, rgba(120, 120, 120, 0));
         }
         
         .copyright {
@@ -340,11 +352,6 @@
             
             .logo {
                 height: 50px;
-            }
-            
-            .section-title {
-                font-size: 22px;
-                margin-bottom: var(--spacing-medium);
             }
             
             .contact-section {
@@ -392,14 +399,14 @@
     <header id="header">
         <nav>
             <a href="index.html" class="logo">
-                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
                 <li><a href="works.html">WORKS</a></li>
                 <li><a href="concepts.html">CONCEPTS</a></li>
                 <li><a href="characters.html">CHARACTERS</a></li>
                 <li><a href="game.html">GAME</a></li>
-                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="contact.html" class="active">CONTACT</a></li>
             </ul>
             <button class="mobile-menu-toggle">
                 <span></span>
@@ -415,14 +422,14 @@
             <li><a href="concepts.html">CONCEPTS</a></li>
             <li><a href="characters.html">CHARACTERS</a></li>
             <li><a href="game.html">GAME</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="contact.html" class="active">CONTACT</a></li>
         </ul>
     </div>
     
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <h2 class="section-title contact-title fade-in">CONTACT</h2>
+            <!-- 섹션 타이틀 제거 -->
             
             <div class="contact-info fade-in">
                 <p><a href="mailto:ai@fakeoven.com">ai@fakeoven.com</a></p>
@@ -467,11 +474,13 @@
                     this.style.position = 'fixed';
                     this.style.top = '20px';
                     this.style.right = '20px';
+                    this.style.zIndex = '1200';
                 } else {
                     // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
                     this.style.position = '';
                     this.style.top = '';
                     this.style.right = '';
+                    this.style.zIndex = '';
                 }
             });
 
@@ -486,6 +495,7 @@
                     mobileMenuToggle.style.position = '';
                     mobileMenuToggle.style.top = '';
                     mobileMenuToggle.style.right = '';
+                    mobileMenuToggle.style.zIndex = '';
                 });
             });
             
