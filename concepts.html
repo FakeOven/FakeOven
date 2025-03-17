@@ -16,16 +16,16 @@
         :root {
             --main-color: #000;
             --secondary-color: #777;
-            --bg-color: #fff;
-            --subtle-color: #f5f5f5;
+            --bg-color: #000; /* 배경색 검정으로 변경 */
+            --text-color: #fff; /* 텍스트 색상 흰색으로 */
+            --accent-color: #ff4d5a;
+            --subtle-color: #333; /* 미묘한 색상도 어둡게 변경 */
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
             --spacing-xl: 120px;
             --transition: all 0.3s ease;
             --section-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
-            --tab-button-font: 'Montserrat', 'Noto Sans KR', sans-serif;
-            --work-title-font: 'Montserrat', 'Noto Sans KR', sans-serif;
             --menu-font: 'Montserrat', 'Noto Sans KR', sans-serif;
             --brand-font: 'Chicle', cursive;
             --desc-font: 'Rock Salt', cursive;
@@ -40,23 +40,43 @@
             padding: 0;
         }
         
+        html {
+            height: -webkit-fill-available;
+            background-color: var(--bg-color);
+        }
+        
         body {
             font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
-            color: var(--main-color);
+            color: var(--text-color);
             width: 100%;
             overflow-x: hidden;
             line-height: 1.5;
             font-weight: 300;
             letter-spacing: 0.02em;
             min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+        
+        /* 이미지 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 링크 */
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
         }
         
         /* 헤더 스타일 */
         header {
-            background-color: #ffffff;
+            background-color: var(--bg-color);
             position: fixed;
             top: 0;
             left: 0;
@@ -64,7 +84,7 @@
             padding: calc(var(--spacing-unit) * 2) 0;
             z-index: 1000;
             transition: var(--transition);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
         }
         
         nav {
@@ -96,7 +116,7 @@
         
         .menu a {
             text-decoration: none;
-            color: var(--main-color);
+            color: var(--text-color);
             font-family: var(--menu-font);
             font-size: 18px;
             font-weight: 700;
@@ -106,6 +126,16 @@
             padding: 5px 0;
         }
         
+        .menu a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-color);
+        }
+        
         .menu a::after {
             content: '';
             position: absolute;
@@ -113,7 +143,7 @@
             height: 1px;
             bottom: 0;
             left: 0;
-            background-color: var(--main-color);
+            background-color: var(--text-color);
             transition: var(--transition);
         }
         
@@ -131,19 +161,21 @@
             height: 25px;
             background: transparent;
             border: none;
-            z-index: 1100;
+            z-index: 1200;
+            position: relative;
         }
         
         .mobile-menu-toggle span {
             width: 100%;
             height: 3px;
-            background-color: var(--main-color);
+            background-color: var(--text-color);
             transition: all 0.3s ease;
             transform-origin: left;
         }
         
         .mobile-menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg);
+            background-color: white !important;
         }
         
         .mobile-menu-toggle.active span:nth-child(2) {
@@ -152,6 +184,7 @@
         
         .mobile-menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg);
+            background-color: white !important;
         }
         
         .mobile-menu-overlay {
@@ -161,8 +194,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            z-index: 1000;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1100;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -209,37 +242,37 @@
         section {
             padding: var(--spacing-large) 0;
             scroll-margin-top: 100px;
+            background-color: var(--bg-color);
         }
         
-        .section-title {
-            text-align: center;
-            margin-bottom: var(--spacing-large);
-            font-size: clamp(24px, 3vw, 36px);
-            letter-spacing: 0.1em;
-            font-family: var(--section-title-font);
-            font-weight: 600;
-        }
-        
-        /* Concepts Section 스타일 */
-        .concepts-section {
-            padding-top: 120px;
-            padding-bottom: var(--spacing-xl);
-            position: relative;
+        /* Coming Soon 섹션 */
+        .coming-soon-section {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 60vh;
-            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+            background-color: var(--bg-color);
         }
         
-        .coming-soon {
-            font-size: 24px;
-            font-weight: 400;
+        .coming-soon-title {
+            font-size: clamp(32px, 5vw, 64px);
+            margin-bottom: var(--spacing-medium);
+            font-family: var(--section-title-font);
+            font-weight: 700;
+            color: var(--text-color);
             letter-spacing: 0.1em;
-            color: #aaa;
-            text-align: center;
-            font-family: 'Montserrat', sans-serif;
-            margin-top: 40px;
+            text-transform: uppercase;
+        }
+        
+        .coming-soon-subtitle {
+            font-size: clamp(16px, 2vw, 24px);
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--secondary-color);
+            font-weight: 300;
+            letter-spacing: 0.05em;
         }
         
         /* 푸터 */
@@ -247,6 +280,10 @@
             padding: var(--spacing-medium) 0;
             text-align: center;
             border-top: 1px solid var(--subtle-color);
+            background-color: var(--bg-color);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
         
         .copyright {
@@ -285,31 +322,25 @@
                 height: 50px;
             }
             
-            .section-title {
-                font-size: 22px;
-                margin-bottom: var(--spacing-medium);
-            }
-            
-            .concepts-section {
-                padding-top: 100px;
-                padding-bottom: var(--spacing-large);
-                min-height: 50vh;
-            }
-            
-            .coming-soon {
-                font-size: 20px;
-                margin-top: 20px;
+            /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
+            .mobile-menu-toggle.active {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1200; /* z-index 추가 */
             }
         }
 
-        /* 아이폰 높이 문제 수정 */
-        html {
-            height: -webkit-fill-available;
-        }
-
-        body {
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
+        /* iOS 사파리 뷰포트 높이 문제 수정 */
+        @supports (-webkit-touch-callout: none) {
+            .coming-soon-section {
+                min-height: -webkit-fill-available;
+            }
+            
+            footer {
+                margin-bottom: env(safe-area-inset-bottom, 0);
+                padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
+            }
         }
     </style>
 </head>
@@ -317,11 +348,11 @@
     <header id="header">
         <nav>
             <a href="index.html" class="logo">
-                <img class="dark-logo" src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo.png?raw=true" alt="FAKEOVEN Logo">
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
             </a>
             <ul class="menu">
                 <li><a href="works.html">WORKS</a></li>
-                <li><a href="concepts.html">CONCEPTS</a></li>
+                <li><a href="concepts.html" class="active">CONCEPTS</a></li>
                 <li><a href="characters.html">CHARACTERS</a></li>
                 <li><a href="game.html">GAME</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
@@ -337,19 +368,17 @@
     <div class="mobile-menu-overlay">
         <ul class="menu">
             <li><a href="works.html">WORKS</a></li>
-            <li><a href="concepts.html">CONCEPTS</a></li>
+            <li><a href="concepts.html" class="active">CONCEPTS</a></li>
             <li><a href="characters.html">CHARACTERS</a></li>
             <li><a href="game.html">GAME</a></li>
             <li><a href="contact.html">CONTACT</a></li>
         </ul>
     </div>
     
-    <!-- Concepts Section -->
-    <section id="concepts" class="concepts-section">
-        <div class="container">
-            <h2 class="section-title fade-in">CONCEPTS</h2>
-            <div class="coming-soon">COMING SOON</div>
-        </div>
+    <!-- Coming Soon Section -->
+    <section class="coming-soon-section">
+        <h1 class="coming-soon-title fade-in">COMING SOON</h1>
+        <p class="coming-soon-subtitle fade-in">Our concept gallery is currently in development. Please check back later for innovative AI concepts from FAKEOVEN.</p>
     </section>
     
     <footer>
@@ -369,34 +398,48 @@
                 this.classList.toggle('active');
                 mobileMenuOverlay.classList.toggle('active');
                 document.body.classList.toggle('menu-open');
+                
+                // 활성화 시 버튼이 항상 보이도록 위치 고정
+                if (this.classList.contains('active')) {
+                    this.style.position = 'fixed';
+                    this.style.top = '20px';
+                    this.style.right = '20px';
+                    this.style.zIndex = '1200';
+                } else {
+                    // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
+                    this.style.position = '';
+                    this.style.top = '';
+                    this.style.right = '';
+                    this.style.zIndex = '';
+                }
             });
-
+            
             // 모바일 메뉴 링크 클릭 시 메뉴 닫기
             mobileMenuLinks.forEach(link => {
                 link.addEventListener('click', function() {
                     mobileMenuToggle.classList.remove('active');
                     mobileMenuOverlay.classList.remove('active');
                     document.body.classList.remove('menu-open');
+                    
+                    // 원래 위치로 돌아가기
+                    mobileMenuToggle.style.position = '';
+                    mobileMenuToggle.style.top = '';
+                    mobileMenuToggle.style.right = '';
+                    mobileMenuToggle.style.zIndex = '';
                 });
             });
-        });
-        
-        // 스크롤 시 요소 페이드인
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        function checkFade() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 50) {
+            
+            // 스크롤 시 요소 페이드인
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
                     element.classList.add('visible');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', checkFade);
-        window.addEventListener('load', checkFade);
+                });
+            }
+            
+            window.addEventListener('load', checkFade);
+        });
     </script>
 </body>
 </html>
