@@ -14,12 +14,12 @@
     <style>
         /* 기본 변수 */
         :root {
-    --main-color: #fff;
-    --secondary-color: #777;
+            --main-color: #fff;
+            --secondary-color: #777;
             --accent-color: #ff4d5a;
-    --bg-color: #000; /* 배경색 검정으로 변경 */
-    --text-color: #fff; /* 텍스트 색상 흰색으로 */
-    --subtle-color: #333; /* 미묘한 색상도 어둡게 변경 */
+            --bg-color: #000; /* 배경색 검정으로 변경 */
+            --text-color: #fff; /* 텍스트 색상 흰색으로 */
+            --subtle-color: #333; /* 미묘한 색상도 어둡게 변경 */
             --spacing-unit: 10px;
             --spacing-medium: 40px;
             --spacing-large: 80px;
@@ -48,8 +48,8 @@
             font-family: 'Montserrat', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             width: 100%;
             overflow-x: hidden;
             line-height: 1.5;
@@ -75,7 +75,7 @@
         
         /* 헤더 스타일 */
         header {
-               background-color: var(--bg-color);
+            background-color: var(--bg-color);
             position: fixed;
             top: 0;
             left: 0;
@@ -163,14 +163,15 @@
             z-index: 1200;
             position: relative;
         }
-        
+
         .mobile-menu-toggle span {
             width: 100%;
             height: 2px;
             background-color: var(--text-color);
             transition: all 0.3s ease;
-            transform-origin: left;
+            transform-origin: center;
             border-radius: 2px;
+            position: relative;
         }
         
         /* 첫 번째 줄은 짧게 */
@@ -185,11 +186,29 @@
             margin-left: auto;
         }
         
+        /* X 버튼 스타일 개선 - 크기 키움 */
+.mobile-menu-toggle.active {
+    width: 50px;   /* 40px에서 50px로 키움 */
+    height: 50px;  /* 40px에서 50px로 키움 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    position: fixed !important;
+    z-index: 9999 !important;
+}
+        .mobile-menu-toggle.active span {
+    position: absolute;
+    background-color: white !important;
+    width: 30px;   /* 24px에서 30px로 키움 */
+    height: 2px;
+    border-radius: 2px;
+}
+        
         .mobile-menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg);
-            background-color: white !important;
-            width: 100%;
-            margin-left: 0;
+            margin: 0; /* 마진 제거 */
         }
         
         .mobile-menu-toggle.active span:nth-child(2) {
@@ -198,9 +217,7 @@
         
         .mobile-menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg);
-            background-color: white !important;
-            width: 100%;
-            margin-left: 0;
+            margin: 0; /* 마진 제거 */
         }
         
         .mobile-menu-overlay {
@@ -215,6 +232,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            pointer-events: none;
         }
         
         .mobile-menu-overlay.active {
@@ -225,6 +243,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            pointer-events: auto;
+            z-index: 1200;
         }
         
         .mobile-menu-overlay .menu li {
@@ -262,30 +282,25 @@
         }
         
         /* Coming Soon 섹션으로 변경 */
-.game-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    background-color: var(--bg-color);
-}
+        .game-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-color: var(--bg-color);
+        }
 
-.coming-soon-title {
-    font-size: clamp(32px, 5vw, 64px);
-    margin-bottom: var(--spacing-medium);
-    font-family: var(--section-title-font);
-    font-weight: 700;
-    color: var(--text-color);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-/* 기존 게임 그리드 제거 */
-.game-grid {
-    display: none;
-}
+        .coming-soon-title {
+            font-size: clamp(32px, 5vw, 64px);
+            margin-bottom: var(--spacing-medium);
+            font-family: var(--section-title-font);
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
         
         /* 푸터 */
         footer {
@@ -348,27 +363,15 @@
                 margin-bottom: var(--spacing-medium);
             }
             
-            .game-section {
+            .characters-section {
                 padding-top: 100px;
                 padding-bottom: var(--spacing-large);
-            }
-            
-            .game-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
-            .mobile-menu-toggle.active {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                z-index: 1200;
             }
         }
 
         /* iOS 사파리 뷰포트 높이 문제 수정 */
         @supports (-webkit-touch-callout: none) {
-            .game-section {
+            .characters-section {
                 min-height: -webkit-fill-available;
                 padding-bottom: calc(var(--spacing-large) + env(safe-area-inset-bottom, 0));
             }
@@ -384,8 +387,8 @@
     <header id="header">
         <nav>
             <a href="index.html" class="logo">
-    <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
-</a>
+                <img src="https://github.com/FakeOven/FakeOvenLinks/blob/main/images/fkov_logo2.png?raw=true" alt="FAKEOVEN Logo">
+            </a>
             <ul class="menu">
                 <li><a href="works.html">WORKS</a></li>
                 <li><a href="concepts.html">CONCEPTS</a></li>
@@ -414,8 +417,8 @@
     <!-- Game Section -->
     <section id="game" class="game-section">
         <div class="container">
-    <h1 class="coming-soon-title fade-in">COMING SOON</h1>
-</div>
+            <h1 class="coming-soon-title fade-in">COMING SOON</h1>
+        </div>
     </section>
     
     <footer>
@@ -441,13 +444,17 @@
                     this.style.position = 'fixed';
                     this.style.top = '20px';
                     this.style.right = '20px';
-                    this.style.zIndex = '1200';
+                    this.style.zIndex = '9999';
+                    // 항상 최상위에 표시하기 위해 body의 맨 마지막으로 이동
+                    document.body.appendChild(this);
                 } else {
                     // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
                     this.style.position = '';
                     this.style.top = '';
                     this.style.right = '';
                     this.style.zIndex = '';
+                    // 버튼을 원래 위치로 되돌리기
+                    document.querySelector('nav').appendChild(this);
                 }
             });
             
@@ -463,6 +470,8 @@
                     mobileMenuToggle.style.top = '';
                     mobileMenuToggle.style.right = '';
                     mobileMenuToggle.style.zIndex = '';
+                    // 버튼을 원래 위치로 되돌리기
+                    document.querySelector('nav').appendChild(mobileMenuToggle);
                 });
             });
             
