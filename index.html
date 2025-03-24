@@ -52,59 +52,78 @@
             font-weight: 300;
             letter-spacing: 0.02em;
         }
+        
         /* 모바일 메뉴 버튼 스타일 - z-index 수정 */
         .mobile-menu-toggle {
             display: none;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    background: transparent;
-    border: none;
-    z-index: 1200;
-    position: relative;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            z-index: 1200;
+            position: relative;
         }
 
         .mobile-menu-toggle span {
             width: 100%;
-    height: 2px; /* 두께 감소 */
-    background-color: var(--text-color);
-    transition: all 0.3s ease;
-    transform-origin: left;
-    border-radius: 2px; /* 둥근 모서리 추가 */
+            height: 2px; /* 두께 감소 */
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+            transform-origin: center;
+            border-radius: 2px; /* 둥근 모서리 추가 */
         }
         
         /* 첫 번째 줄은 짧게 */
-.mobile-menu-toggle span:nth-child(1) {
-    width: 70%;
-    margin-left: auto;
+        .mobile-menu-toggle span:nth-child(1) {
+            width: 70%;
+            margin-left: auto;
+        }
+
+        /* 세 번째 줄도 짧게 */
+        .mobile-menu-toggle span:nth-child(3) {
+            width: 70%;
+            margin-left: auto;
+        }
+
+        /* X 버튼 스타일 개선 */
+.mobile-menu-toggle.active {
+    width: 50px;   /* 크기 조정 */
+    height: 50px;  /* 크기 조정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* 배경 없음 */
+    border-radius: 0; /* 둥근 모서리 없음 */
+    position: fixed !important;
+    z-index: 9999 !important;
+}
+        
+        .mobile-menu-toggle.active span {
+    position: absolute;
+    background-color: white !important; /* 흰색 X */
+    width: 30px;
+    height: 2px;
+    border-radius: 2px;
 }
 
-/* 세 번째 줄도 짧게 */
-.mobile-menu-toggle span:nth-child(3) {
-    width: 70%;
-    margin-left: auto;
-}
-
-
-        .mobile-menu-toggle.active span:nth-child(1) {
+.mobile-menu-toggle.active span:nth-child(1) {
     transform: rotate(45deg);
-    width: 100%;
-    margin-left: 0;
+    margin: 0;
 }
 
-        .mobile-menu-toggle.active span:nth-child(2) {
+.mobile-menu-toggle.active span:nth-child(2) {
     opacity: 0;
 }
 
 .mobile-menu-toggle.active span:nth-child(3) {
     transform: rotate(-45deg);
-    width: 100%;
-    margin-left: 0;
+    margin: 0;
 }
 
-        /* 모바일 메뉴 오버레이 - z-index 수정 */
+        /* 메뉴 오버레이 최적화 */
         .mobile-menu-overlay {
             display: none;
             position: fixed;
@@ -113,10 +132,11 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.9);
-            z-index: 1100; /* 1000에서 1100으로 증가 */
+            z-index: 9000; /* z-index 값 높임 */
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            pointer-events: auto;
         }
 
         .mobile-menu-overlay.active {
@@ -127,6 +147,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            pointer-events: auto;
         }
 
         .mobile-menu-overlay .menu li {
@@ -307,33 +328,34 @@
         
         /* 언어 토글 버튼 스타일 */
         .language-toggle {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    gap: 15px;
-}
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
         
         .language-btn {
-    background: transparent;
-    border: none;
-    color: rgba(255, 255, 255, 0.6);
-    padding: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: var(--transition);
-}
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
         
         .language-btn.active {
-    color: white;
-}
+            color: white;
+        }
+        
         .language-btn.active::after {
-    content: none;
-}
+            content: none;
+        }
         
         .language-btn:hover {
-    color: white;
-}
+            color: white;
+        }
         
         /* 이미지 슬라이드쇼 스타일 */
         .hero-background {
@@ -501,13 +523,6 @@
             header.scrolled .mobile-menu-toggle span {
                 background-color: white; /* 변경: 검정으로 스크롤 시에도 흰색으로 유지 */
             }
-            
-            /* 모바일 메뉴 오버레이가 활성화됐을 때 토글 버튼 위치 고정 */
-            .mobile-menu-toggle.active {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-            }
         }
         
         /* 추가: 로고 색상 변경을 위한 스타일 */
@@ -533,81 +548,81 @@
                 display: block;
             }
         }
+        
         /* 모바일 사파리 뷰포트 높이 문제 해결을 위한 CSS */
+        /* 추가할 CSS */
+        html {
+            height: -webkit-fill-available;
+            background-color: #000; /* HTML 배경색 검정으로 변경 */
+        }
 
-/* 추가할 CSS */
-html {
-    height: -webkit-fill-available;
-    background-color: #000; /* HTML 배경색 검정으로 변경 */
-}
+        body {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
 
-body {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-}
+        .hero-section {
+            height: 100vh; /* 기존 코드 */
+            min-height: -webkit-fill-available; /* 추가 */
+        }
 
-.hero-section {
-    height: 100vh; /* 기존 코드 */
-    min-height: -webkit-fill-available; /* 추가 */
-}
+        footer {
+            margin-bottom: env(safe-area-inset-bottom, 0);
+            padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
+            background-color: #000; /* 푸터 배경색 검정으로 변경 */
+        }
 
-footer {
-    margin-bottom: env(safe-area-inset-bottom, 0);
-    padding-bottom: calc(var(--spacing-medium) + env(safe-area-inset-bottom, 0));
-    background-color: #000; /* 푸터 배경색 검정으로 변경 */
-}
+        /* 추가로 iOS에서 스크롤 문제를 방지하기 위한 조치 */
+        @supports (-webkit-touch-callout: none) {
+            .hero-section {
+                height: -webkit-fill-available;
+            }
 
-/* 추가로 iOS에서 스크롤 문제를 방지하기 위한 조치 */
-@supports (-webkit-touch-callout: none) {
-    .hero-section {
-        height: -webkit-fill-available;
-    }
+            section {
+                padding-bottom: calc(var(--spacing-large) + env(safe-area-inset-bottom, 0));
+            }
+        }
 
-    section {
-        padding-bottom: calc(var(--spacing-large) + env(safe-area-inset-bottom, 0));
-    }
-}
+        /* Footer 수정 - 배경색은 검정으로, 선 제거 */
+        footer {
+            padding: var(--spacing-medium) 0;
+            text-align: center;
+            background-color: #000;
+            border: none;
+        }
 
-/* Footer 수정 - 배경색은 검정으로, 선 제거 */
-footer {
-    padding: var(--spacing-medium) 0;
-    text-align: center;
-    background-color: #000;
-    border: none;
-}
+        .copyright {
+            font-size: 12px;
+            color: var(--secondary-color); /* 카피라이트 텍스트는 회색 유지 */
+            margin-bottom: var(--spacing-unit);
+        }
 
-.copyright {
-    font-size: 12px;
-    color: var(--secondary-color); /* 카피라이트 텍스트는 회색 유지 */
-    margin-bottom: var(--spacing-unit);
-}
+        /* 이미지와 배경 사이의 흰 선 제거 */
+        .hero-section {
+            border-bottom: none;
+        }
 
-/* 이미지와 배경 사이의 흰 선 제거 */
-.hero-section {
-    border-bottom: none;
-}
+        .hero-background {
+            border-bottom: none;
+        }
 
-.hero-background {
-    border-bottom: none;
-}
+        .slideshow-item {
+            border-bottom: none;
+        }
 
-.slideshow-item {
-    border-bottom: none;
-}
+        .hero-background::after {
+            border-bottom: none;
+        }
 
-.hero-background::after {
-    border-bottom: none;
-}
+        /* 슬라이드쇼와 메인 콘텐츠 사이 간격 없이 */
+        .hero-section::after {
+            display: none;
+        }
 
-/* 슬라이드쇼와 메인 콘텐츠 사이 간격 없이 */
-.hero-section::after {
-    display: none;
-}
-
-.hero-content {
-    border-top: none;
-    margin-top: 0;
-}
+        .hero-content {
+            border-top: none;
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -673,10 +688,10 @@ footer {
             </p>
             
             <div class="language-toggle">
-    <button class="language-btn active" data-lang="en">EN</button>
-    <span style="color: rgba(255, 255, 255, 0.6);">｜</span>
-    <button class="language-btn" data-lang="kr">KR</button>
-</div>
+                <button class="language-btn active" data-lang="en">EN</button>
+                <span style="color: rgba(255, 255, 255, 0.6);">｜</span>
+                <button class="language-btn" data-lang="kr">KR</button>
+            </div>
         </div>
     </section>
     
@@ -746,7 +761,8 @@ footer {
             const mobileMenuLinks = document.querySelectorAll('.mobile-menu-overlay .menu a');
 
             // 모바일 메뉴 토글 기능 - 수정
-            mobileMenuToggle.addEventListener('click', function() {
+            mobileMenuToggle.addEventListener('click', function(e) {
+                e.stopPropagation(); // 이벤트 버블링 중지
                 this.classList.toggle('active');
                 mobileMenuOverlay.classList.toggle('active');
                 document.body.classList.toggle('menu-open');
@@ -756,13 +772,17 @@ footer {
                     this.style.position = 'fixed';
                     this.style.top = '20px';
                     this.style.right = '20px';
-                    this.style.zIndex = '1200';
+                    this.style.zIndex = '9999';
+                    // 항상 최상위에 표시하기 위해 body의 마지막으로 이동
+                    document.body.appendChild(this);
                 } else {
                     // X버튼을 눌러 메뉴를 닫았을 때 원래 위치로 돌아가기
                     this.style.position = '';
                     this.style.top = '';
                     this.style.right = '';
                     this.style.zIndex = '';
+                    // 버튼을 원래 위치로 되돌리기
+                    document.querySelector('nav').appendChild(this);
                 }
             });
 
@@ -778,6 +798,8 @@ footer {
                     mobileMenuToggle.style.top = '';
                     mobileMenuToggle.style.right = '';
                     mobileMenuToggle.style.zIndex = '';
+                    // 버튼을 원래 위치로 되돌리기
+                    document.querySelector('nav').appendChild(mobileMenuToggle);
                 });
             });
         });
