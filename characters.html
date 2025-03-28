@@ -493,5 +493,78 @@
             window.addEventListener('load', checkFade);
         });
     </script>
+    <!-- 카카오톡 플로팅 버튼 -->
+<a href="https://pf.kakao.com/_yKBnn/chat" target="_blank" id="kakao-floating-btn" aria-label="KakaoTalk">
+    <img src="" alt="KakaoTalk" id="kakao-icon">
+</a>
+
+<style>
+    /* 플로팅 버튼 기본 스타일 */
+    #kakao-floating-btn {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    #kakao-floating-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    #kakao-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    /* 모바일 화면 조정 */
+    @media (max-width: 768px) {
+        #kakao-floating-btn {
+            width: 50px;
+            height: 50px;
+            bottom: 90px;
+            right: 15px;
+        }
+        
+        #kakao-icon {
+            width: 28px;
+            height: 28px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const kakaoIcon = document.getElementById('kakao-icon');
+        
+        // 직접 이미지 URL 사용하여 문제 해결
+        const darkIconUrl = "https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/KakaoTalk_logo2.png";
+        const lightIconUrl = "https://raw.githubusercontent.com/FakeOven/FakeOvenLinks/main/images/KakaoTalk_logo_w.png";
+        
+        // 페이지 경로 확인
+        const path = window.location.pathname;
+        
+        // 경로에 따라 아이콘 설정
+        if (path.includes('works.html') || path.includes('concepts.html') || path.includes('contact.html')) {
+            kakaoIcon.src = darkIconUrl;
+        } else {
+            kakaoIcon.src = lightIconUrl;
+        }
+        
+        // 메인 페이지 확인
+        if (path === '/' || path === '/index.html' || path.endsWith('/')) {
+            kakaoIcon.src = lightIconUrl;
+        }
+    });
+</script>
 </body>
 </html>
